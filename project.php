@@ -21,7 +21,7 @@ function non_sql_hundler($params) {
     global $app,$log;
   $log->err( "Error: " . $params['error'] );
   http_response_code(500);
- $app->render('error_internal.html.twig');
+ $app->render('internal_error.html.twig');
  
   die; 
 }
@@ -55,6 +55,9 @@ $log->pushHandler(new StreamHandler('logs/error.log', Logger::WARNING));
 if(!isset($_SESSION['user'])){    
     $_SESSION['user']=array();
 }
+$app->get('/', function() use ($app) {
+  echo'this is garage sale project';
+});
 
 $twig = $app->view()->getEnvironment();
 $twig->addGlobal('userSession',$_SESSION['user']);
@@ -110,5 +113,8 @@ $app->post('/register', function() use ($app) {
         $app->render('register_success.html.twig');
     }
 });
+
+
+
 $app->run();
 

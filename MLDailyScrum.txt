@@ -9,3 +9,15 @@ Things To Do Today
 - Expand 5 user stories
 Bloking Elements / Questions for others
 -- None at the moment --
+
+Miho
+2017/11/03
+1. Proposal document is done.
+2.create trello board
+3.----
+
+Miho
+2017/11/03 PM
+1.Trello board created
+2.Register and login page
+3.Google about login with FB account.
