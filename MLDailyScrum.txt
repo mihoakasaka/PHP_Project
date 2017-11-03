@@ -9,3 +9,15 @@ Things To Do Today
 - Expand 5 user stories
 Bloking Elements / Questions for others
 -- None at the moment --
+2017/11/03 -- Afternoon
+Things done/Not yet Done
+DONE - Create Trello Board
+DONE - Share with Miho
+DONE - Create at least 5 user stories
+DONE - Expand 5 user stories
+Things To Do Today
+- Implement User can post an ad
+- Add and expand Search User Story
+- Add and expand 2 other user stories (except login and messaging)
+Bloking Elements / Questions for others
+-- None at the moment --
