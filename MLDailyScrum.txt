@@ -1,15 +1,17 @@
 Daily Scrum -- Miguel Legault
+
 2017/11/03
-Things done/Not yet Done
+==========
+A) Things done/Not yet Done
 -- None: first SCRUM cycle --
-Things To Do Today
+B) Things To Do Today
 - Create Trello Board
 - Share with Miho
 - Create at least 5 user stories
 - Expand 5 user stories
-Bloking Elements / Questions for others
+C) Blocking Elements / Questions for others
 -- None at the moment --
-<<<<<<< HEAD
+
 
 Miho
 2017/11/03
@@ -23,16 +25,30 @@ Miho
 2.Register and login page
 3.Google about login with FB account.
 =======
+
 2017/11/03 -- Afternoon
-Things done/Not yet Done
+==========
+A) Things done/Not yet Done
 DONE - Create Trello Board
 DONE - Share with Miho
 DONE - Create at least 5 user stories
 DONE - Expand 5 user stories
-Things To Do Today
+B) Things To Do Today
 - Implement User can post an ad
 - Add and expand Search User Story
 - Add and expand 2 other user stories (except login and messaging)
-Bloking Elements / Questions for others
+C) Blocking Elements / Questions for others
 -- None at the moment --
->>>>>>> a9315d9bb186b83597ebd75d13a6a81d3d6eb691
+
+2017/11/04
+==========
+A) Things done/Not yet Done
+DONE - Add and expand Search User Story
+NOT DONE - Implement User can post an ad
+NOT DONE - Add and expand 2 other user stories (except login and messaging)
+B) Things To Do Today + Sunday
+- Implement User can post an ad
+- Add and expand 2 other user stories (except login and messaging)
+C) Blocking Elements / Questions for others
+-- None at the moment --
+
