@@ -5,6 +5,7 @@ use Monolog\Handler\StreamHandler;
 session_start();
 require_once 'vendor/autoload.php';
 
+
 //DB::$dbName = 'cp4809_garagesale';
 //DB::$user = 'cp4809_garagesal';
 DB::$dbName = 'garagesale';
@@ -52,24 +53,69 @@ $log = new Logger('mail');
 $log->pushHandler(new StreamHandler('logs/everything.log', Logger::WARNING));
 $log->pushHandler(new StreamHandler('logs/error.log', Logger::WARNING));
 
+  
+$twig = $app->view()->getEnvironment();
+$twig->addGlobal('userSession',$_SESSION['user']); 
+
 if(!isset($_SESSION['user'])){    
     $_SESSION['user']=array();
 }
-$app->get('/', function() use ($app) {
-  echo'this is garage sale project';
+
+$app->get('/logout', function() use ($app) {
+    $_SESSION['user'] = array();
+    $app->render('logout.html.twig');
 });
 
-$twig = $app->view()->getEnvironment();
-$twig->addGlobal('userSession',$_SESSION['user']);
+$app->get('/login', function() use ($app) {
+    $app->render('login.html.twig');
+});
+
+$app->post('/login', function() use ($app) {
+    
+$email = $app->request()->post('email');
+$password = $app->request()->post('pass');
+$row = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);
+    $error = false;
+    if (!$row) {
+        $error = true; // user not found
+    } else {
+        if (password_verify($password, $row['password'])== FALSE) {
+            $error = true; // password invalid
+        }
+    }
+    if ($error) {
+        $app->render('login.html.twig', array('error' => true));
+    } else {
+        unset($row['password']);
+        $_SESSION['user'] = $row;
+        $app->render('login_success.html.twig',array('userSession' => $_SESSION['user']));
+    }
+});
+
+$app->get('/', function() use ($app) {
+     $app->render('index.html.twig',array('userSession' => $_SESSION['user']));
+ 
+});
+
 /* * ****************** check email if registered *********************** */
 $app->get('/isemailregistered/:email', function($email)use($app) {
     $row = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);
-    echo!$row ? "" : '<span style="background-color:red; font-weight:bold;">Email already registered.</span>';
+    echo!$row ? "" : '<span style="color:red; font-weight:bold;">Email already registered.</span>';
 });
 
-/* * ****************** Registration*********************** */
+
+/* * ****************** check username if taken *********************** */
+$app->get('/isusernametaken/:username', function($name)use($app) {
+    $row = DB::queryFirstRow("SELECT * FROM users WHERE name=%s", $name);
+    echo!$row ? "" : '<span style="color:red; font-weight:bold;">Username already taken.</span>';
+});
+
+$app->get('/isemailregistered/:email', function($email) use ($app) {
+    $row = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);
+    echo!$row ? "" : '<span style="background-color: red; font-weight: bold;">Email already taken</span>';
+});
+
 $app->get('/register', function() use ($app) {
-    // 1. First show
     $app->render('register.html.twig');
 });
 
@@ -109,11 +155,11 @@ $app->post('/register', function() use ($app) {
             'errorList' => $errorList,
             'v' => $values));
     } else { // 2. successful submission
-        DB::insert('users', array('name' => $name, 'email' => $email, 'password' => $pass1));
+        $passEnc = password_hash($pass1, PASSWORD_BCRYPT);
+        DB::insert('users', array('name' => $name, 'email' => $email, 'password' => $passEnc));
         $app->render('register_success.html.twig');
     }
 });
-
 
 
 $app->run();

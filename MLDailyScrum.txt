@@ -52,3 +52,11 @@ B) Things To Do Today + Sunday
 C) Blocking Elements / Questions for others
 -- None at the moment --
 
+==============
+
+Miho
+2017/11/04
+1.DONE - Registration
+  DONE - Log in ( Not done - showing error message is missing )  
+2.Completing log in(without FB), index page
+3.-----
