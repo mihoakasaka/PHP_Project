@@ -35,51 +35,39 @@ class __TwigTemplate_2b6bd024781674d0eae417384823982530542b74717c9f7da3321433319
     public function block_content($context, array $blocks = array())
     {
         // line 7
-        echo "        ";
-        if (($context["errorList"] ?? null)) {
-            // line 8
-            echo "        <ul>
+        echo "
+    <form method=\"post\" id=\"loginForm\">
+        <div class=\"imgcontainer\">
+            <img src=\"images/login.png\" class=\"avatar\">
+        </div>
+
+        <div class=\"container\">
             ";
-            // line 9
-            $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable(($context["errorList"] ?? null));
-            foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-                // line 10
-                echo "                <li>";
-                echo twig_escape_filter($this->env, $context["error"], "html", null, true);
-                echo "</li>
-                ";
-            }
-            $_parent = $context['_parent'];
-            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
-            $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 12
-            echo "        </ul>
-        ";
-        }
         // line 14
-        echo "<form method=\"post\" id=\"loginForm\">
-  <div class=\"imgcontainer\">
-    <img src=\"images/login.png\" class=\"avatar\">
-  </div>
+        if (($context["error"] ?? null)) {
+            // line 15
+            echo "                <p id=\"loginError\">Enter valid email and password<p><br>
+            ";
+        }
+        // line 17
+        echo "
+                    <label><b>E-mail</b></label>
+                    <input type=\"text\" placeholder=\"Enter email\" name=\"email\" required>
 
-  <div class=\"container\">
-    <label><b>E-mail</b></label>
-    <input type=\"text\" placeholder=\"Enter email\" name=\"email\" required>
+                    <label><b>Password</b></label>
+                    <input type=\"password\" placeholder=\"Enter Password\" name=\"pass\" required>
 
-    <label><b>Password</b></label>
-    <input type=\"password\" placeholder=\"Enter Password\" name=\"pass\" required>
-        
-    <button type=\"submit\">Login</button>
-   
-  </div>
+                    <button type=\"submit\">Login</button>
 
-  <div class=\"container\" style=\"background-color:#f1f1f1\">
-    <button type=\"button\" class=\"cancelbtn\">Cancel</button>
-    <span class=\"psw\">Forgot <a href=\"/\">password?</a></span>
-  </div>
-</form>
-    ";
+                    </div>
+
+                    <div class=\"container\" style=\"background-color:#f1f1f1\">
+                        <button type=\"button\" class=\"cancelbtn\">Cancel</button>
+                        <span class=\"registerNow\">No account?<a href=\"/register\">Register!!</a></span>
+                    </div>
+                    </form>
+
+                ";
     }
 
     public function getTemplateName()
@@ -94,7 +82,7 @@ class __TwigTemplate_2b6bd024781674d0eae417384823982530542b74717c9f7da3321433319
 
     public function getDebugInfo()
     {
-        return array (  61 => 14,  57 => 12,  48 => 10,  44 => 9,  41 => 8,  38 => 7,  35 => 6,  29 => 3,  11 => 2,);
+        return array (  53 => 17,  49 => 15,  47 => 14,  38 => 7,  35 => 6,  29 => 3,  11 => 2,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -112,36 +100,35 @@ class __TwigTemplate_2b6bd024781674d0eae417384823982530542b74717c9f7da3321433319
 {% block title %}Log in{% endblock %}
 
 
-  {% block content %}
-        {% if errorList %}
-        <ul>
-            {% for error in errorList %}
-                <li>{{error}}</li>
-                {% endfor %}
-        </ul>
-        {% endif %}
-<form method=\"post\" id=\"loginForm\">
-  <div class=\"imgcontainer\">
-    <img src=\"images/login.png\" class=\"avatar\">
-  </div>
+{% block content %}
 
-  <div class=\"container\">
-    <label><b>E-mail</b></label>
-    <input type=\"text\" placeholder=\"Enter email\" name=\"email\" required>
+    <form method=\"post\" id=\"loginForm\">
+        <div class=\"imgcontainer\">
+            <img src=\"images/login.png\" class=\"avatar\">
+        </div>
 
-    <label><b>Password</b></label>
-    <input type=\"password\" placeholder=\"Enter Password\" name=\"pass\" required>
-        
-    <button type=\"submit\">Login</button>
-   
-  </div>
+        <div class=\"container\">
+            {% if error %}
+                <p id=\"loginError\">Enter valid email and password<p><br>
+            {% endif %}
 
-  <div class=\"container\" style=\"background-color:#f1f1f1\">
-    <button type=\"button\" class=\"cancelbtn\">Cancel</button>
-    <span class=\"psw\">Forgot <a href=\"/\">password?</a></span>
-  </div>
-</form>
-    {% endblock %} 
+                    <label><b>E-mail</b></label>
+                    <input type=\"text\" placeholder=\"Enter email\" name=\"email\" required>
+
+                    <label><b>Password</b></label>
+                    <input type=\"password\" placeholder=\"Enter Password\" name=\"pass\" required>
+
+                    <button type=\"submit\">Login</button>
+
+                    </div>
+
+                    <div class=\"container\" style=\"background-color:#f1f1f1\">
+                        <button type=\"button\" class=\"cancelbtn\">Cancel</button>
+                        <span class=\"registerNow\">No account?<a href=\"/register\">Register!!</a></span>
+                    </div>
+                    </form>
+
+                {% endblock %} 
 ", "login.html.twig", "C:\\xampp\\htdocs\\PHP_Project\\templates\\login.html.twig");
     }
 }
