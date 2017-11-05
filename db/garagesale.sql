@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2017 at 10:13 PM
+-- Generation Time: Nov 05, 2017 at 11:39 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -87,7 +87,7 @@ CREATE TABLE `messages` (
 
 CREATE TABLE `pictures` (
   `id` int(11) NOT NULL,
-  `productId` int(11) NOT NULL,
+  `adId` int(11) NOT NULL,
   `imagePath` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -159,7 +159,8 @@ ALTER TABLE `messages`
 --
 ALTER TABLE `pictures`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `productId` (`productId`);
+  ADD KEY `productId` (`adId`),
+  ADD KEY `adId` (`adId`);
 
 --
 -- Indexes for table `products`
@@ -185,7 +186,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `ads`
 --
 ALTER TABLE `ads`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `categories`
 --
@@ -205,7 +206,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `pictures`
 --
 ALTER TABLE `pictures`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `products`
 --
@@ -245,7 +246,7 @@ ALTER TABLE `messages`
 -- Constraints for table `pictures`
 --
 ALTER TABLE `pictures`
-  ADD CONSTRAINT `pictures_ibfk_1` FOREIGN KEY (`productId`) REFERENCES `products` (`id`);
+  ADD CONSTRAINT `pictures_ibfk_1` FOREIGN KEY (`adId`) REFERENCES `ads` (`id`);
 
 --
 -- Constraints for table `products`

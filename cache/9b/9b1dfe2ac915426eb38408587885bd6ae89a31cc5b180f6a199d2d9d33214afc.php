@@ -89,12 +89,12 @@ class __TwigTemplate_83b5d64b43d65a21b6a1e90809ad340ea29bfb5b2e66e194581c3f55301
             echo "</p>";
         }
         // line 17
-        echo "    Add Pictures (at least 1, up to 3)<input type=\"file\" name=\"adImage\" multiple='multiple'><br>
+        echo "    Add Pictures (at least 1, up to 3)<input type=\"file\" name=\"adImages[]\" multiple='multiple'><br>
     ";
         // line 18
-        if ($this->getAttribute((isset($context["errorList"]) ? $context["errorList"] : null), "pictures", array(), "array")) {
+        if ($this->getAttribute((isset($context["errorList"]) ? $context["errorList"] : null), "adImages", array(), "array")) {
             echo "<p>";
-            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["errorList"]) ? $context["errorList"] : null), "pictures", array(), "array"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["errorList"]) ? $context["errorList"] : null), "adImages", array(), "array"), "html", null, true);
             echo "</p>";
         }
         // line 19
@@ -151,8 +151,8 @@ class __TwigTemplate_83b5d64b43d65a21b6a1e90809ad340ea29bfb5b2e66e194581c3f55301
     {% if errorList['body'] %}<p>{{ errorList['body'] }}</p>{% endif %}
     Price: <input type=\"number\" step=\"0.01\" name=\"price\" value=\"{{v.price}}\"><br>
     {% if errorList['price'] %}<p>{{ errorList['price'] }}</p>{% endif %}
-    Add Pictures (at least 1, up to 3)<input type=\"file\" name=\"adImage\" multiple='multiple'><br>
-    {% if errorList['pictures'] %}<p>{{ errorList['pictures'] }}</p>{% endif %}
+    Add Pictures (at least 1, up to 3)<input type=\"file\" name=\"adImages[]\" multiple='multiple'><br>
+    {% if errorList['adImages'] %}<p>{{ errorList['adImages'] }}</p>{% endif %}
     <input type=\"submit\" value=\"{% if isEditing %}Update{% else %}Create{% endif %} Ad\">
 </form>
 
