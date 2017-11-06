@@ -84,9 +84,11 @@ class __TwigTemplate_3744c8db58ae6dbeea08c01705e38fec252e6c219615d5385128361541d
             $context['_iterated'] = false;
             foreach ($context['_seq'] as $context["_key"] => $context["c"]) {
                 // line 21
-                echo "            <p>";
-                echo twig_escape_filter($this->env, $this->getAttribute($context["c"], "description", array()), "html", null, true);
-                echo "</p>
+                echo "                    <p><a href='/category/";
+                echo twig_escape_filter($this->env, $this->getAttribute($context["c"], "urlSanitizedFullName", array()), "html", null, true);
+                echo "'>";
+                echo twig_escape_filter($this->env, $this->getAttribute($context["c"], "fullName", array()), "html", null, true);
+                echo "</a></p>
         ";
                 $context['_iterated'] = true;
             }
@@ -140,7 +142,7 @@ class __TwigTemplate_3744c8db58ae6dbeea08c01705e38fec252e6c219615d5385128361541d
 
     public function getDebugInfo()
     {
-        return array (  126 => 32,  119 => 30,  111 => 28,  106 => 27,  102 => 25,  95 => 23,  87 => 21,  82 => 20,  78 => 18,  71 => 16,  61 => 14,  56 => 13,  50 => 11,  48 => 10,  42 => 7,  38 => 5,  35 => 4,  29 => 2,  11 => 1,);
+        return array (  128 => 32,  121 => 30,  113 => 28,  108 => 27,  104 => 25,  97 => 23,  87 => 21,  82 => 20,  78 => 18,  71 => 16,  61 => 14,  56 => 13,  50 => 11,  48 => 10,  42 => 7,  38 => 5,  35 => 4,  29 => 2,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -173,7 +175,7 @@ class __TwigTemplate_3744c8db58ae6dbeea08c01705e38fec252e6c219615d5385128361541d
         
         <h3>Categories</h3>
                 {% for c in v.categoryResults %}
-            <p>{{ c.description }}</p>
+                    <p><a href='/category/{{c.urlSanitizedFullName}}'>{{ c.fullName }}</a></p>
         {% else %}
             <p>No categories found matching this search</p>
         {% endfor %}

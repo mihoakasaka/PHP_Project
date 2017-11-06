@@ -288,6 +288,17 @@ $app->post('/search', function() use ($app, $log) {
 
 });
 
+/* Categories */
+
+// Browse a category by name
+$app->get('/category/:name', function($name) use ($app, $log) {
+    echo 'browsing category ' . $name;
+    
+    // Search for category by name
+    
+});
+
+
 
 /* * ****************** check email if registered *********************** */
 $app->get('/isemailregistered/:email', function($email)use($app) {
