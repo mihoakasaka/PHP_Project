@@ -12,6 +12,7 @@ class __TwigTemplate_00c8b13873e5ffcab63f19c339c6109e5a631d51d6c5ae928fb64f80e65
         $this->blocks = array(
             'title' => array($this, 'block_title'),
             'headextra' => array($this, 'block_headextra'),
+            'loginstatus' => array($this, 'block_loginstatus'),
             'content' => array($this, 'block_content'),
         );
     }
@@ -27,7 +28,7 @@ class __TwigTemplate_00c8b13873e5ffcab63f19c339c6109e5a631d51d6c5ae928fb64f80e65
         <title>";
         // line 6
         $this->displayBlock('title', $context, $blocks);
-        echo "</title>
+        echo " | Garage Sale</title>
     ";
         // line 7
         $this->displayBlock('headextra', $context, $blocks);
@@ -39,26 +40,16 @@ class __TwigTemplate_00c8b13873e5ffcab63f19c339c6109e5a631d51d6c5ae928fb64f80e65
     <div id=\"header\">
         ";
         // line 13
-        if (($context["userSession"] ?? null)) {
-            // line 14
-            echo "            <p>Hello, ";
-            echo twig_escape_filter($this->env, $this->getAttribute(($context["userSession"] ?? null), "name", array()), "html", null, true);
-            echo "!! /<a href=\"/logout\">Log out</a></p> 
-        ";
-        } else {
-            // line 16
-            echo "            <p> Hello, guest. please <a href=\"/login\">log in</a> or <a href=\"/register\">register</a><p>
-            ";
-        }
-        // line 18
+        $this->displayBlock('loginstatus', $context, $blocks);
+        // line 25
         echo "    </div>
 
 
     <div id=\"centeredContent\">
     ";
-        // line 22
+        // line 29
         $this->displayBlock('content', $context, $blocks);
-        // line 23
+        // line 30
         echo "</div>
 <div id=\"footer\">
     footer
@@ -70,7 +61,6 @@ class __TwigTemplate_00c8b13873e5ffcab63f19c339c6109e5a631d51d6c5ae928fb64f80e65
     // line 6
     public function block_title($context, array $blocks = array())
     {
-        echo "Default";
     }
 
     // line 7
@@ -78,7 +68,35 @@ class __TwigTemplate_00c8b13873e5ffcab63f19c339c6109e5a631d51d6c5ae928fb64f80e65
     {
     }
 
-    // line 22
+    // line 13
+    public function block_loginstatus($context, array $blocks = array())
+    {
+        // line 14
+        echo "            ";
+        if (($context["userSession"] ?? null)) {
+            // line 15
+            echo "                <p class='login-status'>Hello, ";
+            echo twig_escape_filter($this->env, $this->getAttribute(($context["userSession"] ?? null), "name", array()), "html", null, true);
+            echo "!! /<a href=\"/logout\">Log out</a></p> 
+            ";
+        } else {
+            // line 17
+            echo "                <p class='login-status'> Hello, guest. please <a href=\"/login\">log in</a> or <a href=\"/register\">register</a><p>
+                ";
+        }
+        // line 19
+        echo "        <form method=\"post\" action='/search'>
+        <input type='text' name='searchTerm' value='";
+        // line 20
+        echo twig_escape_filter($this->env, $this->getAttribute(($context["v"] ?? null), "searchTerm", array()), "html", null, true);
+        echo "'/>
+        <input type='submit' value='Search' />
+    </form>
+
+        ";
+    }
+
+    // line 29
     public function block_content($context, array $blocks = array())
     {
     }
@@ -88,14 +106,9 @@ class __TwigTemplate_00c8b13873e5ffcab63f19c339c6109e5a631d51d6c5ae928fb64f80e65
         return "master.html.twig";
     }
 
-    public function isTraitable()
-    {
-        return false;
-    }
-
     public function getDebugInfo()
     {
-        return array (  82 => 22,  77 => 7,  71 => 6,  62 => 23,  60 => 22,  54 => 18,  50 => 16,  44 => 14,  42 => 13,  35 => 8,  33 => 7,  29 => 6,  22 => 1,);
+        return array (  100 => 29,  91 => 20,  88 => 19,  84 => 17,  78 => 15,  75 => 14,  72 => 13,  67 => 7,  62 => 6,  53 => 30,  51 => 29,  45 => 25,  43 => 13,  36 => 8,  34 => 7,  30 => 6,  23 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -113,18 +126,25 @@ class __TwigTemplate_00c8b13873e5ffcab63f19c339c6109e5a631d51d6c5ae928fb64f80e65
         <link href=\"/styles.css\" rel=\"stylesheet\">
         <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>
         <meta charset=\"UTF-8\">
-        <title>{% block title %}Default{% endblock %}</title>
+        <title>{% block title %}{% endblock %} | Garage Sale</title>
     {% block headextra %}{% endblock %}
 
 
 </head>
 <body>
     <div id=\"header\">
-        {% if userSession %}
-            <p>Hello, {{userSession.name}}!! /<a href=\"/logout\">Log out</a></p> 
-        {% else %}
-            <p> Hello, guest. please <a href=\"/login\">log in</a> or <a href=\"/register\">register</a><p>
-            {% endif %}
+        {% block loginstatus %}
+            {% if userSession %}
+                <p class='login-status'>Hello, {{userSession.name}}!! /<a href=\"/logout\">Log out</a></p> 
+            {% else %}
+                <p class='login-status'> Hello, guest. please <a href=\"/login\">log in</a> or <a href=\"/register\">register</a><p>
+                {% endif %}
+        <form method=\"post\" action='/search'>
+        <input type='text' name='searchTerm' value='{{v.searchTerm}}'/>
+        <input type='submit' value='Search' />
+    </form>
+
+        {% endblock %}
     </div>
 
 

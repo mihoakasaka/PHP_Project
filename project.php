@@ -7,11 +7,11 @@ session_start();
 require_once 'vendor/autoload.php';
 
 
-DB::$dbName = 'cp4809_garagesale';
-DB::$user = 'cp4809_garagesal';
-DB::$host = 'ipd10.com' ; 
-//DB::$dbName = 'garagesale';
-//DB::$user = 'garagesale';
+//DB::$dbName = 'cp4809_garagesale';
+//DB::$user = 'cp4809_garagesal';
+//DB::$host = 'ipd10.com';
+DB::$dbName = 'garagesale';
+DB::$user = 'garagesale';
 DB::$encoding = 'utf8';
 DB::$password = '4!}9N0R*398?';
 
@@ -153,7 +153,7 @@ $app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
     $title = $app->request()->post('title');
     $body = $app->request()->post('body');
     $price = $app->request()->post('price');
-    
+
     $values = array('categoryId' => $categoryId, 'title' => $title, 'body' => $body, 'price' => $price);
     $errorList = array();
 
@@ -246,7 +246,7 @@ $app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
                 return;
             }
             // TODO: if EDITING and new file is uploaded we should delete the old one in uploads
-            $sanitizedImages[$i]['imagePath'] = "/" . $imagePath;            
+            $sanitizedImages[$i]['imagePath'] = "/" . $imagePath;
         }
 
         if ($id != -1) {
@@ -261,7 +261,7 @@ $app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
                 // Add FK to link picture to ad
                 $sanitizedImages[$i]['adId'] = $newAdId;
             }
-            db::insert('pictures',$sanitizedImages);
+            db::insert('pictures', $sanitizedImages);
         }
         $app->render('addEditAd_success.html.twig', array('isEditing' => ($id != -1)));
     }
@@ -277,7 +277,7 @@ $app->get('/search', function() use ($app, $log) {
 
 $app->post('/search', function() use ($app, $log) {
     $searchTerm = $app->request()->post('searchTerm');
-    
+
     $values = array('searchTerm' => $searchTerm);
 
     $values['adResults'] = DB::query('SELECT * from ads WHERE title LIKE %ss', $searchTerm);
@@ -285,7 +285,6 @@ $app->post('/search', function() use ($app, $log) {
     $values['userResults'] = DB::query('SELECT * from users WHERE username LIKE %ss OR name LIKE %ss', $searchTerm, $searchTerm);
 
     $app->render('searchresults.html.twig', array('v' => $values));
-
 });
 
 /* Categories */
@@ -293,9 +292,8 @@ $app->post('/search', function() use ($app, $log) {
 // Browse a category by name
 $app->get('/category/:name', function($name) use ($app, $log) {
     echo 'browsing category ' . $name;
-    
+
     // Search for category by name
-    
 });
 
 
@@ -347,9 +345,12 @@ $app->post('/register', function() use ($app) {
     }
     if ($pass1 != $pass2) {
         array_push($errorList, "Passwords don't match");
-    } else { // TODO: do a better check for password quality (lower/upper/numbers/special)
-        if (strlen($pass1) < 2 || strlen($pass1) > 50) {
-            array_push($errorList, "Password must be between 2 and 50 characters long");
+    } else { // better check for password quality (lower/upper/numbers/special)
+        if (strlen($pass1) < 6 || strlen($pass1) > 50) {
+            array_push($errorList, "Password must be between 6 and 50 characters long .");
+        }
+        if (!(preg_match(('/[A-Z]/'), $pass1)) || !(preg_match(('/[a-z]/'), $pass1)) ||!(preg_match(('/[0-9]/'), $pass1))) {
+            array_push($errorList, "Password must include at least one uppercase letter, lowercase letter and digit.");
         }
     }
     //
@@ -359,7 +360,7 @@ $app->post('/register', function() use ($app) {
             'v' => $values));
     } else { // 2. successful submission
         $passEnc = password_hash($pass1, PASSWORD_BCRYPT);
-        
+
         DB::insert('users', array('name' => $name, 'email' => $email, 'password' => $passEnc));
         $app->render('register_success.html.twig');
     }
@@ -369,8 +370,8 @@ $app->get('/', function() use ($app) {
 
     $productList = DB::query('SELECT name,description,price,imagePath FROM products,pictures WHERE products.id=pictures.productId');
     $categoryList = DB::query('SELECT * FROM categories');
-  
-    $app->render('index.html.twig', array('userSession' => $_SESSION['user'],'productList' => $productList, 'categoryList' => $categoryList));
+
+    $app->render('index.html.twig', array('userSession' => $_SESSION['user'], 'productList' => $productList, 'categoryList' => $categoryList));
 });
 
 $app->post('/', function() use ($app) {
