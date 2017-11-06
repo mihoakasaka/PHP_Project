@@ -270,6 +270,25 @@ $app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
     'id' => '\d+'
 ));
 
+/* Search */
+$app->get('/search', function() use ($app, $log) {
+    $app->render('searchresults.html.twig');
+});
+
+$app->post('/search', function() use ($app, $log) {
+    $searchTerm = $app->request()->post('searchTerm');
+    
+    $values = array('searchTerm' => $searchTerm);
+
+    $values['adResults'] = DB::query('SELECT * from ads WHERE title LIKE %ss', $searchTerm);
+    $values['categoryResults'] = DB::query('SELECT * from categories WHERE description LIKE %ss', $searchTerm);
+    $values['userResults'] = DB::query('SELECT * from users WHERE username LIKE %ss OR name LIKE %ss', $searchTerm, $searchTerm);
+
+    $app->render('searchresults.html.twig', array('v' => $values));
+
+});
+
+
 /* * ****************** check email if registered *********************** */
 $app->get('/isemailregistered/:email', function($email)use($app) {
     $row = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);

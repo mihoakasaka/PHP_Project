@@ -28,7 +28,7 @@ class __TwigTemplate_87a86df006dd2202e643b264156f3e573238b8b43873d89825885252259
         <title>";
         // line 6
         $this->displayBlock('title', $context, $blocks);
-        echo "</title>
+        echo " | Garage Sale</title>
     ";
         // line 7
         $this->displayBlock('headextra', $context, $blocks);
@@ -41,15 +41,15 @@ class __TwigTemplate_87a86df006dd2202e643b264156f3e573238b8b43873d89825885252259
         ";
         // line 13
         $this->displayBlock('loginstatus', $context, $blocks);
-        // line 20
+        // line 25
         echo "    </div>
 
 
     <div id=\"centeredContent\">
     ";
-        // line 24
+        // line 29
         $this->displayBlock('content', $context, $blocks);
-        // line 25
+        // line 30
         echo "</div>
 <div id=\"footer\">
     footer
@@ -61,7 +61,6 @@ class __TwigTemplate_87a86df006dd2202e643b264156f3e573238b8b43873d89825885252259
     // line 6
     public function block_title($context, array $blocks = array())
     {
-        echo "Default";
     }
 
     // line 7
@@ -86,10 +85,18 @@ class __TwigTemplate_87a86df006dd2202e643b264156f3e573238b8b43873d89825885252259
                 ";
         }
         // line 19
-        echo "        ";
+        echo "        <form method=\"post\" action='/search'>
+        <input type='text' name='searchTerm' value='";
+        // line 20
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["v"]) ? $context["v"] : null), "searchTerm", array()), "html", null, true);
+        echo "'/>
+        <input type='submit' value='Search' />
+    </form>
+
+        ";
     }
 
-    // line 24
+    // line 29
     public function block_content($context, array $blocks = array())
     {
     }
@@ -101,7 +108,7 @@ class __TwigTemplate_87a86df006dd2202e643b264156f3e573238b8b43873d89825885252259
 
     public function getDebugInfo()
     {
-        return array (  93 => 24,  89 => 19,  85 => 17,  79 => 15,  76 => 14,  73 => 13,  68 => 7,  62 => 6,  53 => 25,  51 => 24,  45 => 20,  43 => 13,  36 => 8,  34 => 7,  30 => 6,  23 => 1,);
+        return array (  100 => 29,  91 => 20,  88 => 19,  84 => 17,  78 => 15,  75 => 14,  72 => 13,  67 => 7,  62 => 6,  53 => 30,  51 => 29,  45 => 25,  43 => 13,  36 => 8,  34 => 7,  30 => 6,  23 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -119,7 +126,7 @@ class __TwigTemplate_87a86df006dd2202e643b264156f3e573238b8b43873d89825885252259
         <link href=\"/styles.css\" rel=\"stylesheet\">
         <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>
         <meta charset=\"UTF-8\">
-        <title>{% block title %}Default{% endblock %}</title>
+        <title>{% block title %}{% endblock %} | Garage Sale</title>
     {% block headextra %}{% endblock %}
 
 
@@ -132,6 +139,11 @@ class __TwigTemplate_87a86df006dd2202e643b264156f3e573238b8b43873d89825885252259
             {% else %}
                 <p class='login-status'> Hello, guest. please <a href=\"/login\">log in</a> or <a href=\"/register\">register</a><p>
                 {% endif %}
+        <form method=\"post\" action='/search'>
+        <input type='text' name='searchTerm' value='{{v.searchTerm}}'/>
+        <input type='submit' value='Search' />
+    </form>
+
         {% endblock %}
     </div>
 
