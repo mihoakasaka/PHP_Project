@@ -105,7 +105,7 @@ class __TwigTemplate_bad9f3f9ef7bb6cc18cfd77633e467e37a8c076747f1d37693fa4259450
 
     public function getDebugInfo()
     {
-        return array (  86 => 26,  82 => 25,  78 => 23,  74 => 21,  65 => 19,  61 => 18,  58 => 17,  55 => 16,  52 => 15,  36 => 3,  30 => 2,  11 => 1,);
+        return array (  100 => 40,  93 => 36,  86 => 31,  82 => 29,  73 => 27,  69 => 26,  66 => 25,  63 => 24,  60 => 23,  36 => 3,  30 => 2,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -126,30 +126,49 @@ class __TwigTemplate_bad9f3f9ef7bb6cc18cfd77633e467e37a8c076747f1d37693fa4259450
             \$('input[name=email]').bind('propertychange change click keyup input paste', function () {
                 // AJAX request
                 var email = \$('input[name=email]').val();
-                \$('#isTaken').load('/isemailregistered/' + email);
+                \$('#isRegistered').load('/isemailregistered/' + email);
             });
         });
+         \$(document).ready(function () {
+            \$('input[name=name]').bind('propertychange change click keyup input paste', function () {
+                // AJAX request
+                var name = \$('input[name=name]').val();
+                \$('#isTaken').load('/isusernametaken/' + name);
+            });
+        });
+       
     </script>
 {% endblock %}
 
-  {% block content %}
-        {% if errorList %}
+{% block content %}
+    {% if errorList %}
         <ul>
             {% for error in errorList %}
                 <li>{{error}}</li>
                 {% endfor %}
         </ul>
-        {% endif %}
+    {% endif %}
 
-            <form method=\"post\">
-                Name: <input type=\"text\" name=\"name\" value=\"{{v.name}}\"><br>
-                Email: <input type=\"email\" name=\"email\"  value=\"{{v.email}}\"> <span id=\"isTaken\"></span><br>
+    <form method=\"post\" id=\"registerForm\">
 
-                Password: <input type=\"password\" name=\"pass1\"><br>
-                Password (repeated): <input type=\"password\" name=\"pass2\"><br>
-                <input type=\"submit\" value=\"Register\">
-            </form>
-    {% endblock %} 
-", "register.html.twig", "C:\\xampp\\htdocs\\PHP_Project\\templates\\register.html.twig");
+        <div class=\"container\">
+            <label><b>Username</b></label><span id=\"isTaken\"></span><br>
+            <input type=\"text\" placeholder=\"Enter Name\" name=\"name\"  value=\"{{v.name}}\" required>
+
+
+            <label><b>E-mail</b></label><span id=\"isRegistered\"></span><br>
+            <input type=\"text\" placeholder=\"Enter Email\" name=\"email\"  value=\"{{v.email}}\" required>
+
+            <label><b>Password</b></label>
+            <input type=\"password\" placeholder=\"Enter Password\" name=\"pass1\" required>
+
+            <label><b>Confirm Password</b></label>
+            <input type=\"password\" placeholder=\"Retype Password\" name=\"pass2\" required>
+            <button type=\"submit\">Register</button>
+        </div>
+    </form>
+
+{% endblock %} 
+", "register.html.twig", "C:\\xampp\\htdocs\\phpproject\\templates\\register.html.twig");
     }
 }
