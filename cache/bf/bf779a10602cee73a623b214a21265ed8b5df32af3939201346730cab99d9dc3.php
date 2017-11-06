@@ -99,6 +99,6 @@ class __TwigTemplate_87a86df006dd2202e643b264156f3e573238b8b43873d89825885252259
             {% block content %}{% endblock %}
     </div>
 </body>
-</html>", "master.html.twig", "C:\\xampp\\htdocs\\PHP_Project\\templates\\master.html.twig");
+</html>", "master.html.twig", "C:\\xampp\\htdocs\\phpproject\\templates\\master.html.twig");
     }
 }
