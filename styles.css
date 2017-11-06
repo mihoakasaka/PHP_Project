@@ -12,13 +12,21 @@ body{
     
 }
 
-header{display:block;}
+#header{display:block;}
+#centeredContent{
+    display: block;
+    float: none;
+    height: 90%;
+}
+#footer{
+    display: block;
+}
 h1{
     margin:auto;
 	width:70%;
         padding: 10px;
 }
-
+/************************** login page  **************************/
 #loginForm, #registerForm {
     width: 300px;
     margin: auto;
@@ -71,7 +79,34 @@ span.registerNow{
     float: right;
     padding-top: 16px;
 }
-
+/************************** index page  **************************/
+ul {
+  list-style-type: none;
+}
+li{
+    margin: 5px 0;
+}
+.category{
+    width: 200px;
+  margin: 10px;
+    display: block;
+    float: left;
+}
+.productList{
+    width: 500px;
+    margin: auto;
+    display: block;
+    float: left;
+}
+.productContainer{
+    width: 150px;
+    display: block;
+    float: left;
+}
+.imageContainer{
+    width: 100px;
+    height: 100px;
+}
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
    span.registerNow {

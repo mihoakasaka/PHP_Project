@@ -36,13 +36,33 @@ class __TwigTemplate_00c8b13873e5ffcab63f19c339c6109e5a631d51d6c5ae928fb64f80e65
 
 </head>
 <body>
+    <div id=\"header\">
+        ";
+        // line 13
+        if (($context["userSession"] ?? null)) {
+            // line 14
+            echo "            <p>Hello, ";
+            echo twig_escape_filter($this->env, $this->getAttribute(($context["userSession"] ?? null), "name", array()), "html", null, true);
+            echo "!! /<a href=\"/logout\">Log out</a></p> 
+        ";
+        } else {
+            // line 16
+            echo "            <p> Hello, guest. please <a href=\"/login\">log in</a> or <a href=\"/register\">register</a><p>
+            ";
+        }
+        // line 18
+        echo "    </div>
+
 
     <div id=\"centeredContent\">
-            ";
-        // line 14
+    ";
+        // line 22
         $this->displayBlock('content', $context, $blocks);
-        // line 15
-        echo "    </div>
+        // line 23
+        echo "</div>
+<div id=\"footer\">
+    footer
+</div>
 </body>
 </html>";
     }
@@ -58,7 +78,7 @@ class __TwigTemplate_00c8b13873e5ffcab63f19c339c6109e5a631d51d6c5ae928fb64f80e65
     {
     }
 
-    // line 14
+    // line 22
     public function block_content($context, array $blocks = array())
     {
     }
@@ -68,9 +88,14 @@ class __TwigTemplate_00c8b13873e5ffcab63f19c339c6109e5a631d51d6c5ae928fb64f80e65
         return "master.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  62 => 14,  57 => 7,  51 => 6,  45 => 15,  43 => 14,  35 => 8,  33 => 7,  29 => 6,  22 => 1,);
+        return array (  82 => 22,  77 => 7,  71 => 6,  62 => 23,  60 => 22,  54 => 18,  50 => 16,  44 => 14,  42 => 13,  35 => 8,  33 => 7,  29 => 6,  22 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -94,10 +119,21 @@ class __TwigTemplate_00c8b13873e5ffcab63f19c339c6109e5a631d51d6c5ae928fb64f80e65
 
 </head>
 <body>
+    <div id=\"header\">
+        {% if userSession %}
+            <p>Hello, {{userSession.name}}!! /<a href=\"/logout\">Log out</a></p> 
+        {% else %}
+            <p> Hello, guest. please <a href=\"/login\">log in</a> or <a href=\"/register\">register</a><p>
+            {% endif %}
+    </div>
+
 
     <div id=\"centeredContent\">
-            {% block content %}{% endblock %}
-    </div>
+    {% block content %}{% endblock %}
+</div>
+<div id=\"footer\">
+    footer
+</div>
 </body>
 </html>", "master.html.twig", "C:\\xampp\\htdocs\\PHP_Project\\templates\\master.html.twig");
     }

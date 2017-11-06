@@ -2,6 +2,7 @@
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+
 session_start();
 require_once 'vendor/autoload.php';
 
@@ -15,27 +16,27 @@ DB::$password = '4!}9N0R*398?';
 
 
 //************Error handling**************//
-DB::$nonsql_error_handler='non_sql_hundler';
+DB::$nonsql_error_handler = 'non_sql_hundler';
 DB::$error_handler = 'sql_error_handler';
 
 function non_sql_hundler($params) {
-    global $app,$log;
-  $log->err( "Error: " . $params['error'] );
-  http_response_code(500);
- $app->render('internal_error.html.twig');
- 
-  die; 
-}
-function sql_error_handler($params) {
-    global $app,$log;
- $log->err( "Error: " . $params['error'] );
- $log->err("Query: " . $params['query'] );
- http_response_code(500);
- $app->render('internal_error.html.twig');
-  die; 
+    global $app, $log;
+    $log->err("Error: " . $params['error']);
+    http_response_code(500);
+    $app->render('internal_error.html.twig');
+
+    die;
 }
 
-  
+function sql_error_handler($params) {
+    global $app, $log;
+    $log->err("Error: " . $params['error']);
+    $log->err("Query: " . $params['query']);
+    http_response_code(500);
+    $app->render('internal_error.html.twig');
+    die;
+}
+
 // Slim creation and setup
 $app = new \Slim\Slim(array(
     'view' => new \Slim\Views\Twig()
@@ -53,12 +54,12 @@ $log = new Logger('mail');
 $log->pushHandler(new StreamHandler('logs/everything.log', Logger::WARNING));
 $log->pushHandler(new StreamHandler('logs/error.log', Logger::WARNING));
 
-  
-$twig = $app->view()->getEnvironment();
-$twig->addGlobal('userSession',$_SESSION['user']); 
 
-if(!isset($_SESSION['user'])){    
-    $_SESSION['user']=array();
+$twig = $app->view()->getEnvironment();
+$twig->addGlobal('userSession', $_SESSION['user']);
+
+if (!isset($_SESSION['user'])) {
+    $_SESSION['user'] = array();
 }
 
 $app->get('/logout', function() use ($app) {
@@ -71,15 +72,15 @@ $app->get('/login', function() use ($app) {
 });
 
 $app->post('/login', function() use ($app) {
-    
-$email = $app->request()->post('email');
-$password = $app->request()->post('pass');
-$row = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);
+
+    $email = $app->request()->post('email');
+    $password = $app->request()->post('pass');
+    $row = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);
     $error = false;
     if (!$row) {
         $error = true; // user not found
     } else {
-        if (password_verify($password, $row['password'])== FALSE) {
+        if (password_verify($password, $row['password']) == FALSE) {
             $error = true; // password invalid
         }
     }
@@ -88,14 +89,10 @@ $row = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);
     } else {
         unset($row['password']);
         $_SESSION['user'] = $row;
-        $app->render('login_success.html.twig',array('userSession' => $_SESSION['user']));
+        $app->render('login_success.html.twig', array('userSession' => $_SESSION['user']));
     }
 });
 
-$app->get('/', function() use ($app) {
-     $app->render('index.html.twig',array('userSession' => $_SESSION['user']));
- 
-});
 
 /* * ****************** check email if registered *********************** */
 $app->get('/isemailregistered/:email', function($email)use($app) {
@@ -156,9 +153,22 @@ $app->post('/register', function() use ($app) {
             'v' => $values));
     } else { // 2. successful submission
         $passEnc = password_hash($pass1, PASSWORD_BCRYPT);
+        
         DB::insert('users', array('name' => $name, 'email' => $email, 'password' => $passEnc));
         $app->render('register_success.html.twig');
     }
+});
+/* * ************ index (list of ads)*********************** */
+$app->get('/', function() use ($app) {
+
+    $productList = DB::query('SELECT name,description,price,imagePath FROM products,pictures WHERE products.id=pictures.productId');
+    $categoryList = DB::query('SELECT * FROM categories');
+  
+    $app->render('index.html.twig', array('userSession' => $_SESSION['user'],'productList' => $productList, 'categoryList' => $categoryList));
+});
+
+$app->post('/', function() use ($app) {
+    
 });
 
 

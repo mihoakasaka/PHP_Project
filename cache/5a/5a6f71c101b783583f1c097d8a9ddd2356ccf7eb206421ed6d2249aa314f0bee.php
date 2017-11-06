@@ -7,20 +7,38 @@ class __TwigTemplate_bfd78309f8b224fde081fba1d62f1b79d544c12ddfce0b4958358a8b0ba
     {
         parent::__construct($env);
 
-        $this->parent = false;
-
+        // line 2
+        $this->parent = $this->loadTemplate("master.html.twig", "login_success.html.twig", 2);
         $this->blocks = array(
+            'title' => array($this, 'block_title'),
+            'content' => array($this, 'block_content'),
         );
+    }
+
+    protected function doGetParent(array $context)
+    {
+        return "master.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        // line 2
-        echo "
-<p>Login successful, ";
-        // line 3
-        echo twig_escape_filter($this->env, ($context["name"] ?? null), "html", null, true);
-        echo " <a href=\"/\">click to continue</a>.</p>";
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+    }
+
+    // line 4
+    public function block_title($context, array $blocks = array())
+    {
+        echo "Index";
+    }
+
+    // line 6
+    public function block_content($context, array $blocks = array())
+    {
+        // line 7
+        echo "<p>Login successful,  ";
+        echo twig_escape_filter($this->env, $this->getAttribute(($context["userSession"] ?? null), "name", array()), "html", null, true);
+        echo " <a href=\"/\">click to continue</a>.</p>
+";
     }
 
     public function getTemplateName()
@@ -35,7 +53,7 @@ class __TwigTemplate_bfd78309f8b224fde081fba1d62f1b79d544c12ddfce0b4958358a8b0ba
 
     public function getDebugInfo()
     {
-        return array (  22 => 3,  19 => 2,);
+        return array (  38 => 7,  35 => 6,  29 => 4,  11 => 2,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -49,7 +67,12 @@ class __TwigTemplate_bfd78309f8b224fde081fba1d62f1b79d544c12ddfce0b4958358a8b0ba
     public function getSourceContext()
     {
         return new Twig_Source("{# empty Twig template #}
+{% extends \"master.html.twig\" %}
 
-<p>Login successful, {{name}} <a href=\"/\">click to continue</a>.</p>", "login_success.html.twig", "C:\\xampp\\htdocs\\PHP_Project\\templates\\login_success.html.twig");
+{% block title %}Index{% endblock %}
+
+{% block content %}
+<p>Login successful,  {{userSession.name}} <a href=\"/\">click to continue</a>.</p>
+{% endblock %}", "login_success.html.twig", "C:\\xampp\\htdocs\\PHP_Project\\templates\\login_success.html.twig");
     }
 }

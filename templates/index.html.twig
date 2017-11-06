@@ -3,9 +3,24 @@
 {% block title %}Index{% endblock %}
 
 {% block content %}
-{% if userSession %}
-<p>Hello, {{userSession.name}}!! /<a href="/logout">Log out</a></p> 
-{% else %}
-   <p> Hello, guest. please <a href="/login">log in</a> or <a href="/register">register</a><p>
-{% endif %}
+    
+    <div class="category">
+        <ul id="categorylist">
+            {% for c in categoryList %}
+                <li><a href="/list/">{{c.description}}</a></li>
+
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="productList">
+        {% for p in productList %}
+            <div class="productContainer">
+                <div class="imageContainer">
+                    <img src="../images/{{p.imagePath}}" width="100">
+                </div>
+                <p>{{p.name}}</p> <p>{{p.price}}</p>
+            </div>
+
+        {% endfor %}
+    </div>
 {% endblock %}
