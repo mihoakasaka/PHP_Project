@@ -60,3 +60,23 @@ Miho
   DONE - Log in ( Not done - showing error message is missing )  
 2.Completing log in(without FB), index page
 3.-----
+
+2017/11/05
+==========
+A) Things done/Not yet Done
+NOT DONE - Implement User can post and edit an ad
+DONE - Add and expand 2 other user stories (except login and messaging)
+B) Things To Do Today 
+- Implement User can post an ad
+- set up remote database
+- Test registration and log in
+C) Blocking Elements / Questions for others
+-- Database structure to be modified
+
+==============
+
+Miho
+2017/11/05
+1. DONE - Log in 
+2.search for register/login with FB account
+3.
