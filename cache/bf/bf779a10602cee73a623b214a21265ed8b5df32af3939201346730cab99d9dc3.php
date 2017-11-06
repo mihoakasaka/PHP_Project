@@ -12,6 +12,7 @@ class __TwigTemplate_87a86df006dd2202e643b264156f3e573238b8b43873d89825885252259
         $this->blocks = array(
             'title' => array($this, 'block_title'),
             'headextra' => array($this, 'block_headextra'),
+            'loginstatus' => array($this, 'block_loginstatus'),
             'content' => array($this, 'block_content'),
         );
     }
@@ -36,13 +37,23 @@ class __TwigTemplate_87a86df006dd2202e643b264156f3e573238b8b43873d89825885252259
 
 </head>
 <body>
+    <div id=\"header\">
+        ";
+        // line 13
+        $this->displayBlock('loginstatus', $context, $blocks);
+        // line 20
+        echo "    </div>
+
 
     <div id=\"centeredContent\">
-            ";
-        // line 14
+    ";
+        // line 24
         $this->displayBlock('content', $context, $blocks);
-        // line 15
-        echo "    </div>
+        // line 25
+        echo "</div>
+<div id=\"footer\">
+    footer
+</div>
 </body>
 </html>";
     }
@@ -58,7 +69,27 @@ class __TwigTemplate_87a86df006dd2202e643b264156f3e573238b8b43873d89825885252259
     {
     }
 
-    // line 14
+    // line 13
+    public function block_loginstatus($context, array $blocks = array())
+    {
+        // line 14
+        echo "            ";
+        if ((isset($context["userSession"]) ? $context["userSession"] : null)) {
+            // line 15
+            echo "                <p class='login-status'>Hello, ";
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["userSession"]) ? $context["userSession"] : null), "name", array()), "html", null, true);
+            echo "!! /<a href=\"/logout\">Log out</a></p> 
+            ";
+        } else {
+            // line 17
+            echo "                <p class='login-status'> Hello, guest. please <a href=\"/login\">log in</a> or <a href=\"/register\">register</a><p>
+                ";
+        }
+        // line 19
+        echo "        ";
+    }
+
+    // line 24
     public function block_content($context, array $blocks = array())
     {
     }
@@ -70,7 +101,7 @@ class __TwigTemplate_87a86df006dd2202e643b264156f3e573238b8b43873d89825885252259
 
     public function getDebugInfo()
     {
-        return array (  62 => 14,  57 => 7,  51 => 6,  45 => 15,  43 => 14,  35 => 8,  33 => 7,  29 => 6,  22 => 1,);
+        return array (  93 => 24,  89 => 19,  85 => 17,  79 => 15,  76 => 14,  73 => 13,  68 => 7,  62 => 6,  53 => 25,  51 => 24,  45 => 20,  43 => 13,  36 => 8,  34 => 7,  30 => 6,  23 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -94,11 +125,24 @@ class __TwigTemplate_87a86df006dd2202e643b264156f3e573238b8b43873d89825885252259
 
 </head>
 <body>
+    <div id=\"header\">
+        {% block loginstatus %}
+            {% if userSession %}
+                <p class='login-status'>Hello, {{userSession.name}}!! /<a href=\"/logout\">Log out</a></p> 
+            {% else %}
+                <p class='login-status'> Hello, guest. please <a href=\"/login\">log in</a> or <a href=\"/register\">register</a><p>
+                {% endif %}
+        {% endblock %}
+    </div>
+
 
     <div id=\"centeredContent\">
-            {% block content %}{% endblock %}
-    </div>
+    {% block content %}{% endblock %}
+</div>
+<div id=\"footer\">
+    footer
+</div>
 </body>
-</html>", "master.html.twig", "C:\\xampp\\htdocs\\phpproject\\templates\\master.html.twig");
+</html>", "master.html.twig", "C:\\xampp\\htdocs\\phproject\\templates\\master.html.twig");
     }
 }

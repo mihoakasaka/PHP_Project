@@ -65,7 +65,7 @@ if (!isset($_SESSION['user'])) {
 
 $app->get('/logout', function() use ($app) {
     $_SESSION['user'] = array();
-    $app->render('logout.html.twig');
+    $app->render('logout.html.twig', array('userSession' => $_SESSION['user']));
 });
 
 $app->get('/login', function() use ($app) {
@@ -129,7 +129,7 @@ $app->get('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
     } else { // nothing to load from database - adding
         $values = array();
     }
-    $app->render('/temporarytemplates/addAd.html.twig', array(
+    $app->render('addEditAd.html.twig', array(
         'v' => $values,
         'c' => buildCategoriesStruct(),
         'isEditing' => ($id != -1)
@@ -154,9 +154,6 @@ $app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
     $body = $app->request()->post('body');
     $price = $app->request()->post('price');
     
-    // FIXME removign debugging code
-    print_r($categoryId);
-
     $values = array('categoryId' => $categoryId, 'title' => $title, 'body' => $body, 'price' => $price);
     $errorList = array();
 
@@ -231,7 +228,7 @@ $app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
 
 
     if ($errorList) { // There were errors
-        $app->render('/temporarytemplates/addAd.html.twig', array(
+        $app->render('addEditAd.html.twig', array(
             'errorList' => $errorList,
             'isEditing' => ($id != -1),
             'v' => $values,
@@ -266,7 +263,7 @@ $app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
             }
             db::insert('pictures',$sanitizedImages);
         }
-        $app->render('/temporarytemplates/addAd_success.html.twig', array('isEditing' => ($id != -1)));
+        $app->render('addEditAd_success.html.twig', array('isEditing' => ($id != -1)));
     }
 })->conditions(array(
     'op' => '(edit|add)',

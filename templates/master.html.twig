@@ -10,11 +10,13 @@
 </head>
 <body>
     <div id="header">
-        {% if userSession %}
-            <p>Hello, {{userSession.name}}!! /<a href="/logout">Log out</a></p> 
-        {% else %}
-            <p> Hello, guest. please <a href="/login">log in</a> or <a href="/register">register</a><p>
-            {% endif %}
+        {% block loginstatus %}
+            {% if userSession %}
+                <p class='login-status'>Hello, {{userSession.name}}!! /<a href="/logout">Log out</a></p> 
+            {% else %}
+                <p class='login-status'> Hello, guest. please <a href="/login">log in</a> or <a href="/register">register</a><p>
+                {% endif %}
+        {% endblock %}
     </div>
 
 

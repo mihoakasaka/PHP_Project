@@ -54,3 +54,5 @@
 [2017-11-06 16:08:39] mail.ERROR: Query: INSERT INTO `ads` (`categoryId`,`title`,`body`,`price`,`sellerId`) VALUES ('', 'A great deal on a vintage car', 'This is an ad for a vintage car', '100000.00', '3') [] []
 [2017-11-06 16:12:42] mail.ERROR: Error: Cannot add or update a child row: a foreign key constraint fails (`cp4809_garagesale`.`ads`, CONSTRAINT `ads_ibfk_1` FOREIGN KEY (`categoryId`) REFERENCES `categories` (`id`)) [] []
 [2017-11-06 16:12:42] mail.ERROR: Query: INSERT INTO `ads` (`categoryId`,`title`,`body`,`price`,`sellerId`) VALUES ('', 'A great deal on a vintage car', 'This is an ad for a vintage car', '100000.00', '3') [] []
+[2017-11-06 16:50:11] mail.ERROR: Error: Unknown column 'pictures.productId' in 'where clause' [] []
+[2017-11-06 16:50:11] mail.ERROR: Query: SELECT name,description,price,imagePath FROM products,pictures WHERE products.id=pictures.productId [] []
