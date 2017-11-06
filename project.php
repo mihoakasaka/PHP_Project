@@ -7,10 +7,11 @@ session_start();
 require_once 'vendor/autoload.php';
 
 
-//DB::$dbName = 'cp4809_garagesale';
-//DB::$user = 'cp4809_garagesal';
-DB::$dbName = 'garagesale';
-DB::$user = 'garagesale';
+DB::$dbName = 'cp4809_garagesale';
+DB::$user = 'cp4809_garagesal';
+DB::$host = 'ipd10.com' ; 
+//DB::$dbName = 'garagesale';
+//DB::$user = 'garagesale';
 DB::$encoding = 'utf8';
 DB::$password = '4!}9N0R*398?';
 

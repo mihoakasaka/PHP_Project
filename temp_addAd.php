@@ -6,10 +6,11 @@ use Monolog\Handler\StreamHandler;
 session_start();
 require_once 'vendor/autoload.php';
 
-//DB::$dbName = 'cp4809_garagesale';
-//DB::$user = 'cp4809_garagesal';
-DB::$dbName = 'garagesale';
-DB::$user = 'garagesale';
+DB::$dbName = 'cp4809_garagesale';
+DB::$user = 'cp4809_garagesal';
+DB::$host = 'ipd10.com' ; 
+//DB::$dbName = 'garagesale';
+//DB::$user = 'garagesale';
 DB::$encoding = 'utf8';
 DB::$password = '4!}9N0R*398?';
 
@@ -68,12 +69,12 @@ function buildCategoriesStruct() {
     // Build a structure suitable to generate a select element in template for hierachal categories
     // FIXME: actually get a list from db
     $categoriesList = array(
-        array('categoryId' => 1, 'noPosts' => true, 'categoryDashedName' => 'Cars'),
-        array('categoryId' => 2, 'noPosts' => false, 'categoryDashedName' => ' - Used'),
-        array('categoryId' => 3, 'noPosts' => false, 'categoryDashedName' => ' - Vintage'),
-        array('categoryId' => 4, 'noPosts' => true, 'categoryDashedName' => 'Appliances'),
-        array('categoryId' => 5, 'noPosts' => false, 'categoryDashedName' => ' - Dishwahers'),
-        array('categoryId' => 6, 'noPosts' => false, 'categoryDashedName' => ' - Blenders')
+        array('categoryId' => 5, 'noPosts' => true, 'categoryDashedName' => 'Cars'),
+        array('categoryId' => 6, 'noPosts' => false, 'categoryDashedName' => ' - Used'),
+        array('categoryId' => 7, 'noPosts' => false, 'categoryDashedName' => ' - Vintage'),
+        array('categoryId' => 8, 'noPosts' => true, 'categoryDashedName' => 'Appliances'),
+        array('categoryId' => 9, 'noPosts' => false, 'categoryDashedName' => ' - Dishwahers'),
+        array('categoryId' => 10, 'noPosts' => false, 'categoryDashedName' => ' - Blenders')
     );
     return $categoriesList;
 }
@@ -123,6 +124,9 @@ $app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
     $title = $app->request()->post('title');
     $body = $app->request()->post('body');
     $price = $app->request()->post('price');
+    
+    // FIXME removign debugging code
+    print_r($categoryId);
 
     $values = array('categoryId' => $categoryId, 'title' => $title, 'body' => $body, 'price' => $price);
     $errorList = array();
