@@ -1,0 +1,17 @@
+{% extends "master.html.twig" %}
+{% block title %}reset password{% endblock %}
+
+
+{% block content %}
+    <p></p>
+    
+    {% if error %}
+        
+        {% endif %}
+        
+        <form method="post">
+            Password:<input type="password" name="pass1">
+            Password(repeated):<input type="password" name="pass2">
+            <input type='submit' value="Set new Password">
+            </form>
+{% endblock %}

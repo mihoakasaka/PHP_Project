@@ -80,3 +80,27 @@ Miho
 1. DONE - Log in 
 2.search for register/login with FB account
 3.
+
+Miguel Legault
+2017/11/06
+==========
+A)
+DONE- Implement User can post an ad
+-set up remote database
+-Test registration and log in
+B)
+-Integrate Bootstrap and LESS
+-add ad life cycle diagram
+C)
+Not at the moment
+
+
+
+==============
+
+Miho
+2017/11/06
+1. DONE - Registration password validation
+Not done -FB login 
+2.FB login , password reset
+3.----
