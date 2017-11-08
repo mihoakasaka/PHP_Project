@@ -104,3 +104,21 @@ Miho
 Not done -FB login 
 2.FB login , password reset
 3.----
+
+
+Miho
+2017/11/07
+1. DONE - Registration password validation
+Not done -FB login 
+2.FB login , password reset
+3.Can't connect to ipd10.com
+
+Miguel
+1.
+NOT DONE -Integrate Bootstrap and LESS
+NOT DONE -add ad life cycle diagram
+2.
+-Integrate Bootstrap and LESS
+-add ad life cycle diagram
+3.
+None at the moment
