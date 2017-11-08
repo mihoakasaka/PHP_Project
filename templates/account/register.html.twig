@@ -1,6 +1,6 @@
-{% extends "master.html.twig" %}
+{% extends "bootstraptransition/master.html.twig" %}
 {% block title %}Resister{% endblock %}
-{% block headextra %} 
+{% block bodyendextra %} 
     <script>
         $(document).ready(function () {
             $('input[name=email]').bind('propertychange change click keyup input paste', function () {

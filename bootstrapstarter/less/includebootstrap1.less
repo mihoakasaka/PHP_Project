@@ -10,4 +10,14 @@ and open the template in the editor.
 
 @import "../vendor/twbs/bootstrap/less/bootstrap.less";
 
-@brand-primary:         darken(#00FF00, 6.5%);
+@brand-primary:         darken(#662F00, 6.5%);
+
+.bordered {
+  border-top: dotted 1px black;
+  border-bottom: solid 2px black;
+}
+
+#registrationform {
+    .bordered;
+    .form-horizontal;
+}

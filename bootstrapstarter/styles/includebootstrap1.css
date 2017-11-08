@@ -1095,12 +1095,12 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #00de00;
+  color: #452000;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #009100;
+  color: #000000;
   text-decoration: underline;
 }
 a:focus {
@@ -1335,11 +1335,11 @@ mark,
   color: #777777;
 }
 .text-primary {
-  color: #00de00;
+  color: #452000;
 }
 a.text-primary:hover,
 a.text-primary:focus {
-  color: #00ab00;
+  color: #120800;
 }
 .text-success {
   color: #3c763d;
@@ -1371,11 +1371,11 @@ a.text-danger:focus {
 }
 .bg-primary {
   color: #fff;
-  background-color: #00de00;
+  background-color: #452000;
 }
 a.bg-primary:hover,
 a.bg-primary:focus {
-  background-color: #00ab00;
+  background-color: #120800;
 }
 .bg-success {
   background-color: #dff0d8;
@@ -3110,26 +3110,26 @@ fieldset[disabled] .btn-default.focus {
 }
 .btn-primary {
   color: #fff;
-  background-color: #00de00;
-  border-color: #00c400;
+  background-color: #452000;
+  border-color: #2b1400;
 }
 .btn-primary:focus,
 .btn-primary.focus {
   color: #fff;
-  background-color: #00ab00;
-  border-color: #004500;
+  background-color: #120800;
+  border-color: #000000;
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #00ab00;
-  border-color: #008700;
+  background-color: #120800;
+  border-color: #000000;
 }
 .btn-primary:active,
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
   color: #fff;
-  background-color: #00ab00;
-  border-color: #008700;
+  background-color: #120800;
+  border-color: #000000;
 }
 .btn-primary:active:hover,
 .btn-primary.active:hover,
@@ -3141,8 +3141,8 @@ fieldset[disabled] .btn-default.focus {
 .btn-primary.active.focus,
 .open > .dropdown-toggle.btn-primary.focus {
   color: #fff;
-  background-color: #008700;
-  border-color: #004500;
+  background-color: #000000;
+  border-color: #000000;
 }
 .btn-primary:active,
 .btn-primary.active,
@@ -3158,11 +3158,11 @@ fieldset[disabled] .btn-primary:focus,
 .btn-primary.disabled.focus,
 .btn-primary[disabled].focus,
 fieldset[disabled] .btn-primary.focus {
-  background-color: #00de00;
-  border-color: #00c400;
+  background-color: #452000;
+  border-color: #2b1400;
 }
 .btn-primary .badge {
-  color: #00de00;
+  color: #452000;
   background-color: #fff;
 }
 .btn-success {
@@ -3394,7 +3394,7 @@ fieldset[disabled] .btn-danger.focus {
   background-color: #fff;
 }
 .btn-link {
-  color: #00de00;
+  color: #452000;
   font-weight: normal;
   border-radius: 0;
 }
@@ -3415,7 +3415,7 @@ fieldset[disabled] .btn-link {
 }
 .btn-link:hover,
 .btn-link:focus {
-  color: #009100;
+  color: #000000;
   text-decoration: underline;
   background-color: transparent;
 }
@@ -3561,7 +3561,7 @@ tbody.collapse.in {
   color: #fff;
   text-decoration: none;
   outline: 0;
-  background-color: #00de00;
+  background-color: #452000;
 }
 .dropdown-menu > .disabled > a,
 .dropdown-menu > .disabled > a:hover,
@@ -3995,7 +3995,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav .open > a:hover,
 .nav .open > a:focus {
   background-color: #eeeeee;
-  border-color: #00de00;
+  border-color: #452000;
 }
 .nav .nav-divider {
   height: 1px;
@@ -4088,7 +4088,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
   color: #fff;
-  background-color: #00de00;
+  background-color: #452000;
 }
 .nav-stacked > li {
   float: none;
@@ -4712,7 +4712,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   padding: 6px 12px;
   line-height: 1.42857143;
   text-decoration: none;
-  color: #00de00;
+  color: #452000;
   background-color: #fff;
   border: 1px solid #ddd;
   margin-left: -1px;
@@ -4733,7 +4733,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > li > a:focus,
 .pagination > li > span:focus {
   z-index: 2;
-  color: #009100;
+  color: #000000;
   background-color: #eeeeee;
   border-color: #ddd;
 }
@@ -4745,8 +4745,8 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > .active > span:focus {
   z-index: 3;
   color: #fff;
-  background-color: #00de00;
-  border-color: #00de00;
+  background-color: #452000;
+  border-color: #452000;
   cursor: default;
 }
 .pagination > .disabled > span,
@@ -4863,11 +4863,11 @@ a.label:focus {
   background-color: #5e5e5e;
 }
 .label-primary {
-  background-color: #00de00;
+  background-color: #452000;
 }
 .label-primary[href]:hover,
 .label-primary[href]:focus {
-  background-color: #00ab00;
+  background-color: #120800;
 }
 .label-success {
   background-color: #5cb85c;
@@ -4931,7 +4931,7 @@ a.badge:focus {
 }
 .list-group-item.active > .badge,
 .nav-pills > .active > a > .badge {
-  color: #00de00;
+  color: #452000;
   background-color: #fff;
 }
 .list-group-item > .badge {
@@ -5006,7 +5006,7 @@ a.badge:focus {
 a.thumbnail:hover,
 a.thumbnail:focus,
 a.thumbnail.active {
-  border-color: #00de00;
+  border-color: #452000;
 }
 .thumbnail .caption {
   padding: 9px;
@@ -5120,7 +5120,7 @@ a.thumbnail.active {
   line-height: 20px;
   color: #fff;
   text-align: center;
-  background-color: #00de00;
+  background-color: #452000;
   -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   -webkit-transition: width 0.6s ease;
@@ -5283,8 +5283,8 @@ button.list-group-item {
 .list-group-item.active:focus {
   z-index: 2;
   color: #fff;
-  background-color: #00de00;
-  border-color: #00de00;
+  background-color: #452000;
+  border-color: #452000;
 }
 .list-group-item.active .list-group-item-heading,
 .list-group-item.active:hover .list-group-item-heading,
@@ -5300,7 +5300,7 @@ button.list-group-item {
 .list-group-item.active .list-group-item-text,
 .list-group-item.active:hover .list-group-item-text,
 .list-group-item.active:focus .list-group-item-text {
-  color: #abffab;
+  color: #ff7f12;
 }
 .list-group-item-success {
   color: #3c763d;
@@ -5680,22 +5680,22 @@ button.list-group-item-danger.active:focus {
   border-bottom-color: #ddd;
 }
 .panel-primary {
-  border-color: #00de00;
+  border-color: #452000;
 }
 .panel-primary > .panel-heading {
   color: #fff;
-  background-color: #00de00;
-  border-color: #00de00;
+  background-color: #452000;
+  border-color: #452000;
 }
 .panel-primary > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #00de00;
+  border-top-color: #452000;
 }
 .panel-primary > .panel-heading .badge {
-  color: #00de00;
+  color: #452000;
   background-color: #fff;
 }
 .panel-primary > .panel-footer + .panel-collapse > .panel-body {
-  border-bottom-color: #00de00;
+  border-bottom-color: #452000;
 }
 .panel-success {
   border-color: #d6e9c6;
@@ -6465,7 +6465,9 @@ button.close {
 .modal-header:before,
 .modal-header:after,
 .modal-footer:before,
-.modal-footer:after {
+.modal-footer:after,
+#registrationform .form-group:before,
+#registrationform .form-group:after {
   content: " ";
   display: table;
 }
@@ -6484,7 +6486,8 @@ button.close {
 .pager:after,
 .panel-body:after,
 .modal-header:after,
-.modal-footer:after {
+.modal-footer:after,
+#registrationform .form-group:after {
   clear: both;
 }
 .center-block {
@@ -6728,5 +6731,51 @@ button.close {
 @media print {
   .hidden-print {
     display: none !important;
+  }
+}
+.bordered {
+  border-top: dotted 1px black;
+  border-bottom: solid 2px black;
+}
+#registrationform {
+  border-top: dotted 1px black;
+  border-bottom: solid 2px black;
+}
+#registrationform .radio,
+#registrationform .checkbox,
+#registrationform .radio-inline,
+#registrationform .checkbox-inline {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 7px;
+}
+#registrationform .radio,
+#registrationform .checkbox {
+  min-height: 27px;
+}
+#registrationform .form-group {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+@media (min-width: 768px) {
+  #registrationform .control-label {
+    text-align: right;
+    margin-bottom: 0;
+    padding-top: 7px;
+  }
+}
+#registrationform .has-feedback .form-control-feedback {
+  right: 15px;
+}
+@media (min-width: 768px) {
+  #registrationform .form-group-lg .control-label {
+    padding-top: 11px;
+    font-size: 18px;
+  }
+}
+@media (min-width: 768px) {
+  #registrationform .form-group-sm .control-label {
+    padding-top: 6px;
+    font-size: 12px;
   }
 }
