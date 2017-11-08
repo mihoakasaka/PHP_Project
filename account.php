@@ -1,4 +1,5 @@
 <?php
+
 if (false) {
     $app = new \Slim\Slim();
     $log = new Logger('main');
@@ -112,10 +113,9 @@ $app->get('/logout', function() use ($app) {
     $_SESSION['user'] = array();
     $app->render('account/logout.html.twig', array('userSession' => $_SESSION['user']));
 });
+//FB log in
 
-$app->get('/login', function() use ($app) {
-    $app->render('account/login.html.twig');
-});
+
 
 $app->post('/login', function() use ($app) {
 
@@ -189,7 +189,7 @@ $app->post('/register', function() use ($app) {
         if (strlen($pass1) < 6 || strlen($pass1) > 50) {
             array_push($errorList, "Password must be between 6 and 50 characters long .");
         }
-        if (!(preg_match(('/[A-Z]/'), $pass1)) || !(preg_match(('/[a-z]/'), $pass1)) ||!(preg_match(('/[0-9]/'), $pass1))) {
+        if (!(preg_match(('/[A-Z]/'), $pass1)) || !(preg_match(('/[a-z]/'), $pass1)) || !(preg_match(('/[0-9]/'), $pass1))) {
             array_push($errorList, "Password must include at least one uppercase letter, lowercase letter and digit.");
         }
     }
@@ -205,11 +205,78 @@ $app->post('/register', function() use ($app) {
         $app->render('account/register_success.html.twig');
     }
 });
+/* * ***************************  log in with FB account ***************************** */
 
-$helper = $FB->getRedirectLoginHelper();
-$redirectURL = "http://Localhost/FBlogin/callback.php";
-$permission = ['email'];
-$loginURL = $helper->getLoginUrl($redirectURL,$permission);
+
+require_once __DIR__ . '/Facebook/autoload.php';
+$fb = new Facebook\Facebook([
+    'app_id' => '291988171297988',
+    'app_secret' => '831a96ed04f3886d3eda5296e5d2ca34',
+    'default_graph_version' => 'v2.4',
+        ]);
+$helper = $fb->getRedirectLoginHelper();
+$permissions = ['email']; // optional
+
+try {
+    if (isset($_SESSION['facebook_access_token'])) {
+        $accessToken = $_SESSION['facebook_access_token'];
+    } else {
+        $accessToken = $helper->getAccessToken();
+    }
+} catch (Facebook\Exceptions\FacebookResponseException $e) {
+    // When Graph returns an error
+    echo 'Graph returned an error: ' . $e->getMessage();
+    exit;
+} catch (Facebook\Exceptions\FacebookSDKException $e) {
+    // When validation fails or other local issues
+    echo 'Facebook SDK returned an error: ' . $e->getMessage();
+    exit;
+}
+if (isset($accessToken)) {
+    if (isset($_SESSION['facebook_access_token'])) {
+        $fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
+    } else {
+        // getting short-lived access token
+        $_SESSION['facebook_access_token'] = (string) $accessToken;
+        // OAuth 2.0 client handler
+        $oAuth2Client = $fb->getOAuth2Client();
+        // Exchanges a short-lived access token for a long-lived one
+        $longLivedAccessToken = $oAuth2Client->getLongLivedAccessToken($_SESSION['facebook_access_token']);
+        $_SESSION['facebook_access_token'] = (string) $longLivedAccessToken;
+        // setting default access token to be used in script
+        $fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
+    }
+    // redirect the user back to the same page if it has "code" GET variable
+    if (isset($_GET['code'])) {
+        header('Location: ./');
+    }
+    // getting basic info about user
+    try {
+        $profile_request = $fb->get('/me?fields=name,first_name,last_name,email');
+        $profile = $profile_request->getGraphNode()->asArray();
+    } catch (Facebook\Exceptions\FacebookResponseException $e) {
+        // When Graph returns an error
+        echo 'Graph returned an error: ' . $e->getMessage();
+        session_destroy();
+        // redirecting user back to app login page
+        header("Location: ./");
+        exit;
+    } catch (Facebook\Exceptions\FacebookSDKException $e) {
+        // When validation fails or other local issues
+        echo 'Facebook SDK returned an error: ' . $e->getMessage();
+        exit;
+    }
+
+    // printing $profile array on the screen which holds the basic info about user
+    print_r($profile);
+    // Now you can redirect to another page and use the access token from $_SESSION['facebook_access_token']
+} else {
+    // replace your website URL same as added in the developers.facebook.com/apps e.g. if you used http instead of https and you used non-www version or www version of your website then you must add the same here
+    $loginUrl = $helper->getLoginUrl('http://garagesale.ipd10.com/fblogincallback', $permissions);
+    echo '<a href="' . $loginUrl . '">Log in with Facebook!</a>';
+}
+
+
 
 
 

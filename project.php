@@ -56,13 +56,7 @@ $log = new Logger('mail');
 $log->pushHandler(new StreamHandler('logs/everything.log', Logger::WARNING));
 $log->pushHandler(new StreamHandler('logs/error.log', Logger::WARNING));
 
-require_once 'Facebook/autoload.php';
 
-$FB = new \Facebook\Facebook([
-    'app_id' =>'291988171297988',
-            'app_secret'=>'831a96ed04f3886d3eda5296e5d2ca34',
-           'default_graph_version'=>'v2.10'
-]);
 
 
 $twig = $app->view()->getEnvironment();
@@ -71,8 +65,6 @@ $twig->addGlobal('userSession', $_SESSION['user']);
 if (!isset($_SESSION['user'])) {
     $_SESSION['user'] = array();
 }
-
-
 
 function buildCategoriesStruct() {
     // Build a structure suitable to generate a select element in template for hierachal categories
@@ -109,7 +101,7 @@ $app->get('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
     } else { // nothing to load from database - adding
         $values = array();
     }
-    $app->render('addEditAd.html.twig', array(
+   $app->render('addEditAd.html.twig', array(
         'v' => $values,
         'c' => buildCategoriesStruct(),
         'isEditing' => ($id != -1)
@@ -290,5 +282,6 @@ $app->post('/', function() use ($app) {
 });
 
 require_once 'account.php';
+
 $app->run();
 
