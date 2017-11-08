@@ -1,14 +1,14 @@
 <?php
 
-/* index.html.twig */
-class __TwigTemplate_b1d9f4be629dbc67fbada3827432ce4c43329a984ff316c15ec432d75abb77e1 extends Twig_Template
+/* passreset_request.html.twig */
+class __TwigTemplate_e81d1327c816b7811dc102a71199b063f52ee8ba01b4fb11532ad8bf88335c4d extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("master.html.twig", "index.html.twig", 1);
+        $this->parent = $this->loadTemplate("master.html.twig", "passreset_request.html.twig", 1);
         $this->blocks = array(
             'title' => array($this, 'block_title'),
             'content' => array($this, 'block_content'),
@@ -25,24 +25,36 @@ class __TwigTemplate_b1d9f4be629dbc67fbada3827432ce4c43329a984ff316c15ec432d75ab
         $this->parent->display($context, array_merge($this->blocks, $blocks));
     }
 
-    // line 3
+    // line 2
     public function block_title($context, array $blocks = array())
     {
-        echo "Index";
+        echo "Forgotten password";
     }
 
     // line 5
     public function block_content($context, array $blocks = array())
     {
         // line 6
-        echo "    
-  <p>index page</p>
+        echo "    <p>Enter Email</p>
+    
+    ";
+        // line 8
+        if (($context["error"] ?? null)) {
+            // line 9
+            echo "        ";
+        }
+        // line 10
+        echo "        
+        <form method=\"post\">
+            Email:<input type=\"email\" name=\"email\">
+            <input type=\"submit\" value=\"Request reset password\">
+            </form>
 ";
     }
 
     public function getTemplateName()
     {
-        return "index.html.twig";
+        return "passreset_request.html.twig";
     }
 
     public function isTraitable()
@@ -52,7 +64,7 @@ class __TwigTemplate_b1d9f4be629dbc67fbada3827432ce4c43329a984ff316c15ec432d75ab
 
     public function getDebugInfo()
     {
-        return array (  38 => 6,  35 => 5,  29 => 3,  11 => 1,);
+        return array (  47 => 10,  44 => 9,  42 => 8,  38 => 6,  35 => 5,  29 => 2,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -66,12 +78,19 @@ class __TwigTemplate_b1d9f4be629dbc67fbada3827432ce4c43329a984ff316c15ec432d75ab
     public function getSourceContext()
     {
         return new Twig_Source("{% extends \"master.html.twig\" %}
+{% block title %}Forgotten password{% endblock %}
 
-{% block title %}Index{% endblock %}
 
 {% block content %}
+    <p>Enter Email</p>
     
-  <p>index page</p>
-{% endblock %}", "index.html.twig", "C:\\xampp\\htdocs\\PHP_Project\\templates\\index.html.twig");
+    {% if error %}
+        {% endif %}
+        
+        <form method=\"post\">
+            Email:<input type=\"email\" name=\"email\">
+            <input type=\"submit\" value=\"Request reset password\">
+            </form>
+{% endblock %}", "passreset_request.html.twig", "C:\\xampp\\htdocs\\PHP_Project\\templates\\passreset_request.html.twig");
     }
 }

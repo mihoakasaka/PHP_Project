@@ -79,3 +79,6 @@
 [2017-11-07 18:09:10] mail.ERROR: Query: SELECT name,description,price,imagePath FROM products,pictures WHERE products.id=pictures.productId [] []
 [2017-11-07 18:09:12] mail.ERROR: Error: Unknown column 'pictures.productId' in 'where clause' [] []
 [2017-11-07 18:09:12] mail.ERROR: Query: SELECT name,description,price,imagePath FROM products,pictures WHERE products.id=pictures.productId [] []
+[2017-11-08 03:52:38] mail.ERROR: Error: Unable to connect to MySQL server! Error: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.  [] []
+[2017-11-08 04:15:08] mail.ERROR: Error: Unable to connect to MySQL server! Error: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.  [] []
+[2017-11-08 04:18:18] mail.ERROR: Error: Unable to connect to MySQL server! Error: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.  [] []
