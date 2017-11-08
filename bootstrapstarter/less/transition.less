@@ -14,130 +14,50 @@ and open the template in the editor.
     Created on : Oct 20, 2017, 12:01:19 PM
     Author     : Miho Akasaka
 */
-*{ border:red dotted 1px;   }
-body{
-    margin: auto;
-    width: 860px;
-    background-color:lightcyan;
-    
-}
 
-#header{display:block;}
-#centeredContent{
-    display: block;
-    float: none;
-    height: 90%;
-}
-#footer{
-    display: block;
-}
-h1{
-    margin:auto;
-	width:70%;
-        padding: 10px;
-}
-/************************** login page  **************************/
-#loginForm, #registerForm {
-    width: 300px;
-    margin: auto;
-    border: 3px solid #f1f1f1;
-    background-color: white;
-}
-input {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-}
-
-button:hover {
-    opacity: 0.8;
-}
-
-.cancelbtn {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #f44336;
-}
-
-.imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-}
-
-img.avatar {
-    width: 40%;
-    border-radius: 50%;
-}
-
-.container {
-    padding: 16px;
-}
-
-span.registerNow{
-    float: right;
-    padding-top: 16px;
-}
-/************************** index page  **************************/
-ul {
-  list-style-type: none;
-}
-li{
-    margin: 5px 0;
-}
-.category{
-    width: 200px;
-  margin: 10px;
-    display: block;
-    float: left;
-}
-.productList{
-    width: 500px;
-    margin: auto;
-    display: block;
-    float: left;
-}
-.productContainer{
-    width: 150px;
-    display: block;
-    float: left;
-}
-.imageContainer{
-    width: 100px;
-    height: 100px;
-}
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-   span.registerNow {
-       display: block;
-       float: none;
-    }
-    .cancelbtn {
-       width: 100%;
-    }
-}
 
 @import "../vendor/twbs/bootstrap/less/bootstrap.less";
 
+.form-register {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-register {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-register .form-register-heading,
+.form-register .checkbox {
+  margin-bottom: 10px;
+}
+.form-register .checkbox {
+  font-weight: normal;
+}
+.form-register .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-register .form-control:focus {
+  z-index: 2;
+}
+.form-register input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-register input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
 @brand-primary:         darken(#662F00, 6.5%);
 
-.bordered {
-  border-top: dotted 1px black;
-  border-bottom: solid 2px black;
-}
-
-#registrationform {
-    .bordered;
-    .form-horizontal;
-}
