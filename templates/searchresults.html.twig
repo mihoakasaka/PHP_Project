@@ -8,26 +8,26 @@
         <input type='submit' value='Search' />
     </form>
 {% if v %}
-        <h2>Search results for {{v.searchTerm}}</h2>
+    <h2>Search results for <span class="quoted">{{v.searchTerm}}</span></h2>
         <h3>Ads</h3>
         {% for a in v.adResults %}
             <p><a href='/add/details/{{a.id}}'>{{ a.title }}</a></p>
         {% else %}
-            <p>No ads found matching this search</p>
+            <p class='text-muted'>No ads found matching this search</p>
         {% endfor %}
         
         <h3>Categories</h3>
                 {% for c in v.categoryResults %}
                     <p><a href='/category/{{c.urlSanitizedFullName}}'>{{ c.fullName }}</a></p>
         {% else %}
-            <p>No categories found matching this search</p>
+            <p class='text-muted'>No categories found matching this search</p>
         {% endfor %}
 
         <h3>Users</h3>
                 {% for u in v.userResults %}
             <p>{{ u.name }}</p>
         {% else %}
-            <p>No users found matching this search</p>
+            <p class='text-muted'>No users found matching this search</p>
         {% endfor %}
 
         {% endif %}

@@ -21,12 +21,22 @@ and open the template in the editor.
 /* Variables */
 /* Override base colors */
 
-@brand-primary:         darken(#662F00, 6.5%);
+@brand-primary:         darken(#FF9900, 6.5%);
 
 /* Set sizes and spacing on some elements */
 @small-forms-max-width: 330px;
 
 /* End of variables */
+
+
+/* Navigation and page headers */
+.nav-bar-brand {
+    color: @brand-primary;
+}
+
+.navbar-inverse .navbar-brand {
+    color: @brand-primary;
+}
 
 /* Main page elements */
 
@@ -81,6 +91,17 @@ body {
 #adAddEditForm {
     .form-record;
 }
+
+/* Utility styling classes */
+/* Quoted, ads surrounding quotes to an element with this class*/
+.quoted::before {
+    content: open-quote;
+}
+
+.quoted::after {
+    content: close-quote;
+}
+
 /*
 .form-signin .checkbox {
   font-weight: normal;

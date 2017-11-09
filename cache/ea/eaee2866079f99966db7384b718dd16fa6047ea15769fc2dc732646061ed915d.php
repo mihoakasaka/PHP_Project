@@ -47,9 +47,9 @@ class __TwigTemplate_3744c8db58ae6dbeea08c01705e38fec252e6c219615d5385128361541d
         // line 10
         if ((isset($context["v"]) ? $context["v"] : null)) {
             // line 11
-            echo "        <h2>Search results for ";
+            echo "    <h2>Search results for <span class=\"quoted\">";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["v"]) ? $context["v"] : null), "searchTerm", array()), "html", null, true);
-            echo "</h2>
+            echo "</span></h2>
         <h3>Ads</h3>
         ";
             // line 13
@@ -68,7 +68,7 @@ class __TwigTemplate_3744c8db58ae6dbeea08c01705e38fec252e6c219615d5385128361541d
             }
             if (!$context['_iterated']) {
                 // line 16
-                echo "            <p>No ads found matching this search</p>
+                echo "            <p class='text-muted'>No ads found matching this search</p>
         ";
             }
             $_parent = $context['_parent'];
@@ -94,7 +94,7 @@ class __TwigTemplate_3744c8db58ae6dbeea08c01705e38fec252e6c219615d5385128361541d
             }
             if (!$context['_iterated']) {
                 // line 23
-                echo "            <p>No categories found matching this search</p>
+                echo "            <p class='text-muted'>No categories found matching this search</p>
         ";
             }
             $_parent = $context['_parent'];
@@ -118,7 +118,7 @@ class __TwigTemplate_3744c8db58ae6dbeea08c01705e38fec252e6c219615d5385128361541d
             }
             if (!$context['_iterated']) {
                 // line 30
-                echo "            <p>No users found matching this search</p>
+                echo "            <p class='text-muted'>No users found matching this search</p>
         ";
             }
             $_parent = $context['_parent'];
@@ -165,26 +165,26 @@ class __TwigTemplate_3744c8db58ae6dbeea08c01705e38fec252e6c219615d5385128361541d
         <input type='submit' value='Search' />
     </form>
 {% if v %}
-        <h2>Search results for {{v.searchTerm}}</h2>
+    <h2>Search results for <span class=\"quoted\">{{v.searchTerm}}</span></h2>
         <h3>Ads</h3>
         {% for a in v.adResults %}
             <p><a href='/add/details/{{a.id}}'>{{ a.title }}</a></p>
         {% else %}
-            <p>No ads found matching this search</p>
+            <p class='text-muted'>No ads found matching this search</p>
         {% endfor %}
         
         <h3>Categories</h3>
                 {% for c in v.categoryResults %}
                     <p><a href='/category/{{c.urlSanitizedFullName}}'>{{ c.fullName }}</a></p>
         {% else %}
-            <p>No categories found matching this search</p>
+            <p class='text-muted'>No categories found matching this search</p>
         {% endfor %}
 
         <h3>Users</h3>
                 {% for u in v.userResults %}
             <p>{{ u.name }}</p>
         {% else %}
-            <p>No users found matching this search</p>
+            <p class='text-muted'>No users found matching this search</p>
         {% endfor %}
 
         {% endif %}

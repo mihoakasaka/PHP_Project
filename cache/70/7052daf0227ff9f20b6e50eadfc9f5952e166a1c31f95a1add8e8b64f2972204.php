@@ -105,7 +105,7 @@ class __TwigTemplate_b0a0e21b0477985c6f2212430113f15e1b056c2267ae0aee5e63eb673c8
     <footer>
         <div class=\"container-fluid\">
             <div class=\"row\">
-                <p class=\"col-xs-12\">footer</p>
+                <p class=\"col-xs-12\">Garage Sale is a project of <a href=\"http://ipd10.com\">IPD-10's</a> Miho Akasaka and Miguel Legault</p>
             </div>
         </div>
     </footer>
@@ -240,7 +240,7 @@ class __TwigTemplate_b0a0e21b0477985c6f2212430113f15e1b056c2267ae0aee5e63eb673c8
     <footer>
         <div class=\"container-fluid\">
             <div class=\"row\">
-                <p class=\"col-xs-12\">footer</p>
+                <p class=\"col-xs-12\">Garage Sale is a project of <a href=\"http://ipd10.com\">IPD-10's</a> Miho Akasaka and Miguel Legault</p>
             </div>
         </div>
     </footer>
