@@ -81,7 +81,7 @@ class __TwigTemplate_b0a0e21b0477985c6f2212430113f15e1b056c2267ae0aee5e63eb673c8
         // line 47
         echo "                    </ul>
                     <form class=\"navbar-form navbar-right\" method=\"post\" action=\"/search\">
-                        <input type=\"text\" class=\"form-control\" placeholder=\"Search...\">
+                        <input type=\"text\" class=\"form-control\" placeholder=\"Search...\" name=\"searchTerm\">
                     </form>
                 </div>
             </div>
@@ -219,7 +219,7 @@ class __TwigTemplate_b0a0e21b0477985c6f2212430113f15e1b056c2267ae0aee5e63eb673c8
                             {% endif %}
                     </ul>
                     <form class=\"navbar-form navbar-right\" method=\"post\" action=\"/search\">
-                        <input type=\"text\" class=\"form-control\" placeholder=\"Search...\">
+                        <input type=\"text\" class=\"form-control\" placeholder=\"Search...\" name=\"searchTerm\">
                     </form>
                 </div>
             </div>

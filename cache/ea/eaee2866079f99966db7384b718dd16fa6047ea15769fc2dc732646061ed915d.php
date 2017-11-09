@@ -8,7 +8,7 @@ class __TwigTemplate_3744c8db58ae6dbeea08c01705e38fec252e6c219615d5385128361541d
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("master.html.twig", "searchresults.html.twig", 1);
+        $this->parent = $this->loadTemplate("bootstraptransition/master.html.twig", "searchresults.html.twig", 1);
         $this->blocks = array(
             'title' => array($this, 'block_title'),
             'content' => array($this, 'block_content'),
@@ -17,7 +17,7 @@ class __TwigTemplate_3744c8db58ae6dbeea08c01705e38fec252e6c219615d5385128361541d
 
     protected function doGetParent(array $context)
     {
-        return "master.html.twig";
+        return "bootstraptransition/master.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = array())
@@ -155,7 +155,7 @@ class __TwigTemplate_3744c8db58ae6dbeea08c01705e38fec252e6c219615d5385128361541d
 
     public function getSourceContext()
     {
-        return new Twig_Source("{% extends \"master.html.twig\" %}
+        return new Twig_Source("{% extends \"bootstraptransition/master.html.twig\" %}
 {% block title %}Search{% endblock %}
 
 {% block content %}
@@ -189,6 +189,6 @@ class __TwigTemplate_3744c8db58ae6dbeea08c01705e38fec252e6c219615d5385128361541d
 
         {% endif %}
 {% endblock %} 
-", "searchresults.html.twig", "C:\\xampp\\htdocs\\phproject\\templates\\searchresults.html.twig");
+", "searchresults.html.twig", "C:\\xampp\\htdocs\\phpproject\\templates\\searchresults.html.twig");
     }
 }

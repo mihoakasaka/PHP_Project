@@ -64,10 +64,10 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
                 <input type=\"password\" class=\"form-control\" placeholder=\"Enter Password\" name=\"pass\" id=\"tbPassword\" required>
         </div>
         <input type=\"submit\" value=\"Log in\">
-        <button onclick=\"window.location = '";
+        <p><a href=\"";
         // line 24
-        echo twig_escape_filter($this->env, (isset($context["loginURL"]) ? $context["loginURL"] : null), "html", null, true);
-        echo "'\">Log in with FB</button>
+        echo twig_escape_filter($this->env, (isset($context["loginUrl"]) ? $context["loginUrl"] : null), "html", null, true);
+        echo "\">Log in with Facebook!</a></p>
         <input type=\"reset\" value=\"Cancel\">
         <p class=\"help-block\">No account?<a href=\"/register\">Register!!</a></p>
     </form>
@@ -123,7 +123,7 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
                 <input type=\"password\" class=\"form-control\" placeholder=\"Enter Password\" name=\"pass\" id=\"tbPassword\" required>
         </div>
         <input type=\"submit\" value=\"Log in\">
-        <button onclick=\"window.location = '{{ loginURL }}'\">Log in with FB</button>
+        <p><a href=\"{{loginUrl}}\">Log in with Facebook!</a></p>
         <input type=\"reset\" value=\"Cancel\">
         <p class=\"help-block\">No account?<a href=\"/register\">Register!!</a></p>
     </form>
