@@ -7,7 +7,11 @@ if (false) {
 }
 
 // URL/event handlers go here
-$app->get('/admin/articles/list', function() use ($app) {
-    echo "This is Teacher's Project";
+$app->get('/', function() use ($app) {
+    $adsList = array();
+    
+        $adsList = DB::query('SELECT ads.id, title, price, imagePath FROM ads,pictures WHERE ads.id=pictures.adId Order by ads.id desc' );
+    
+    $app->render('index.html.twig', array('adsList' => $adsList));
 });
 

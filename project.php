@@ -4,7 +4,9 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
 session_start();
+require_once 'Facebook/autoload.php';
 require_once 'vendor/autoload.php';
+require_once 'fbconfig.php';
 
 
 
@@ -52,19 +54,43 @@ $view->parserOptions = array(
 $view->setTemplatesDirectory(dirname(__FILE__) . '/templates');
 
 // create a log channel
-$log = new Logger('mail');
+$log = new Logger('main');
 $log->pushHandler(new StreamHandler('logs/everything.log', Logger::WARNING));
 $log->pushHandler(new StreamHandler('logs/error.log', Logger::WARNING));
 
-
-
-
-$twig = $app->view()->getEnvironment();
-$twig->addGlobal('userSession', $_SESSION['user']);
-
+if ($_SERVER['SERVER_NAME'] != 'localhost') {
+//sessions 
+    $helper = $fb->getRedirectLoginHelper();
+    $permissions = ['public_profile', 'email']; // optional
+    $loginUrl = $helper->getLoginUrl('http://garagesale.ipd10.com/callback.php', $permissions);
+    echo $loginUrl;
+    $logoutUrl = $helper->getLoginUrl('http://garagesale.ipd10.com/callback.php', $permissions);
+}
 if (!isset($_SESSION['user'])) {
     $_SESSION['user'] = array();
 }
+if (!isset($_SESSION['facebook_access_token'])) {
+    $_SESSION['facebook_access_token'] = array();
+}
+
+
+$twig = $app->view()->getEnvironment();
+if ($_SERVER['SERVER_NAME'] != 'localhost') {
+    $twig->addGlobal('fbUser', $_SESSION['facebook_access_token']);
+    $twig->addGlobal('loginUrl', $loginUrl);
+}
+$twig->addGlobal('userSession', $_SESSION['user']);
+
+$app->get('/logout', function() use ($app) {
+    $_SESSION['user'] = array();
+    $app->render('account/logout.html.twig', array('userSession' => $_SESSION['user']));
+});
+
+$app->get('/login', function() use ($app) {
+
+    $app->render('account/login.html.twig', array('userSession' => $_SESSION['user']));
+});
+
 
 function buildCategoriesStruct() {
     // Build a structure suitable to generate a select element in template for hierachal categories
@@ -271,17 +297,8 @@ $app->get('/category/:name', function($name) use ($app, $log) {
 
 
 
-/* * ************ index (list of ads)*********************** */
-$app->get('/', function() use ($app) {
-
-    $app->render('index.html.twig');
-});
-
-$app->post('/', function() use ($app) {
-    
-});
-
 require_once 'account.php';
+require_once 'admin.php';
 
 $app->run();
 

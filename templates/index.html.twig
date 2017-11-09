@@ -1,8 +1,59 @@
 {% extends "master.html.twig" %}
 
 {% block title %}Index{% endblock %}
-
+{% block headextra %}
+    <style>
+        ul {
+  list-style-type: none;
+}
+li {
+  margin: 5px 0;
+}
+.category {
+  width: 200px;
+  margin: 10px;
+  display: block;
+  float: left;
+}
+.adsList {
+  width: 500px;
+  margin: auto;
+  display: block;
+  float: left;
+}
+.adContainer {
+  width: 150px;
+  display: block;
+  float: left;
+}
+.imageContainer {
+  width: 100px;
+  height: 100px;
+}
+        </style>
+{% endblock %}
 {% block content %}
-    
-  <p>index page</p>
+
+
+    <a href="/ad/add">Create an ad</a>
+    <div id="categoryList">
+
+    </div>
+    <div id="adsList">
+        {% for a in adsList %}
+            <div class="adContainer">
+                <div class="imageContainer">
+                    <img src="{{a.imagePath}}" width="100">
+                </div>
+                <div class="title">
+                    <p>{{a.title}}</p>
+                </div>
+                <div class="price">
+                    <p>{{a.price}}</p>      
+                </div>
+
+            </div>                   
+        {% endfor %}
+
+    </div>
 {% endblock %}

@@ -80,7 +80,7 @@ $app->map('/passreset/token/:secretToken', function($secretToken) use ($app, $lo
         return;
     }
     if ($app->request()->isGet()) { // State 1: first show
-        $app->render('passreset_form.html.twig', array(
+        $app->render('account/passreset_form.html.twig', array(
             'name' => $user['name'], 'email' => $user['email']
         ));
     } else { // receiving POST with new password
@@ -102,7 +102,8 @@ $app->map('/passreset/token/:secretToken', function($secretToken) use ($app, $lo
                 'email' => $user['email']
             ));
         } else { // 2. successful submission
-            DB::update('users', array('password' => $pass1), 'id=%d', $user['id']);
+             $passEnc = password_hash($pass1, PASSWORD_BCRYPT);
+            DB::update('users', array('password' => $passEnc), 'id=%d', $user['id']);
             $app->render('account/passreset_form_success.html.twig');
         }
     }
