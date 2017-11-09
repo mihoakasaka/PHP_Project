@@ -36,16 +36,25 @@ class __TwigTemplate_ff293466af8894c9d01678a9a8effdd1e95560874730b14996b7add9b00
     public function block_content($context, array $blocks = array())
     {
         // line 5
-        echo "    ";
+        echo "    <form method=\"post\" id=\"registerForm\" class=\"form-access ";
         if ((isset($context["errorList"]) ? $context["errorList"] : null)) {
-            // line 6
-            echo "        <ul>
+            echo "has-error";
+        }
+        echo "\">
+        <h2 class=\"form-account-heading\">Please register</h2>
             ";
-            // line 7
+        // line 7
+        if ((isset($context["errorList"]) ? $context["errorList"] : null)) {
+            // line 8
+            echo "                <div class=\"help-block\">
+                <p>Please check your registration information</p>
+        <ul>
+            ";
+            // line 11
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable((isset($context["errorList"]) ? $context["errorList"] : null));
             foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-                // line 8
+                // line 12
                 echo "                <li>";
                 echo twig_escape_filter($this->env, $context["error"], "html", null, true);
                 echo "</li>
@@ -54,39 +63,42 @@ class __TwigTemplate_ff293466af8894c9d01678a9a8effdd1e95560874730b14996b7add9b00
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 10
+            // line 14
             echo "        </ul>
+                </div>
     ";
         }
-        // line 12
+        // line 17
         echo "
-    <form class=\"form-register\" method=\"post\" id=\"registerForm\">
-
-            <label><b>Username</b></label><span id=\"isTaken\"></span><br>
-            <input type=\"text\" placeholder=\"Enter Name\" name=\"name\"  value=\"";
-        // line 16
+        <div class=\"form-group\">
+            <label for=\"tbName\" class=\"control-label\">Username</label><span class=\"help-block\" id=\" isTaken\"></span>
+            <input type=\"text\" class=\"form-control\" placeholder=\"Enter Name\" name=\"name\" id=\"tbName\" value=\"";
+        // line 20
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["v"]) ? $context["v"] : null), "name", array()), "html", null, true);
         echo "\" required>
-
-
-            <label><b>E-mail</b></label><span id=\"isRegistered\"></span><br>
-            <input type=\"text\" placeholder=\"Enter Email\" name=\"email\"  value=\"";
-        // line 20
+        </div>
+        <div class=\"form-group\">
+            <label for=\"tbEmail\" class=\"control-label\">E-mail</label><span class=\"help-block\" id=\"isRegistered\"></span>
+            <input type=\"text\" class=\"form-control\" placeholder=\"Enter Email\" name=\"email\" id=\"tbEmail\" value=\"";
+        // line 24
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["v"]) ? $context["v"] : null), "email", array()), "html", null, true);
         echo "\" required>
-
-            <label><b>Password</b></label>
-            <input type=\"password\" placeholder=\"Enter Password\" name=\"pass1\" required>
-
-            <label><b>Confirm Password</b></label>
-            <input type=\"password\" placeholder=\"Retype Password\" name=\"pass2\" required>
-            <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Register</button>
+        </div>
+        <div class=\"form-group\">
+            <label for=\"tbPassword\" class=\"control-label\">Password</label>
+            <input type=\"password\" class=\"form-control\" placeholder=\"Enter Password\" id=\"tbPassword\" name=\"pass1\" required>
+        </div>
+        <div class=\"form-group\">
+            <label for=\"tbPasswordRetype\" class=\"control-label\">Confirm Password</label>
+            <input type=\"password\" class=\"form-control\" placeholder=\"Retype Password\" id=\"tbPasswordRetyp\" name=\"pass2\" required>
+        </div>
+          <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Register</button>
     </form>
 
 ";
     }
 
-    // line 32
+    // line 39
     public function block_bodyendextra($context, array $blocks = array())
     {
         echo " 
@@ -122,7 +134,7 @@ class __TwigTemplate_ff293466af8894c9d01678a9a8effdd1e95560874730b14996b7add9b00
 
     public function getDebugInfo()
     {
-        return array (  90 => 32,  75 => 20,  68 => 16,  62 => 12,  58 => 10,  49 => 8,  45 => 7,  42 => 6,  39 => 5,  36 => 4,  30 => 2,  11 => 1,);
+        return array (  102 => 39,  84 => 24,  77 => 20,  72 => 17,  67 => 14,  58 => 12,  54 => 11,  49 => 8,  47 => 7,  39 => 5,  36 => 4,  30 => 2,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -139,29 +151,36 @@ class __TwigTemplate_ff293466af8894c9d01678a9a8effdd1e95560874730b14996b7add9b00
 {% block title %}Register{% endblock %}
 
 {% block content %}
-    {% if errorList %}
+    <form method=\"post\" id=\"registerForm\" class=\"form-access {% if errorList %}has-error{% endif %}\">
+        <h2 class=\"form-account-heading\">Please register</h2>
+            {% if errorList %}
+                <div class=\"help-block\">
+                <p>Please check your registration information</p>
         <ul>
             {% for error in errorList %}
                 <li>{{error}}</li>
                 {% endfor %}
         </ul>
+                </div>
     {% endif %}
 
-    <form class=\"form-register\" method=\"post\" id=\"registerForm\">
-
-            <label><b>Username</b></label><span id=\"isTaken\"></span><br>
-            <input type=\"text\" placeholder=\"Enter Name\" name=\"name\"  value=\"{{v.name}}\" required>
-
-
-            <label><b>E-mail</b></label><span id=\"isRegistered\"></span><br>
-            <input type=\"text\" placeholder=\"Enter Email\" name=\"email\"  value=\"{{v.email}}\" required>
-
-            <label><b>Password</b></label>
-            <input type=\"password\" placeholder=\"Enter Password\" name=\"pass1\" required>
-
-            <label><b>Confirm Password</b></label>
-            <input type=\"password\" placeholder=\"Retype Password\" name=\"pass2\" required>
-            <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Register</button>
+        <div class=\"form-group\">
+            <label for=\"tbName\" class=\"control-label\">Username</label><span class=\"help-block\" id=\" isTaken\"></span>
+            <input type=\"text\" class=\"form-control\" placeholder=\"Enter Name\" name=\"name\" id=\"tbName\" value=\"{{v.name}}\" required>
+        </div>
+        <div class=\"form-group\">
+            <label for=\"tbEmail\" class=\"control-label\">E-mail</label><span class=\"help-block\" id=\"isRegistered\"></span>
+            <input type=\"text\" class=\"form-control\" placeholder=\"Enter Email\" name=\"email\" id=\"tbEmail\" value=\"{{v.email}}\" required>
+        </div>
+        <div class=\"form-group\">
+            <label for=\"tbPassword\" class=\"control-label\">Password</label>
+            <input type=\"password\" class=\"form-control\" placeholder=\"Enter Password\" id=\"tbPassword\" name=\"pass1\" required>
+        </div>
+        <div class=\"form-group\">
+            <label for=\"tbPasswordRetype\" class=\"control-label\">Confirm Password</label>
+            <input type=\"password\" class=\"form-control\" placeholder=\"Retype Password\" id=\"tbPasswordRetyp\" name=\"pass2\" required>
+        </div>
+          <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Register</button>
     </form>
 
 {% endblock %} 
@@ -185,6 +204,6 @@ class __TwigTemplate_ff293466af8894c9d01678a9a8effdd1e95560874730b14996b7add9b00
        
     </script>
 {% endblock %}
-", "account/register.html.twig", "C:\\xampp\\htdocs\\phproject\\templates\\account\\register.html.twig");
+", "account/register.html.twig", "C:\\xampp\\htdocs\\phpproject\\templates\\account\\register.html.twig");
     }
 }

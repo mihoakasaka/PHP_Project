@@ -53,54 +53,60 @@ class __TwigTemplate_b0a0e21b0477985c6f2212430113f15e1b056c2267ae0aee5e63eb673c8
         // line 26
         echo "</head>
 <body>
-    <!--<header>-->
-    <nav class=\"navbar navbar-inverse navbar-fixed-top\">
-        <div class=\"container-fluid\">
-            <div class=\"navbar-header\">
-                <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" aria-controls=\"navbar\">
-                    <span class=\"sr-only\">Toggle navigation</span>
-                    <span class=\"icon-bar\"></span>
-                    <span class=\"icon-bar\"></span>
-                    <span class=\"icon-bar\"></span>
-                </button>
-                <a class=\"navbar-brand\" href=\"/\">Garage Sale</a>
-            </div>
-            <div id=\"navbar\" class=\"navbar-collapse collapse\">
-                <ul class=\"nav navbar-nav navbar-right\">
-                    ";
+    <header>
+        <nav class=\"navbar navbar-inverse navbar-fixed-top\">
+            <div class=\"container-fluid\">
+                <div class=\"navbar-header\">
+                    <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" aria-controls=\"navbar\">
+                        <span class=\"sr-only\">Toggle navigation</span>
+                        <span class=\"icon-bar\"></span>
+                        <span class=\"icon-bar\"></span>
+                        <span class=\"icon-bar\"></span>
+                    </button>
+                    <a class=\"navbar-brand\" href=\"/\">Garage Sale</a>
+                </div>
+                <div id=\"navbar\" class=\"navbar-collapse collapse\">
+                    <ul class=\"nav navbar-nav navbar-right\">
+                        ";
         // line 42
         if ((isset($context["userSession"]) ? $context["userSession"] : null)) {
             echo "<li><a href=\"/logout\">Log out</a></li> 
-                        ";
+                            ";
         } else {
             // line 44
-            echo "                        <li><a href=\"/login\">Log in</a></li>
-                        <li><a href=\"/register\">Register</a></li>
-                        ";
+            echo "                            <li><a href=\"/login\">Log in</a></li>
+                            <li><a href=\"/register\">Register</a></li>
+                            ";
         }
         // line 47
-        echo "                </ul>
-                <form class=\"navbar-form navbar-right\" method=\"post\" action=\"/search\">
-                    <input type=\"text\" class=\"form-control\" placeholder=\"Search...\">
-                </form>
+        echo "                    </ul>
+                    <form class=\"navbar-form navbar-right\" method=\"post\" action=\"/search\">
+                        <input type=\"text\" class=\"form-control\" placeholder=\"Search...\">
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <div class=\"container-fluid\">
+            <div class=\"row\">
+
+                <div class=\"col-xs-12 main\">";
+        // line 61
+        $this->displayBlock('content', $context, $blocks);
+        echo "</div>
+
             </div>
         </div>
-    </nav>
-    <!--</header>-->
+    </main>
 
-    <div class=\"container-fluid\">
-        <div class=\"row\">
-            <div class=\"col-xs-12\">
-            ";
-        // line 59
-        $this->displayBlock('content', $context, $blocks);
-        // line 60
-        echo "        </div>
-
-    </div>
     <footer>
         <div class=\"container-fluid\">
-            footer
+            <div class=\"row\">
+                <p class=\"col-xs-12\">footer</p>
+            </div>
         </div>
     </footer>
     <!-- Bootstrap core JavaScript
@@ -112,9 +118,9 @@ class __TwigTemplate_b0a0e21b0477985c6f2212430113f15e1b056c2267ae0aee5e63eb673c8
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src=\"js/ie10-viewport-bug-workaround.js\"></script>
 ";
-        // line 76
+        // line 82
         $this->displayBlock('bodyendextra', $context, $blocks);
-        // line 77
+        // line 83
         echo "
 </body>
 </html>";
@@ -130,12 +136,12 @@ class __TwigTemplate_b0a0e21b0477985c6f2212430113f15e1b056c2267ae0aee5e63eb673c8
     {
     }
 
-    // line 59
+    // line 61
     public function block_content($context, array $blocks = array())
     {
     }
 
-    // line 76
+    // line 82
     public function block_bodyendextra($context, array $blocks = array())
     {
     }
@@ -152,7 +158,7 @@ class __TwigTemplate_b0a0e21b0477985c6f2212430113f15e1b056c2267ae0aee5e63eb673c8
 
     public function getDebugInfo()
     {
-        return array (  139 => 76,  134 => 59,  129 => 25,  124 => 11,  118 => 77,  116 => 76,  98 => 60,  96 => 59,  82 => 47,  77 => 44,  72 => 42,  54 => 26,  52 => 25,  35 => 11,  23 => 1,);
+        return array (  145 => 82,  140 => 61,  135 => 25,  130 => 11,  124 => 83,  122 => 82,  98 => 61,  82 => 47,  77 => 44,  72 => 42,  54 => 26,  52 => 25,  35 => 11,  23 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -192,44 +198,50 @@ class __TwigTemplate_b0a0e21b0477985c6f2212430113f15e1b056c2267ae0aee5e63eb673c8
     {% block headextra %}{% endblock %}
 </head>
 <body>
-    <!--<header>-->
-    <nav class=\"navbar navbar-inverse navbar-fixed-top\">
+    <header>
+        <nav class=\"navbar navbar-inverse navbar-fixed-top\">
+            <div class=\"container-fluid\">
+                <div class=\"navbar-header\">
+                    <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" aria-controls=\"navbar\">
+                        <span class=\"sr-only\">Toggle navigation</span>
+                        <span class=\"icon-bar\"></span>
+                        <span class=\"icon-bar\"></span>
+                        <span class=\"icon-bar\"></span>
+                    </button>
+                    <a class=\"navbar-brand\" href=\"/\">Garage Sale</a>
+                </div>
+                <div id=\"navbar\" class=\"navbar-collapse collapse\">
+                    <ul class=\"nav navbar-nav navbar-right\">
+                        {% if userSession %}<li><a href=\"/logout\">Log out</a></li> 
+                            {% else %}
+                            <li><a href=\"/login\">Log in</a></li>
+                            <li><a href=\"/register\">Register</a></li>
+                            {% endif %}
+                    </ul>
+                    <form class=\"navbar-form navbar-right\" method=\"post\" action=\"/search\">
+                        <input type=\"text\" class=\"form-control\" placeholder=\"Search...\">
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
         <div class=\"container-fluid\">
-            <div class=\"navbar-header\">
-                <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" aria-controls=\"navbar\">
-                    <span class=\"sr-only\">Toggle navigation</span>
-                    <span class=\"icon-bar\"></span>
-                    <span class=\"icon-bar\"></span>
-                    <span class=\"icon-bar\"></span>
-                </button>
-                <a class=\"navbar-brand\" href=\"/\">Garage Sale</a>
-            </div>
-            <div id=\"navbar\" class=\"navbar-collapse collapse\">
-                <ul class=\"nav navbar-nav navbar-right\">
-                    {% if userSession %}<li><a href=\"/logout\">Log out</a></li> 
-                        {% else %}
-                        <li><a href=\"/login\">Log in</a></li>
-                        <li><a href=\"/register\">Register</a></li>
-                        {% endif %}
-                </ul>
-                <form class=\"navbar-form navbar-right\" method=\"post\" action=\"/search\">
-                    <input type=\"text\" class=\"form-control\" placeholder=\"Search...\">
-                </form>
+            <div class=\"row\">
+
+                <div class=\"col-xs-12 main\">{% block content %}{% endblock %}</div>
+
             </div>
         </div>
-    </nav>
-    <!--</header>-->
+    </main>
 
-    <div class=\"container-fluid\">
-        <div class=\"row\">
-            <div class=\"col-xs-12\">
-            {% block content %}{% endblock %}
-        </div>
-
-    </div>
     <footer>
         <div class=\"container-fluid\">
-            footer
+            <div class=\"row\">
+                <p class=\"col-xs-12\">footer</p>
+            </div>
         </div>
     </footer>
     <!-- Bootstrap core JavaScript
@@ -243,6 +255,6 @@ class __TwigTemplate_b0a0e21b0477985c6f2212430113f15e1b056c2267ae0aee5e63eb673c8
 {% block bodyendextra %}{% endblock %}
 
 </body>
-</html>", "bootstraptransition/master.html.twig", "C:\\xampp\\htdocs\\phproject\\templates\\bootstraptransition\\master.html.twig");
+</html>", "bootstraptransition/master.html.twig", "C:\\xampp\\htdocs\\phpproject\\templates\\bootstraptransition\\master.html.twig");
     }
 }
