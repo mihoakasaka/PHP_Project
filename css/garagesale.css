@@ -6737,20 +6737,447 @@ button.close {
     display: none !important;
   }
 }
+/* Variables */
+/* Override base colors */
+/* Set sizes and spacing on some elements */
+/* End of variables */
+/* Main page elements */
 .main {
   padding: 20px;
 }
 body {
   padding-top: 50px;
 }
+/* Forms */
+/* Any form that blocks the whole page (like login or register) should use this class */
 .form-access {
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
 }
-.form-access .form-access-heading,
-.form-access .checkbox {
+/* Any form that is used to add/edit records shoul duse this class */
+#registerForm h1,
+#adAddEditForm h1,
+#loginForm h1,
+#registerForm h2,
+#adAddEditForm h2,
+#loginForm h2,
+#registerForm h3,
+#adAddEditForm h3,
+#loginForm h3,
+#registerForm h4,
+#adAddEditForm h4,
+#loginForm h4 {
   margin-bottom: 10px;
+}
+#registerForm input[type='submit'],
+#adAddEditForm input[type='submit'],
+#loginForm input[type='submit'],
+#registerForm button,
+#adAddEditForm button,
+#loginForm button,
+#registerForm input[type='reset'],
+#adAddEditForm input[type='reset'],
+#loginForm input[type='reset'] {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.3333333;
+  border-radius: 6px;
+  display: block;
+  width: 100%;
+}
+#registerForm input[type='submit']:focus,
+#adAddEditForm input[type='submit']:focus,
+#loginForm input[type='submit']:focus,
+#registerForm button:focus,
+#adAddEditForm button:focus,
+#loginForm button:focus,
+#registerForm input[type='reset']:focus,
+#adAddEditForm input[type='reset']:focus,
+#loginForm input[type='reset']:focus,
+#registerForm input[type='submit']:active:focus,
+#adAddEditForm input[type='submit']:active:focus,
+#loginForm input[type='submit']:active:focus,
+#registerForm button:active:focus,
+#adAddEditForm button:active:focus,
+#loginForm button:active:focus,
+#registerForm input[type='reset']:active:focus,
+#adAddEditForm input[type='reset']:active:focus,
+#loginForm input[type='reset']:active:focus,
+#registerForm input[type='submit'].active:focus,
+#adAddEditForm input[type='submit'].active:focus,
+#loginForm input[type='submit'].active:focus,
+#registerForm button.active:focus,
+#adAddEditForm button.active:focus,
+#loginForm button.active:focus,
+#registerForm input[type='reset'].active:focus,
+#adAddEditForm input[type='reset'].active:focus,
+#loginForm input[type='reset'].active:focus,
+#registerForm input[type='submit'].focus,
+#adAddEditForm input[type='submit'].focus,
+#loginForm input[type='submit'].focus,
+#registerForm button.focus,
+#adAddEditForm button.focus,
+#loginForm button.focus,
+#registerForm input[type='reset'].focus,
+#adAddEditForm input[type='reset'].focus,
+#loginForm input[type='reset'].focus,
+#registerForm input[type='submit']:active.focus,
+#adAddEditForm input[type='submit']:active.focus,
+#loginForm input[type='submit']:active.focus,
+#registerForm button:active.focus,
+#adAddEditForm button:active.focus,
+#loginForm button:active.focus,
+#registerForm input[type='reset']:active.focus,
+#adAddEditForm input[type='reset']:active.focus,
+#loginForm input[type='reset']:active.focus,
+#registerForm input[type='submit'].active.focus,
+#adAddEditForm input[type='submit'].active.focus,
+#loginForm input[type='submit'].active.focus,
+#registerForm button.active.focus,
+#adAddEditForm button.active.focus,
+#loginForm button.active.focus,
+#registerForm input[type='reset'].active.focus,
+#adAddEditForm input[type='reset'].active.focus,
+#loginForm input[type='reset'].active.focus {
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+#registerForm input[type='submit']:hover,
+#adAddEditForm input[type='submit']:hover,
+#loginForm input[type='submit']:hover,
+#registerForm button:hover,
+#adAddEditForm button:hover,
+#loginForm button:hover,
+#registerForm input[type='reset']:hover,
+#adAddEditForm input[type='reset']:hover,
+#loginForm input[type='reset']:hover,
+#registerForm input[type='submit']:focus,
+#adAddEditForm input[type='submit']:focus,
+#loginForm input[type='submit']:focus,
+#registerForm button:focus,
+#adAddEditForm button:focus,
+#loginForm button:focus,
+#registerForm input[type='reset']:focus,
+#adAddEditForm input[type='reset']:focus,
+#loginForm input[type='reset']:focus,
+#registerForm input[type='submit'].focus,
+#adAddEditForm input[type='submit'].focus,
+#loginForm input[type='submit'].focus,
+#registerForm button.focus,
+#adAddEditForm button.focus,
+#loginForm button.focus,
+#registerForm input[type='reset'].focus,
+#adAddEditForm input[type='reset'].focus,
+#loginForm input[type='reset'].focus {
+  color: #333;
+  text-decoration: none;
+}
+#registerForm input[type='submit']:active,
+#adAddEditForm input[type='submit']:active,
+#loginForm input[type='submit']:active,
+#registerForm button:active,
+#adAddEditForm button:active,
+#loginForm button:active,
+#registerForm input[type='reset']:active,
+#adAddEditForm input[type='reset']:active,
+#loginForm input[type='reset']:active,
+#registerForm input[type='submit'].active,
+#adAddEditForm input[type='submit'].active,
+#loginForm input[type='submit'].active,
+#registerForm button.active,
+#adAddEditForm button.active,
+#loginForm button.active,
+#registerForm input[type='reset'].active,
+#adAddEditForm input[type='reset'].active,
+#loginForm input[type='reset'].active {
+  outline: 0;
+  background-image: none;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+#registerForm input[type='submit'].disabled,
+#adAddEditForm input[type='submit'].disabled,
+#loginForm input[type='submit'].disabled,
+#registerForm button.disabled,
+#adAddEditForm button.disabled,
+#loginForm button.disabled,
+#registerForm input[type='reset'].disabled,
+#adAddEditForm input[type='reset'].disabled,
+#loginForm input[type='reset'].disabled,
+#registerForm input[type='submit'][disabled],
+#adAddEditForm input[type='submit'][disabled],
+#loginForm input[type='submit'][disabled],
+#registerForm button[disabled],
+#adAddEditForm button[disabled],
+#loginForm button[disabled],
+#registerForm input[type='reset'][disabled],
+#adAddEditForm input[type='reset'][disabled],
+#loginForm input[type='reset'][disabled],
+fieldset[disabled] #registerForm input[type='submit'],
+fieldset[disabled] #adAddEditForm input[type='submit'],
+fieldset[disabled] #loginForm input[type='submit'],
+fieldset[disabled] #registerForm button,
+fieldset[disabled] #adAddEditForm button,
+fieldset[disabled] #loginForm button,
+fieldset[disabled] #registerForm input[type='reset'],
+fieldset[disabled] #adAddEditForm input[type='reset'],
+fieldset[disabled] #loginForm input[type='reset'] {
+  cursor: not-allowed;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+a#registerForm input[type='submit'].disabled,
+a#adAddEditForm input[type='submit'].disabled,
+a#loginForm input[type='submit'].disabled,
+a#registerForm button.disabled,
+a#adAddEditForm button.disabled,
+a#loginForm button.disabled,
+a#registerForm input[type='reset'].disabled,
+a#adAddEditForm input[type='reset'].disabled,
+a#loginForm input[type='reset'].disabled,
+fieldset[disabled] a#registerForm input[type='submit'],
+fieldset[disabled] a#adAddEditForm input[type='submit'],
+fieldset[disabled] a#loginForm input[type='submit'],
+fieldset[disabled] a#registerForm button,
+fieldset[disabled] a#adAddEditForm button,
+fieldset[disabled] a#loginForm button,
+fieldset[disabled] a#registerForm input[type='reset'],
+fieldset[disabled] a#adAddEditForm input[type='reset'],
+fieldset[disabled] a#loginForm input[type='reset'] {
+  pointer-events: none;
+}
+#registerForm input[type='submit'],
+#adAddEditForm input[type='submit'],
+#loginForm input[type='submit'],
+#registerForm button[type='submit'],
+#adAddEditForm button[type='submit'],
+#loginForm button[type='submit'] {
+  color: #fff;
+  background-color: #452000;
+  border-color: #2b1400;
+}
+#registerForm input[type='submit']:focus,
+#adAddEditForm input[type='submit']:focus,
+#loginForm input[type='submit']:focus,
+#registerForm button[type='submit']:focus,
+#adAddEditForm button[type='submit']:focus,
+#loginForm button[type='submit']:focus,
+#registerForm input[type='submit'].focus,
+#adAddEditForm input[type='submit'].focus,
+#loginForm input[type='submit'].focus,
+#registerForm button[type='submit'].focus,
+#adAddEditForm button[type='submit'].focus,
+#loginForm button[type='submit'].focus {
+  color: #fff;
+  background-color: #120800;
+  border-color: #000000;
+}
+#registerForm input[type='submit']:hover,
+#adAddEditForm input[type='submit']:hover,
+#loginForm input[type='submit']:hover,
+#registerForm button[type='submit']:hover,
+#adAddEditForm button[type='submit']:hover,
+#loginForm button[type='submit']:hover {
+  color: #fff;
+  background-color: #120800;
+  border-color: #000000;
+}
+#registerForm input[type='submit']:active,
+#adAddEditForm input[type='submit']:active,
+#loginForm input[type='submit']:active,
+#registerForm button[type='submit']:active,
+#adAddEditForm button[type='submit']:active,
+#loginForm button[type='submit']:active,
+#registerForm input[type='submit'].active,
+#adAddEditForm input[type='submit'].active,
+#loginForm input[type='submit'].active,
+#registerForm button[type='submit'].active,
+#adAddEditForm button[type='submit'].active,
+#loginForm button[type='submit'].active,
+.open > .dropdown-toggle#registerForm input[type='submit'],
+.open > .dropdown-toggle#adAddEditForm input[type='submit'],
+.open > .dropdown-toggle#loginForm input[type='submit'],
+.open > .dropdown-toggle#registerForm button[type='submit'],
+.open > .dropdown-toggle#adAddEditForm button[type='submit'],
+.open > .dropdown-toggle#loginForm button[type='submit'] {
+  color: #fff;
+  background-color: #120800;
+  border-color: #000000;
+}
+#registerForm input[type='submit']:active:hover,
+#adAddEditForm input[type='submit']:active:hover,
+#loginForm input[type='submit']:active:hover,
+#registerForm button[type='submit']:active:hover,
+#adAddEditForm button[type='submit']:active:hover,
+#loginForm button[type='submit']:active:hover,
+#registerForm input[type='submit'].active:hover,
+#adAddEditForm input[type='submit'].active:hover,
+#loginForm input[type='submit'].active:hover,
+#registerForm button[type='submit'].active:hover,
+#adAddEditForm button[type='submit'].active:hover,
+#loginForm button[type='submit'].active:hover,
+.open > .dropdown-toggle#registerForm input[type='submit']:hover,
+.open > .dropdown-toggle#adAddEditForm input[type='submit']:hover,
+.open > .dropdown-toggle#loginForm input[type='submit']:hover,
+.open > .dropdown-toggle#registerForm button[type='submit']:hover,
+.open > .dropdown-toggle#adAddEditForm button[type='submit']:hover,
+.open > .dropdown-toggle#loginForm button[type='submit']:hover,
+#registerForm input[type='submit']:active:focus,
+#adAddEditForm input[type='submit']:active:focus,
+#loginForm input[type='submit']:active:focus,
+#registerForm button[type='submit']:active:focus,
+#adAddEditForm button[type='submit']:active:focus,
+#loginForm button[type='submit']:active:focus,
+#registerForm input[type='submit'].active:focus,
+#adAddEditForm input[type='submit'].active:focus,
+#loginForm input[type='submit'].active:focus,
+#registerForm button[type='submit'].active:focus,
+#adAddEditForm button[type='submit'].active:focus,
+#loginForm button[type='submit'].active:focus,
+.open > .dropdown-toggle#registerForm input[type='submit']:focus,
+.open > .dropdown-toggle#adAddEditForm input[type='submit']:focus,
+.open > .dropdown-toggle#loginForm input[type='submit']:focus,
+.open > .dropdown-toggle#registerForm button[type='submit']:focus,
+.open > .dropdown-toggle#adAddEditForm button[type='submit']:focus,
+.open > .dropdown-toggle#loginForm button[type='submit']:focus,
+#registerForm input[type='submit']:active.focus,
+#adAddEditForm input[type='submit']:active.focus,
+#loginForm input[type='submit']:active.focus,
+#registerForm button[type='submit']:active.focus,
+#adAddEditForm button[type='submit']:active.focus,
+#loginForm button[type='submit']:active.focus,
+#registerForm input[type='submit'].active.focus,
+#adAddEditForm input[type='submit'].active.focus,
+#loginForm input[type='submit'].active.focus,
+#registerForm button[type='submit'].active.focus,
+#adAddEditForm button[type='submit'].active.focus,
+#loginForm button[type='submit'].active.focus,
+.open > .dropdown-toggle#registerForm input[type='submit'].focus,
+.open > .dropdown-toggle#adAddEditForm input[type='submit'].focus,
+.open > .dropdown-toggle#loginForm input[type='submit'].focus,
+.open > .dropdown-toggle#registerForm button[type='submit'].focus,
+.open > .dropdown-toggle#adAddEditForm button[type='submit'].focus,
+.open > .dropdown-toggle#loginForm button[type='submit'].focus {
+  color: #fff;
+  background-color: #000000;
+  border-color: #000000;
+}
+#registerForm input[type='submit']:active,
+#adAddEditForm input[type='submit']:active,
+#loginForm input[type='submit']:active,
+#registerForm button[type='submit']:active,
+#adAddEditForm button[type='submit']:active,
+#loginForm button[type='submit']:active,
+#registerForm input[type='submit'].active,
+#adAddEditForm input[type='submit'].active,
+#loginForm input[type='submit'].active,
+#registerForm button[type='submit'].active,
+#adAddEditForm button[type='submit'].active,
+#loginForm button[type='submit'].active,
+.open > .dropdown-toggle#registerForm input[type='submit'],
+.open > .dropdown-toggle#adAddEditForm input[type='submit'],
+.open > .dropdown-toggle#loginForm input[type='submit'],
+.open > .dropdown-toggle#registerForm button[type='submit'],
+.open > .dropdown-toggle#adAddEditForm button[type='submit'],
+.open > .dropdown-toggle#loginForm button[type='submit'] {
+  background-image: none;
+}
+#registerForm input[type='submit'].disabled:hover,
+#adAddEditForm input[type='submit'].disabled:hover,
+#loginForm input[type='submit'].disabled:hover,
+#registerForm button[type='submit'].disabled:hover,
+#adAddEditForm button[type='submit'].disabled:hover,
+#loginForm button[type='submit'].disabled:hover,
+#registerForm input[type='submit'][disabled]:hover,
+#adAddEditForm input[type='submit'][disabled]:hover,
+#loginForm input[type='submit'][disabled]:hover,
+#registerForm button[type='submit'][disabled]:hover,
+#adAddEditForm button[type='submit'][disabled]:hover,
+#loginForm button[type='submit'][disabled]:hover,
+fieldset[disabled] #registerForm input[type='submit']:hover,
+fieldset[disabled] #adAddEditForm input[type='submit']:hover,
+fieldset[disabled] #loginForm input[type='submit']:hover,
+fieldset[disabled] #registerForm button[type='submit']:hover,
+fieldset[disabled] #adAddEditForm button[type='submit']:hover,
+fieldset[disabled] #loginForm button[type='submit']:hover,
+#registerForm input[type='submit'].disabled:focus,
+#adAddEditForm input[type='submit'].disabled:focus,
+#loginForm input[type='submit'].disabled:focus,
+#registerForm button[type='submit'].disabled:focus,
+#adAddEditForm button[type='submit'].disabled:focus,
+#loginForm button[type='submit'].disabled:focus,
+#registerForm input[type='submit'][disabled]:focus,
+#adAddEditForm input[type='submit'][disabled]:focus,
+#loginForm input[type='submit'][disabled]:focus,
+#registerForm button[type='submit'][disabled]:focus,
+#adAddEditForm button[type='submit'][disabled]:focus,
+#loginForm button[type='submit'][disabled]:focus,
+fieldset[disabled] #registerForm input[type='submit']:focus,
+fieldset[disabled] #adAddEditForm input[type='submit']:focus,
+fieldset[disabled] #loginForm input[type='submit']:focus,
+fieldset[disabled] #registerForm button[type='submit']:focus,
+fieldset[disabled] #adAddEditForm button[type='submit']:focus,
+fieldset[disabled] #loginForm button[type='submit']:focus,
+#registerForm input[type='submit'].disabled.focus,
+#adAddEditForm input[type='submit'].disabled.focus,
+#loginForm input[type='submit'].disabled.focus,
+#registerForm button[type='submit'].disabled.focus,
+#adAddEditForm button[type='submit'].disabled.focus,
+#loginForm button[type='submit'].disabled.focus,
+#registerForm input[type='submit'][disabled].focus,
+#adAddEditForm input[type='submit'][disabled].focus,
+#loginForm input[type='submit'][disabled].focus,
+#registerForm button[type='submit'][disabled].focus,
+#adAddEditForm button[type='submit'][disabled].focus,
+#loginForm button[type='submit'][disabled].focus,
+fieldset[disabled] #registerForm input[type='submit'].focus,
+fieldset[disabled] #adAddEditForm input[type='submit'].focus,
+fieldset[disabled] #loginForm input[type='submit'].focus,
+fieldset[disabled] #registerForm button[type='submit'].focus,
+fieldset[disabled] #adAddEditForm button[type='submit'].focus,
+fieldset[disabled] #loginForm button[type='submit'].focus {
+  background-color: #452000;
+  border-color: #2b1400;
+}
+#registerForm input[type='submit'] .badge,
+#adAddEditForm input[type='submit'] .badge,
+#loginForm input[type='submit'] .badge,
+#registerForm button[type='submit'] .badge,
+#adAddEditForm button[type='submit'] .badge,
+#loginForm button[type='submit'] .badge {
+  color: #452000;
+  background-color: #fff;
+}
+#loginForm {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+#registerForm {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
 }
 /*
 .form-signin .checkbox {

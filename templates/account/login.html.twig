@@ -1,36 +1,29 @@
-
-{% extends "master.html.twig" %}
-{% block title %}Log in{% endblock %}
-
+{% extends "bootstraptransition/master.html.twig" %}
+{% block title %}Login{% endblock %}
 
 {% block content %}
 
-    <form method="post" id="loginForm">
+    <form method="post" id="loginForm" {% if error %}class="has-error"{% endif %}>
+        <h2>Please Login</h2>
         <div class="imgcontainer">
             <img src="images/login.png" class="avatar">
         </div>
 
-        <div class="container">
+        <div class="form-group">
             {% if error %}
-                <p id="loginError">Enter valid email and password<p><br>
-            {% endif %}
+                <p class="help-block" id="loginError">Enter valid email and password<p>
+                {% endif %}
+                <label for="tbEmail" class="control-label">Email</label><span class="help-block" id="isTaken"></span>
+                <input type="text" class="form-control" placeholder="Enter email" name="email" id="tbEmail" required>
+        <div class="form-group">
+        </div>
+                <label for="tbPassword" class="control-label">Password</label><span class="help-block" id="isTaken"></span>
+                <input type="password" class="form-control" placeholder="Enter Password" name="pass" id="tbPassword" required>
+        </div>
+        <input type="submit" value="Log in">
+        <button onclick="window.location = '{{ loginURL }}'">Log in with FB</button>
+        <input type="reset" value="Cancel">
+        <p class="help-block">No account?<a href="/register">Register!!</a></p>
+    </form>
 
-                    <label><b>E-mail</b></label>
-                    <input type="text" placeholder="Enter email" name="email" required>
-
-                    <label><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="pass" required>
-
-                    <input type="submit" value="Log in">
-                     <input type="button" onclick="window.location='{{ loginURL }}'" value="Log in with FB"></input>
-   
-
-                    </div>
-
-                    <div class="container" style="background-color:#f1f1f1">
-                        <button type="button" class="cancelbtn">Cancel</button>
-                        <span class="registerNow">No account?<a href="/register">Register!!</a></span>
-                    </div>
-                    </form>
-
-                {% endblock %} 
+{% endblock %} 

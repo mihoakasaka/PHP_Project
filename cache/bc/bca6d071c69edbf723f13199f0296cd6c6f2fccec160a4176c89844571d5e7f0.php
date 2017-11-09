@@ -7,8 +7,8 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
     {
         parent::__construct($env);
 
-        // line 2
-        $this->parent = $this->loadTemplate("master.html.twig", "account/login.html.twig", 2);
+        // line 1
+        $this->parent = $this->loadTemplate("bootstraptransition/master.html.twig", "account/login.html.twig", 1);
         $this->blocks = array(
             'title' => array($this, 'block_title'),
             'content' => array($this, 'block_content'),
@@ -17,7 +17,7 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
 
     protected function doGetParent(array $context)
     {
-        return "master.html.twig";
+        return "bootstraptransition/master.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = array())
@@ -25,54 +25,54 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
         $this->parent->display($context, array_merge($this->blocks, $blocks));
     }
 
-    // line 3
+    // line 2
     public function block_title($context, array $blocks = array())
     {
-        echo "Log in";
+        echo "Login";
     }
 
-    // line 6
+    // line 4
     public function block_content($context, array $blocks = array())
     {
-        // line 7
+        // line 5
         echo "
-    <form method=\"post\" id=\"loginForm\">
+    <form method=\"post\" id=\"loginForm\" ";
+        // line 6
+        if ((isset($context["error"]) ? $context["error"] : null)) {
+            echo "class=\"has-error\"";
+        }
+        echo ">
+        <h2>Please Login</h2>
         <div class=\"imgcontainer\">
             <img src=\"images/login.png\" class=\"avatar\">
         </div>
 
-        <div class=\"container\">
+        <div class=\"form-group\">
             ";
-        // line 14
+        // line 13
         if ((isset($context["error"]) ? $context["error"] : null)) {
-            // line 15
-            echo "                <p id=\"loginError\">Enter valid email and password<p><br>
-            ";
-        }
-        // line 17
-        echo "
-                    <label><b>E-mail</b></label>
-                    <input type=\"text\" placeholder=\"Enter email\" name=\"email\" required>
-
-                    <label><b>Password</b></label>
-                    <input type=\"password\" placeholder=\"Enter Password\" name=\"pass\" required>
-
-                    <input type=\"submit\" value=\"Log in\">
-                     <input type=\"button\" onclick=\"window.location='";
-        // line 25
-        echo twig_escape_filter($this->env, (isset($context["loginURL"]) ? $context["loginURL"] : null), "html", null, true);
-        echo "'\" value=\"Log in with FB\"></input>
-   
-
-                    </div>
-
-                    <div class=\"container\" style=\"background-color:#f1f1f1\">
-                        <button type=\"button\" class=\"cancelbtn\">Cancel</button>
-                        <span class=\"registerNow\">No account?<a href=\"/register\">Register!!</a></span>
-                    </div>
-                    </form>
-
+            // line 14
+            echo "                <p class=\"help-block\" id=\"loginError\">Enter valid email and password<p>
                 ";
+        }
+        // line 16
+        echo "                <label for=\"tbEmail\" class=\"control-label\">Email</label><span class=\"help-block\" id=\"isTaken\"></span>
+                <input type=\"text\" class=\"form-control\" placeholder=\"Enter email\" name=\"email\" id=\"tbEmail\" required>
+        <div class=\"form-group\">
+        </div>
+                <label for=\"tbPassword\" class=\"control-label\">Password</label><span class=\"help-block\" id=\"isTaken\"></span>
+                <input type=\"password\" class=\"form-control\" placeholder=\"Enter Password\" name=\"pass\" id=\"tbPassword\" required>
+        </div>
+        <input type=\"submit\" value=\"Log in\">
+        <button onclick=\"window.location = '";
+        // line 24
+        echo twig_escape_filter($this->env, (isset($context["loginURL"]) ? $context["loginURL"] : null), "html", null, true);
+        echo "'\">Log in with FB</button>
+        <input type=\"reset\" value=\"Cancel\">
+        <p class=\"help-block\">No account?<a href=\"/register\">Register!!</a></p>
+    </form>
+
+";
     }
 
     public function getTemplateName()
@@ -87,7 +87,7 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
 
     public function getDebugInfo()
     {
-        return array (  63 => 25,  53 => 17,  49 => 15,  47 => 14,  38 => 7,  35 => 6,  29 => 3,  11 => 2,);
+        return array (  69 => 24,  59 => 16,  55 => 14,  53 => 13,  41 => 6,  38 => 5,  35 => 4,  29 => 2,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -100,42 +100,35 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
 
     public function getSourceContext()
     {
-        return new Twig_Source("
-{% extends \"master.html.twig\" %}
-{% block title %}Log in{% endblock %}
-
+        return new Twig_Source("{% extends \"bootstraptransition/master.html.twig\" %}
+{% block title %}Login{% endblock %}
 
 {% block content %}
 
-    <form method=\"post\" id=\"loginForm\">
+    <form method=\"post\" id=\"loginForm\" {% if error %}class=\"has-error\"{% endif %}>
+        <h2>Please Login</h2>
         <div class=\"imgcontainer\">
             <img src=\"images/login.png\" class=\"avatar\">
         </div>
 
-        <div class=\"container\">
+        <div class=\"form-group\">
             {% if error %}
-                <p id=\"loginError\">Enter valid email and password<p><br>
-            {% endif %}
+                <p class=\"help-block\" id=\"loginError\">Enter valid email and password<p>
+                {% endif %}
+                <label for=\"tbEmail\" class=\"control-label\">Email</label><span class=\"help-block\" id=\"isTaken\"></span>
+                <input type=\"text\" class=\"form-control\" placeholder=\"Enter email\" name=\"email\" id=\"tbEmail\" required>
+        <div class=\"form-group\">
+        </div>
+                <label for=\"tbPassword\" class=\"control-label\">Password</label><span class=\"help-block\" id=\"isTaken\"></span>
+                <input type=\"password\" class=\"form-control\" placeholder=\"Enter Password\" name=\"pass\" id=\"tbPassword\" required>
+        </div>
+        <input type=\"submit\" value=\"Log in\">
+        <button onclick=\"window.location = '{{ loginURL }}'\">Log in with FB</button>
+        <input type=\"reset\" value=\"Cancel\">
+        <p class=\"help-block\">No account?<a href=\"/register\">Register!!</a></p>
+    </form>
 
-                    <label><b>E-mail</b></label>
-                    <input type=\"text\" placeholder=\"Enter email\" name=\"email\" required>
-
-                    <label><b>Password</b></label>
-                    <input type=\"password\" placeholder=\"Enter Password\" name=\"pass\" required>
-
-                    <input type=\"submit\" value=\"Log in\">
-                     <input type=\"button\" onclick=\"window.location='{{ loginURL }}'\" value=\"Log in with FB\"></input>
-   
-
-                    </div>
-
-                    <div class=\"container\" style=\"background-color:#f1f1f1\">
-                        <button type=\"button\" class=\"cancelbtn\">Cancel</button>
-                        <span class=\"registerNow\">No account?<a href=\"/register\">Register!!</a></span>
-                    </div>
-                    </form>
-
-                {% endblock %} 
-", "account/login.html.twig", "C:\\xampp\\htdocs\\phproject\\templates\\account\\login.html.twig");
+{% endblock %} 
+", "account/login.html.twig", "C:\\xampp\\htdocs\\phpproject\\templates\\account\\login.html.twig");
     }
 }

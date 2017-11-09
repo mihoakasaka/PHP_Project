@@ -18,8 +18,17 @@ and open the template in the editor.
 
 @import "../vendor/twbs/bootstrap/less/bootstrap.less";
 
+/* Variables */
+/* Override base colors */
 
 @brand-primary:         darken(#662F00, 6.5%);
+
+/* Set sizes and spacing on some elements */
+@small-forms-max-width: 330px;
+
+/* End of variables */
+
+/* Main page elements */
 
 .main {
     padding: 20px;
@@ -29,16 +38,48 @@ body {
     padding-top: 50px;
 }
 
+/* Forms */
+
+/* Any form that blocks the whole page (like login or register) should use this class */
 .form-access {
-  max-width: 330px;
+  max-width: @small-forms-max-width;
   padding: 15px;
   margin: 0 auto;
 }
 
+/* Any form that is used to add/edit records shoul duse this class */
+.form-record {
+    // Put sizing and spacing here for record editing forms
+}
 
-.form-access .form-access-heading,
-.form-access .checkbox {
-  margin-bottom: 10px;
+
+#registerForm, #adAddEditForm, #loginForm {
+    h1, h2, h3, h4 {
+        margin-bottom: 10px;
+    }
+    input[type='submit'],
+    button,
+    input[type='reset'] {
+        .btn;
+        .btn-lg;
+        .btn-block;
+    }
+    input[type='submit'],
+    button[type='submit'] {
+        .btn-primary;
+    }
+}
+
+#loginForm {
+    .form-access;
+}
+
+#registerForm {
+    .form-access;
+}
+
+#adAddEditForm {
+    .form-record;
 }
 /*
 .form-signin .checkbox {

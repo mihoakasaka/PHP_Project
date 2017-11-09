@@ -35,12 +35,12 @@ class __TwigTemplate_b0a0e21b0477985c6f2212430113f15e1b056c2267ae0aee5e63eb673c8
         $this->displayBlock('title', $context, $blocks);
         echo " | Garage Sale</title>
         <!-- Bootstrap core CSS -->
-        <link href=\"css/garagesale.css\" rel=\"stylesheet\">
+        <link href=\"/css/garagesale.css\" rel=\"stylesheet\">
 
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <link href=\"css/ie10-viewport-bug-workaround.css\" rel=\"stylesheet\">
+        <link href=\"/css/ie10-viewport-bug-workaround.css\" rel=\"stylesheet\">
 
-        <script src=\"js/ie-emulation-modes-warning.js\"></script>
+        <script src=\"/js/ie-emulation-modes-warning.js\"></script>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -114,9 +114,9 @@ class __TwigTemplate_b0a0e21b0477985c6f2212430113f15e1b056c2267ae0aee5e63eb673c8
     <!-- Placed at the end of the document so the pages load faster -->
     <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js\"></script>
     <script>window.jQuery || document.write('<script src=\"js/vendor/jquery.min.js\"><\\/script>')</script>
-    <script src=\"js/bootstrap.min.js\"></script>
+    <script src=\"/js/bootstrap.min.js\"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src=\"js/ie10-viewport-bug-workaround.js\"></script>
+    <script src=\"/js/ie10-viewport-bug-workaround.js\"></script>
 ";
         // line 82
         $this->displayBlock('bodyendextra', $context, $blocks);
@@ -183,12 +183,12 @@ class __TwigTemplate_b0a0e21b0477985c6f2212430113f15e1b056c2267ae0aee5e63eb673c8
         <link rel=\"icon\" href=\"../../favicon.ico\">
         <title>{% block title %}{% endblock %} | Garage Sale</title>
         <!-- Bootstrap core CSS -->
-        <link href=\"css/garagesale.css\" rel=\"stylesheet\">
+        <link href=\"/css/garagesale.css\" rel=\"stylesheet\">
 
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <link href=\"css/ie10-viewport-bug-workaround.css\" rel=\"stylesheet\">
+        <link href=\"/css/ie10-viewport-bug-workaround.css\" rel=\"stylesheet\">
 
-        <script src=\"js/ie-emulation-modes-warning.js\"></script>
+        <script src=\"/js/ie-emulation-modes-warning.js\"></script>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -249,9 +249,9 @@ class __TwigTemplate_b0a0e21b0477985c6f2212430113f15e1b056c2267ae0aee5e63eb673c8
     <!-- Placed at the end of the document so the pages load faster -->
     <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js\"></script>
     <script>window.jQuery || document.write('<script src=\"js/vendor/jquery.min.js\"><\\/script>')</script>
-    <script src=\"js/bootstrap.min.js\"></script>
+    <script src=\"/js/bootstrap.min.js\"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src=\"js/ie10-viewport-bug-workaround.js\"></script>
+    <script src=\"/js/ie10-viewport-bug-workaround.js\"></script>
 {% block bodyendextra %}{% endblock %}
 
 </body>

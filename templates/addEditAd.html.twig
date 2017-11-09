@@ -1,21 +1,40 @@
+{% extends "bootstraptransition/master.html.twig" %}
+{% block title %}{% if isEditing %}Edit{% else %}Create New{% endif %} Ad{% endblock %}
 
+{% block content %}
+    <form method="post" enctype="multipart/form-data" id="adAddEditForm">
 
-<h2>{% if isEditing %}Editing{% else %}Creating{% endif %} Ad</h2>
+        <h2>{% if isEditing %}Editing{% else %}Creating New{% endif %} Ad</h2>
+        <div class="form-group">
+            <label for="lstCategory" class="control-label">Category</label>
+            <select class="form-control" name='categoryId' id="lstCategory">
+                {% for o in c %}
+                    <option value='{{o.categoryId}}' {% if o.noPosts%}disabled='disabled'{% endif %} {% if v.categoryId == o.categoryId %}selected='selected'{% endif %}>{{ o.categoryDashedName }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group{% if errorList['title'] %} has-error{% endif %}">
+            <label for="tbTitle" class="control-label">Title</label>
+            <input type="text" class="form-control" placeholder="Ad title" name="title" id="tbTitle" value="{{v.title}}">
+            {% if errorList['title'] %}<p class="help-block">{{ errorList['title'] }}</p>{% endif %}
+        </div>
+        <div class="form-group{% if errorList['body'] %} has-error{% endif %}">
+            <label for="taBody" class="control-label">Body</label>
+            <textarea name="body" class="form-control" placeholder="Ad text" id="taBody">{{v.body}}</textarea>
+            {% if errorList['body'] %}<p class="help-block">{{ errorList['body'] }}</p>{% endif %}
+        </div>
+        <div class="form-group{% if errorList['price'] %} has-error{% endif %}">
+            <label for="tbPrice" class="control-label">Price</label>
+            <input type="number" class="form-control" step="0.01" name="price" id="tbPrice" value="{{v.price}}">
+            {% if errorList['price'] %}<p class="help-block">{{ errorList['price'] }}</p>{% endif %}
+        </div>
+        <div class="form-group{% if errorList['adImages'] %} has-error{% endif %}">
+            <label for="fcAdImages" class="control-label">Pictures</label>
+            <p class="help-block">Choose at least 1 picture and up to 3</p>
+            <input type="file" class="form-control" name="adImages[]" multiple='multiple'><br>
+            {% if errorList['adImages'] %}<p class="help-block">{{ errorList['adImages'] }}</p>{% endif %}
+        </div>    
+        <button type="submit">{% if isEditing %}Update{% else %}Create{% endif %} Ad</button>
+    </form>
 
-<form method="post" enctype="multipart/form-data">
-    Category: <select name='categoryId'>
-        {% for o in c %}
-            <option value='{{o.categoryId}}' {% if o.noPosts%}disabled='disabled'{% endif %} {% if v.categoryId == o.categoryId %}selected='selected'{% endif %}>{{ o.categoryDashedName }}</option>
-        {% endfor %}
-    </select>
-    Title: <input type="text" name="title" value="{{v.title}}"><br>
-    {% if errorList['title'] %}<p>{{ errorList['title'] }}</p>{% endif %}
-    Body: <textarea name="body">{{v.body}}</textarea><br>
-    {% if errorList['body'] %}<p>{{ errorList['body'] }}</p>{% endif %}
-    Price: <input type="number" step="0.01" name="price" value="{{v.price}}"><br>
-    {% if errorList['price'] %}<p>{{ errorList['price'] }}</p>{% endif %}
-    Add Pictures (at least 1, up to 3)<input type="file" name="adImages[]" multiple='multiple'><br>
-    {% if errorList['adImages'] %}<p>{{ errorList['adImages'] }}</p>{% endif %}
-    <input type="submit" value="{% if isEditing %}Update{% else %}Create{% endif %} Ad">
-</form>
-
+{% endblock %} 

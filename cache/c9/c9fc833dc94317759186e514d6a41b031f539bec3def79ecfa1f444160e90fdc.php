@@ -36,12 +36,12 @@ class __TwigTemplate_ff293466af8894c9d01678a9a8effdd1e95560874730b14996b7add9b00
     public function block_content($context, array $blocks = array())
     {
         // line 5
-        echo "    <form method=\"post\" id=\"registerForm\" class=\"form-access ";
+        echo "    <form method=\"post\" id=\"registerForm\" ";
         if ((isset($context["errorList"]) ? $context["errorList"] : null)) {
-            echo "has-error";
+            echo "class=\"has-error\"";
         }
-        echo "\">
-        <h2 class=\"form-account-heading\">Please register</h2>
+        echo ">
+        <h2>Please register</h2>
             ";
         // line 7
         if ((isset($context["errorList"]) ? $context["errorList"] : null)) {
@@ -71,7 +71,7 @@ class __TwigTemplate_ff293466af8894c9d01678a9a8effdd1e95560874730b14996b7add9b00
         // line 17
         echo "
         <div class=\"form-group\">
-            <label for=\"tbName\" class=\"control-label\">Username</label><span class=\"help-block\" id=\" isTaken\"></span>
+            <label for=\"tbName\" class=\"control-label\">Username</label><span class=\"help-block\" id=\"isTaken\"></span>
             <input type=\"text\" class=\"form-control\" placeholder=\"Enter Name\" name=\"name\" id=\"tbName\" value=\"";
         // line 20
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["v"]) ? $context["v"] : null), "name", array()), "html", null, true);
@@ -92,7 +92,7 @@ class __TwigTemplate_ff293466af8894c9d01678a9a8effdd1e95560874730b14996b7add9b00
             <label for=\"tbPasswordRetype\" class=\"control-label\">Confirm Password</label>
             <input type=\"password\" class=\"form-control\" placeholder=\"Retype Password\" id=\"tbPasswordRetyp\" name=\"pass2\" required>
         </div>
-          <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Register</button>
+          <button type=\"submit\">Register</button>
     </form>
 
 ";
@@ -151,8 +151,8 @@ class __TwigTemplate_ff293466af8894c9d01678a9a8effdd1e95560874730b14996b7add9b00
 {% block title %}Register{% endblock %}
 
 {% block content %}
-    <form method=\"post\" id=\"registerForm\" class=\"form-access {% if errorList %}has-error{% endif %}\">
-        <h2 class=\"form-account-heading\">Please register</h2>
+    <form method=\"post\" id=\"registerForm\" {% if errorList %}class=\"has-error\"{% endif %}>
+        <h2>Please register</h2>
             {% if errorList %}
                 <div class=\"help-block\">
                 <p>Please check your registration information</p>
@@ -165,7 +165,7 @@ class __TwigTemplate_ff293466af8894c9d01678a9a8effdd1e95560874730b14996b7add9b00
     {% endif %}
 
         <div class=\"form-group\">
-            <label for=\"tbName\" class=\"control-label\">Username</label><span class=\"help-block\" id=\" isTaken\"></span>
+            <label for=\"tbName\" class=\"control-label\">Username</label><span class=\"help-block\" id=\"isTaken\"></span>
             <input type=\"text\" class=\"form-control\" placeholder=\"Enter Name\" name=\"name\" id=\"tbName\" value=\"{{v.name}}\" required>
         </div>
         <div class=\"form-group\">
@@ -180,7 +180,7 @@ class __TwigTemplate_ff293466af8894c9d01678a9a8effdd1e95560874730b14996b7add9b00
             <label for=\"tbPasswordRetype\" class=\"control-label\">Confirm Password</label>
             <input type=\"password\" class=\"form-control\" placeholder=\"Retype Password\" id=\"tbPasswordRetyp\" name=\"pass2\" required>
         </div>
-          <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Register</button>
+          <button type=\"submit\">Register</button>
     </form>
 
 {% endblock %} 

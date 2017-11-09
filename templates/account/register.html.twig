@@ -2,8 +2,8 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-    <form method="post" id="registerForm" class="form-access {% if errorList %}has-error{% endif %}">
-        <h2 class="form-account-heading">Please register</h2>
+    <form method="post" id="registerForm" {% if errorList %}class="has-error"{% endif %}>
+        <h2>Please register</h2>
             {% if errorList %}
                 <div class="help-block">
                 <p>Please check your registration information</p>
@@ -16,7 +16,7 @@
     {% endif %}
 
         <div class="form-group">
-            <label for="tbName" class="control-label">Username</label><span class="help-block" id=" isTaken"></span>
+            <label for="tbName" class="control-label">Username</label><span class="help-block" id="isTaken"></span>
             <input type="text" class="form-control" placeholder="Enter Name" name="name" id="tbName" value="{{v.name}}" required>
         </div>
         <div class="form-group">
@@ -31,7 +31,7 @@
             <label for="tbPasswordRetype" class="control-label">Confirm Password</label>
             <input type="password" class="form-control" placeholder="Retype Password" id="tbPasswordRetyp" name="pass2" required>
         </div>
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+          <button type="submit">Register</button>
     </form>
 
 {% endblock %} 

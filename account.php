@@ -115,6 +115,9 @@ $app->get('/logout', function() use ($app) {
 });
 //FB log in
 
+$app->get('/login', function() use ($app) {
+    $app->render('account/login.html.twig');
+});
 
 
 $app->post('/login', function() use ($app) {
@@ -207,6 +210,7 @@ $app->post('/register', function() use ($app) {
 });
 /* * ***************************  log in with FB account ***************************** */
 
+/*
 
 require_once __DIR__ . '/Facebook/autoload.php';
 $fb = new Facebook\Facebook([
@@ -279,4 +283,4 @@ if (isset($accessToken)) {
 
 
 
-
+*/
