@@ -105,7 +105,7 @@ Not done -FB login
 2.FB login , password reset
 3.----
 
-
+====================================================================
 Miho
 2017/11/07
 1. DONE - Registration password validation
@@ -122,3 +122,25 @@ NOT DONE -add ad life cycle diagram
 -add ad life cycle diagram
 3.
 None at the moment
+
+=====================================================================
+====================================================================
+Miho
+2017/11/08
+1. DONE - Registration password validation
+DONE -password reset
+Not done -FB login 
+2.FB login ,list of ads as index page
+3.FB login-teacher
+
+Miguel
+1.
+NOT DONE -Integrate Bootstrap and LESS
+NOT DONE -add ad life cycle diagram
+2.
+-Integrate Bootstrap and LESS
+-add ad life cycle diagram
+3.
+None at the moment
+
+=====================================================================
