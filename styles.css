@@ -99,13 +99,13 @@ li {
   display: block;
   float: left;
 }
-.productList {
+.adsList {
   width: 500px;
   margin: auto;
   display: block;
   float: left;
 }
-.productContainer {
+.adContainer {
   width: 150px;
   display: block;
   float: left;

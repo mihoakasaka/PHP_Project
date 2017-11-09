@@ -21,15 +21,15 @@
                     <label><b>Password</b></label>
                     <input type="password" placeholder="Enter Password" name="pass" required>
 
-                    <input type="submit" value="Log in">
-                     <input type="button" onclick="window.location='{{ loginURL }}'" value="Log in with FB"></input>
+                      <input type="submit" value="Log in">
+                     <a href="{{loginUrl}}">Log in with Facebook!</a>
    
 
                     </div>
 
                     <div class="container" style="background-color:#f1f1f1">
-                        <button type="button" class="cancelbtn">Cancel</button>
-                        <span class="registerNow">No account?<a href="/register">Register!!</a></span>
+                        <button type="button" >Register</button>
+                        <span class="registerNow">Forgot password?<a href="/passreset/request">Reset password</a></span>
                     </div>
                     </form>
 
