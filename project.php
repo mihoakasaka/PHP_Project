@@ -311,7 +311,7 @@ $app->get('/category/:name', function($name) use ($app, $log) {
     // Search for category by name
 });
 
-<<<<<<< HEAD
+
 // Products pagination usinx AJAX - main page
 $app->get('/ads(/:page)', function($page = 1) use ($app) {
     $perPage = 4;
@@ -348,7 +348,7 @@ $app->get('/ajax/ads(/:page)', function($page = 1) use ($app) {
         "adList" => $adList,
         ));
 });
-=======
+
 /* Manage ad pictures AJAX */
 $app->get('/ajax/ad/:adId/pictures/delete/(:pictureId)', function($adId = -1, $pictureId = -1) use ($app, $log) {
     /* We delete the picture id and we render the existing images section */
@@ -396,7 +396,7 @@ $app->get('/ajax/ad/:adId/pictures/delete/(:pictureId)', function($adId = -1, $p
     ));
 });
 
->>>>>>> f84061ddf7eaa097eb2484393798546ae8e1fac7
+
 
 
 require_once 'account.php';
