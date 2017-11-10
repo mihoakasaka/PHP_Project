@@ -117,6 +117,7 @@ $app->get('/logout', function() use ($app) {
 //FB log in
 
 $app->get('/login', function() use ($app) {
+    
     $app->render('account/login.html.twig');
 });
 
@@ -155,10 +156,7 @@ $app->get('/isusernametaken/:username', function($name)use($app) {
     echo!$row ? "" : '<span style="color:red; font-weight:bold;">Username already taken.</span>';
 });
 
-$app->get('/isemailregistered/:email', function($email) use ($app) {
-    $row = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);
-    echo!$row ? "" : '<span style="background-color: red; font-weight: bold;">Email already taken</span>';
-});
+
 
 $app->get('/register', function() use ($app) {
     $app->render('account/register.html.twig');
@@ -210,78 +208,27 @@ $app->post('/register', function() use ($app) {
     }
 });
 /* * ***************************  log in with FB account ***************************** */
-
-/*
-
-require_once __DIR__ . '/Facebook/autoload.php';
-$fb = new Facebook\Facebook([
-    'app_id' => '291988171297988',
-    'app_secret' => '831a96ed04f3886d3eda5296e5d2ca34',
-    'default_graph_version' => 'v2.4',
-        ]);
-$helper = $fb->getRedirectLoginHelper();
-$permissions = ['email']; // optional
-
-try {
-    if (isset($_SESSION['facebook_access_token'])) {
-        $accessToken = $_SESSION['facebook_access_token'];
-    } else {
-        $accessToken = $helper->getAccessToken();
+$app->get('/fblogin', function() use ($app) {
+     $app->render('account/fblogin.html.twig', array('user' => $_SESSION['facebook_access_token']));
+});
+$app->post('/fblogin', function() use ($app) {
+    //check if user has an account
+        $row = DB::queryFirstField('SELECT id from users WHERE email = %s', $_SESSION['facebook_access_token']['email']);
+    if (!$row) {
+       
+        $result = DB::insert('users', array(
+                    'name' => $_SESSION['facebook_access_token']['fName'].' '.$_SESSION['facebook_access_token']['lName'],
+                    'email' => $_SESSION['facebook_access_token']['email'],
+                    'fbId' => $_SESSION['facebook_access_token']['ID'],
+        ));
+        if ($result) {
+            $userID = DB::insertId();
+            $log->debug(sprintf("Regisetred fbUser %s with id %s", $_SESSION['facebook_access_token']['first_name'], $userID));
+            $_SESSION['facebook_access_token']['userID'] = $userID;
+        }
+      
     }
-} catch (Facebook\Exceptions\FacebookResponseException $e) {
-    // When Graph returns an error
-    echo 'Graph returned an error: ' . $e->getMessage();
-    exit;
-} catch (Facebook\Exceptions\FacebookSDKException $e) {
-    // When validation fails or other local issues
-    echo 'Facebook SDK returned an error: ' . $e->getMessage();
-    exit;
-}
-if (isset($accessToken)) {
-    if (isset($_SESSION['facebook_access_token'])) {
-        $fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
-    } else {
-        // getting short-lived access token
-        $_SESSION['facebook_access_token'] = (string) $accessToken;
-        // OAuth 2.0 client handler
-        $oAuth2Client = $fb->getOAuth2Client();
-        // Exchanges a short-lived access token for a long-lived one
-        $longLivedAccessToken = $oAuth2Client->getLongLivedAccessToken($_SESSION['facebook_access_token']);
-        $_SESSION['facebook_access_token'] = (string) $longLivedAccessToken;
-        // setting default access token to be used in script
-        $fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
-    }
-    // redirect the user back to the same page if it has "code" GET variable
-    if (isset($_GET['code'])) {
-        header('Location: ./');
-    }
-    // getting basic info about user
-    try {
-        $profile_request = $fb->get('/me?fields=name,first_name,last_name,email');
-        $profile = $profile_request->getGraphNode()->asArray();
-    } catch (Facebook\Exceptions\FacebookResponseException $e) {
-        // When Graph returns an error
-        echo 'Graph returned an error: ' . $e->getMessage();
-        session_destroy();
-        // redirecting user back to app login page
-        header("Location: ./");
-        exit;
-    } catch (Facebook\Exceptions\FacebookSDKException $e) {
-        // When validation fails or other local issues
-        echo 'Facebook SDK returned an error: ' . $e->getMessage();
-        exit;
-    }
+       $app->render('account/fblogin.html.twig');
+});
+    //check if user has FBid in record
 
-    // printing $profile array on the screen which holds the basic info about user
-    print_r($profile);
-    // Now you can redirect to another page and use the access token from $_SESSION['facebook_access_token']
-} else {
-    // replace your website URL same as added in the developers.facebook.com/apps e.g. if you used http instead of https and you used non-www version or www version of your website then you must add the same here
-    $loginUrl = $helper->getLoginUrl('http://garagesale.ipd10.com/fblogincallback', $permissions);
-    echo '<a href="' . $loginUrl . '">Log in with Facebook!</a>';
-}
-
-
-
-
-*/

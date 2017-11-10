@@ -21,9 +21,10 @@
                 <input type="password" class="form-control" placeholder="Enter Password" name="pass" id="tbPassword" required>
         </div>
         <input type="submit" value="Log in">
-        <p><a href="{{loginUrl}}">Log in with Facebook!</a></p>
-        <input type="reset" value="Cancel">
+        <a href="{{loginUrl}}"><img src="images/fblogin.png" width="200"></a>
+        
         <p class="help-block">No account?<a href="/register">Register!!</a></p>
+        <p class="help-block">Forget password?<a href="/register">Reset password</a></p>
     </form>
 
 {% endblock %} 
