@@ -91,7 +91,6 @@ $app->get('/login', function() use ($app) {
     $app->render('account/login.html.twig', array('userSession' => $_SESSION['user']));
 });
 
-
 function buildCategoriesStruct() {
     // Build a structure suitable to generate a select element in template for hierachal categories
     // FIXME: actually get a list from db
@@ -119,7 +118,8 @@ $app->get('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
     }
 
     if ($id != -1) { // We're editing
-        $values = ''; // FIXME: actually fetch ad from database
+        // Fetch ad from database
+        $values = DB::queryFirstRow('SELECT * FROM `ads` WHERE id=%d AND sellerId=%d', $id, $_SESSION['user']['id']);
         if (!$values) {
             $app->render('not_found.html.twig');
             return;
@@ -127,7 +127,7 @@ $app->get('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
     } else { // nothing to load from database - adding
         $values = array();
     }
-   $app->render('addEditAd.html.twig', array(
+    $app->render('addEditAd.html.twig', array(
         'v' => $values,
         'c' => buildCategoriesStruct(),
         'isEditing' => ($id != -1)
@@ -145,6 +145,13 @@ $app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
     if (($op == 'add' && $id != -1) || ($op == 'edit' && $id == -1)) {
         $app->render('not_found.html.twig');
         return;
+    }
+
+    // Get the current number of pictures
+    if ($op == 'edit') {
+        $existingImagesCount = DB::queryFirstField("SELECT COUNT(id) FROM pictures WHERE adId=%d", $id);
+    } else {
+        $existingImagesCount = 0; // If we're adding, we're starting at 0.
     }
 
     $categoryId = $app->request()->post('categoryId');
@@ -184,13 +191,14 @@ $app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
     // i.e. adImages['error'] becomes adImages['error'][0]
     // If no image is uploaded, only the first element exists
     $adImages = array();
+    $imageCount = 0;
+
     // is file being uploaded
     if ($_FILES['adImages']['error'][0] != UPLOAD_ERR_NO_FILE) {
 
         $adImages = $_FILES['adImages'];
 
         // Loop over all elements to check for upload errors
-        $imageCount = 0;
         while ($imageCount < count($adImages['error'])) {
 
             if ($adImages['error'][$imageCount] != 0) {
@@ -215,8 +223,8 @@ $app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
             }
             $imageCount++;
         }
-        if ($imageCount > 3) {
-            $errorList['adImages'] = (isset($errorList['adImages']) ? $errorList['adImages'] . ' ' : '') . "Can't upload more than 3 files at a time.";
+        if (($imageCount + $existingImagesCount) > 3) {
+            $errorList['adImages'] = (isset($errorList['adImages']) ? $errorList['adImages'] . ' ' : '') . "Can't upload more than 3 files at a time. Can't have more than 3 pictures per ad.";
         }
     } else { // no file uploaded
         if ($op == 'add') {
@@ -248,19 +256,24 @@ $app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
         }
 
         if ($id != -1) {
-            DB::update('todos', $values, "id=%i AND ownerId=%i", $id, $_SESSION['user']['id']);
+            // Update ad
+            DB::update('ads', $values, "id=%i AND sellerId=%i", $id, $_SESSION['user']['id']);
         } else {
             $values['sellerId'] = $_SESSION['user']['id'];
             // Insert ad record
             DB::insert('ads', $values);
-            $newAdId = DB::insertId(); // Get ID of inserted ad for pictures
-            // Insert Pictures
+            $id = DB::insertId(); // Get ID of inserted ad for pictures
+        }
+        
+        // Insert Pictures for add and edit
+        if ($imageCount > 0 ) {
             for ($i = 0; $i < count($sanitizedImages); $i++) {
                 // Add FK to link picture to ad
-                $sanitizedImages[$i]['adId'] = $newAdId;
+                $sanitizedImages[$i]['adId'] = $id;
             }
             db::insert('pictures', $sanitizedImages);
         }
+
         $app->render('addEditAd_success.html.twig', array('isEditing' => ($id != -1)));
     }
 })->conditions(array(
