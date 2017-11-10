@@ -7219,7 +7219,8 @@ a#adAddEditForm div.pict-thumb img.active {
   padding: 9px;
   color: #333333;
 }
-#adAddEditForm div.pict-thumb a {
+#adAddEditForm div.pict-thumb a,
+#adAddEditForm div.pict-thumb button {
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;

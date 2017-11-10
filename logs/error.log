@@ -95,3 +95,5 @@
 [2017-11-10 19:32:13] main.ERROR: Attempt to delete last picture from ad for picture id 5 from ad id 9 with user session 3 [] []
 [2017-11-10 19:32:15] main.ERROR: Attempt to delete last picture from ad for picture id 5 from ad id 9 with user session 3 [] []
 [2017-11-10 19:36:43] main.ERROR: Attempt to delete last picture from ad for picture id 5 from ad id 9 with user session 3 [] []
+[2017-11-10 20:50:43] main.ERROR: Error attempting to delete picture id -1 from ad id 17 with user session 8 [] []
+[2017-11-10 20:52:33] main.ERROR: No results returned from query when attempting to delete picture id 28 from ad id 17 with user session 8 [] []

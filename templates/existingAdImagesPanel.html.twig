@@ -1,12 +1,14 @@
-<h3>Existing images</h3>
-<p class="help-block" id="existingImages">
-    {% for image in i %}
-    <div class="pict-thumb">
-        <img  src="{{ image.imagePath }}" />
-        {% if i|length > 1%}
-            <a class="btn-danger" href="/ajax/ad/{{v.id}}/pictures/delete/{{image.id}}">Delete Me</a> 
-            <a class="btn-warning" href="/ajax/ad/{{v.id}}/pictures/delete/{{image.id}}">Make me the main picture</a>
-        {% endif %}
-    </div>
+<div id="existingImages">
+    <h3>Existing images</h3>
+    <p>
+        {% for image in i %}
+        <div class="pict-thumb">
+            <img  src="{{ image.imagePath }}" />
+            {% if i|length > 1%}
+                <button class="btn-danger" onclick="deleteAndReload('/ajax/ad/{{v.id}}/pictures/delete/{{image.id}}');return false;">Delete Me</button> 
+                <button class="btn-warning" href="/ajax/ad/{{v.id}}/pictures/promote/{{image.id}}">Make me the main picture</button>
+            {% endif %}
+        </div>
     {% endfor %}
 </p>
+</div>

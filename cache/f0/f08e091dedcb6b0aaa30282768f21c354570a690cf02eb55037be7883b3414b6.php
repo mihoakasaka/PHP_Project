@@ -158,45 +158,36 @@ class __TwigTemplate_cf319c7917621ab2d505d697c19976e4b6e9625d7d94f4ecbd77844369b
             echo "            ";
         }
         // line 36
-        echo "
-            <p class=\"help-block\">Add images</p>
+        echo "            <p class=\"help-block\">Add images</p>
             <input type=\"file\" class=\"form-control\" name=\"adImages[]\" multiple='multiple'><br>
             ";
-        // line 39
+        // line 38
         if ($this->getAttribute((isset($context["errorList"]) ? $context["errorList"] : null), "adImages", array(), "array")) {
             echo "<p class=\"help-block\">";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["errorList"]) ? $context["errorList"] : null), "adImages", array(), "array"), "html", null, true);
             echo "</p>";
         }
-        // line 40
+        // line 39
         echo "        </div>    
         <button type=\"submit\">";
-        // line 41
+        // line 40
         if ((isset($context["isEditing"]) ? $context["isEditing"] : null)) {
             echo "Update";
         } else {
             echo "Create";
         }
         echo " Ad</button>
-    </form>
+    </form>        
 ";
     }
 
-    // line 45
+    // line 44
     public function block_bodyendextra($context, array $blocks = array())
     {
-        // line 46
+        // line 45
         echo "    <script>
-        var currentPage = ";
-        // line 47
-        echo twig_escape_filter($this->env, (isset($context["currentPage"]) ? $context["currentPage"] : null), "html", null, true);
-        echo ";
-        function loadPage(page) {
-            \$('#btPage' + currentPage).removeClass(\"currentPageButton\");
-            currentPage = page;
-            \$('#btPage' + currentPage).addClass(\"currentPageButton\");
-            \$('#existingImages').load(\"/ajax/pictures/delete/\");
-            window.history.pushState(\"\", \"Product list\", \"/newproducts/\" + page);
+        function deleteAndReload(deleteUrl) {
+            \$('#existingImages').load(deleteUrl);
         }
     </script>
 ";
@@ -214,7 +205,7 @@ class __TwigTemplate_cf319c7917621ab2d505d697c19976e4b6e9625d7d94f4ecbd77844369b
 
     public function getDebugInfo()
     {
-        return array (  192 => 47,  189 => 46,  186 => 45,  175 => 41,  172 => 40,  166 => 39,  161 => 36,  158 => 35,  155 => 34,  153 => 33,  146 => 31,  143 => 30,  137 => 29,  133 => 28,  126 => 26,  123 => 25,  117 => 24,  113 => 23,  106 => 21,  103 => 20,  97 => 19,  93 => 18,  86 => 16,  82 => 14,  63 => 12,  59 => 11,  48 => 7,  44 => 5,  41 => 4,  30 => 2,  11 => 1,);
+        return array (  188 => 45,  185 => 44,  174 => 40,  171 => 39,  165 => 38,  161 => 36,  158 => 35,  155 => 34,  153 => 33,  146 => 31,  143 => 30,  137 => 29,  133 => 28,  126 => 26,  123 => 25,  117 => 24,  113 => 23,  106 => 21,  103 => 20,  97 => 19,  93 => 18,  86 => 16,  82 => 14,  63 => 12,  59 => 11,  48 => 7,  44 => 5,  41 => 4,  30 => 2,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -262,24 +253,18 @@ class __TwigTemplate_cf319c7917621ab2d505d697c19976e4b6e9625d7d94f4ecbd77844369b
             {% if isEditing %}
                 {% include 'existingAdImagesPanel.html.twig' %}
             {% endif %}
-
             <p class=\"help-block\">Add images</p>
             <input type=\"file\" class=\"form-control\" name=\"adImages[]\" multiple='multiple'><br>
             {% if errorList['adImages'] %}<p class=\"help-block\">{{ errorList['adImages'] }}</p>{% endif %}
         </div>    
         <button type=\"submit\">{% if isEditing %}Update{% else %}Create{% endif %} Ad</button>
-    </form>
+    </form>        
 {% endblock %} 
 
 {% block bodyendextra %}
     <script>
-        var currentPage = {{currentPage}};
-        function loadPage(page) {
-            \$('#btPage' + currentPage).removeClass(\"currentPageButton\");
-            currentPage = page;
-            \$('#btPage' + currentPage).addClass(\"currentPageButton\");
-            \$('#existingImages').load(\"/ajax/pictures/delete/\");
-            window.history.pushState(\"\", \"Product list\", \"/newproducts/\" + page);
+        function deleteAndReload(deleteUrl) {
+            \$('#existingImages').load(deleteUrl);
         }
     </script>
 {% endblock %}", "addEditAd.html.twig", "C:\\xampp\\htdocs\\phproject\\templates\\addEditAd.html.twig");

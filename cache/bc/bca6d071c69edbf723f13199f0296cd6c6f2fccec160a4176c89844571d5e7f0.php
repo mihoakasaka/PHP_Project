@@ -64,12 +64,13 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
                 <input type=\"password\" class=\"form-control\" placeholder=\"Enter Password\" name=\"pass\" id=\"tbPassword\" required>
         </div>
         <input type=\"submit\" value=\"Log in\">
-        <p><a href=\"";
+        <a href=\"";
         // line 24
         echo twig_escape_filter($this->env, (isset($context["loginUrl"]) ? $context["loginUrl"] : null), "html", null, true);
-        echo "\">Log in with Facebook!</a></p>
-        <input type=\"reset\" value=\"Cancel\">
+        echo "\"><img src=\"images/fblogin.png\" width=\"200\"></a>
+        
         <p class=\"help-block\">No account?<a href=\"/register\">Register!!</a></p>
+        <p class=\"help-block\">Forget password?<a href=\"/register\">Reset password</a></p>
     </form>
 
 ";
@@ -123,12 +124,13 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
                 <input type=\"password\" class=\"form-control\" placeholder=\"Enter Password\" name=\"pass\" id=\"tbPassword\" required>
         </div>
         <input type=\"submit\" value=\"Log in\">
-        <p><a href=\"{{loginUrl}}\">Log in with Facebook!</a></p>
-        <input type=\"reset\" value=\"Cancel\">
+        <a href=\"{{loginUrl}}\"><img src=\"images/fblogin.png\" width=\"200\"></a>
+        
         <p class=\"help-block\">No account?<a href=\"/register\">Register!!</a></p>
+        <p class=\"help-block\">Forget password?<a href=\"/register\">Reset password</a></p>
     </form>
 
 {% endblock %} 
-", "account/login.html.twig", "C:\\xampp\\htdocs\\phpproject\\templates\\account\\login.html.twig");
+", "account/login.html.twig", "C:\\xampp\\htdocs\\phproject\\templates\\account\\login.html.twig");
     }
 }

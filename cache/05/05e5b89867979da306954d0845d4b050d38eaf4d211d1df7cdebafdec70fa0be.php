@@ -16,7 +16,8 @@ class __TwigTemplate_40d0599bff5490ec2f8896092ddd549389853dd383a27c8b61092670fe0
     protected function doDisplay(array $context, array $blocks = array())
     {
         // line 1
-        echo "<p>Access Denied</p>";
+        echo "<p>Access Denied</p>
+";
     }
 
     public function getTemplateName()
@@ -39,6 +40,7 @@ class __TwigTemplate_40d0599bff5490ec2f8896092ddd549389853dd383a27c8b61092670fe0
 
     public function getSourceContext()
     {
-        return new Twig_Source("<p>Access Denied</p>", "access_denied.html.twig", "C:\\xampp\\htdocs\\phpproject\\templates\\access_denied.html.twig");
+        return new Twig_Source("<p>Access Denied</p>
+", "access_denied.html.twig", "C:\\xampp\\htdocs\\phproject\\templates\\access_denied.html.twig");
     }
 }
