@@ -1,0 +1,7 @@
+<h3>Existing images</h3>
+<p class="help-block" id="existingImages">
+    {% for image in i %}
+        <img class="" src="{{ image.imagePath }}" />{% if i|length > 1%}<a href="/ajax/ad/{{v.id}}/pictures/delete/{{image.id}}">Delete Me</a> 
+        <a href="/ajax/ad/{{v.id}}/pictures/delete/{{image.id}}">Make me the main picture</a>{% endif %}
+    {% endfor %}
+</p>

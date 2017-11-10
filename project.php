@@ -124,12 +124,15 @@ $app->get('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
             $app->render('not_found.html.twig');
             return;
         }
+        $existingImages = DB::query("SELECT * FROM pictures WHERE adId=%d", $id);
     } else { // nothing to load from database - adding
         $values = array();
+        $existingImages = array();
     }
     $app->render('addEditAd.html.twig', array(
         'v' => $values,
         'c' => buildCategoriesStruct(),
+        'i' => $existingImages,
         'isEditing' => ($id != -1)
     ));
 })->conditions(array(
@@ -149,7 +152,8 @@ $app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
 
     // Get the current number of pictures
     if ($op == 'edit') {
-        $existingImagesCount = DB::queryFirstField("SELECT COUNT(id) FROM pictures WHERE adId=%d", $id);
+        $existingImages = DB::query("SELECT * FROM pictures WHERE adId=%d", $id);
+        $existingImagesCount = count($existingImages);
     } else {
         $existingImagesCount = 0; // If we're adding, we're starting at 0.
     }
@@ -238,6 +242,7 @@ $app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
             'errorList' => $errorList,
             'isEditing' => ($id != -1),
             'v' => $values,
+            'i' => $existingImages,
             'c' => buildCategoriesStruct()
         ));
     } else { // All fields validated
@@ -264,9 +269,9 @@ $app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
             DB::insert('ads', $values);
             $id = DB::insertId(); // Get ID of inserted ad for pictures
         }
-        
+
         // Insert Pictures for add and edit
-        if ($imageCount > 0 ) {
+        if ($imageCount > 0) {
             for ($i = 0; $i < count($sanitizedImages); $i++) {
                 // Add FK to link picture to ad
                 $sanitizedImages[$i]['adId'] = $id;
@@ -307,6 +312,52 @@ $app->get('/category/:name', function($name) use ($app, $log) {
     // Search for category by name
 });
 
+/* Manage ad pictures AJAX */
+$app->get('/ajax/ad/:adId/pictures/delete/(:pictureId)', function($adId = -1, $pictureId = -1) use ($app, $log) {
+    /* We delete the picture id and we render the existing images section */
+
+    // Check that user is authorized and that deleted picture belongs to expected add
+    if (!$_SESSION['user'] || $adId == -1 || $pictureId == -1) {
+        // Getting unexepected values for picture deletion. Log it.
+        $log->err("Error attempting to delete picture id " .
+                $pictureId .
+                " from ad id " .
+                $adId .
+                " with user session " . (isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : '')
+        );
+    } else {
+        // Check that the picture actually belongs to the correct ad and user
+        if (!DB::queryFirstField("SELECT p.id FROM pictures as p INNER JOIN ads as a on p.adId = a.id WHERE a.sellerId=%d AND a.id=%d AND p.id=%d", $_SESSION['user']['id'], $adId, $pictureId)) {
+            $log->err("No results returned from query when attempting to delete picture id " .
+                    $pictureId .
+                    " from ad id " .
+                    $adId .
+                    " with user session " . (isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : '')
+            );
+        } else {
+            // Check that we're not deleting the last picture
+            if (DB::queryFirstField('SELECT COUNT(id) from pictures WHERE adId=%d', $adId) < 2) {
+                            $log->err("Attempt to delete last picture from ad for picture id " .
+                    $pictureId .
+                    " from ad id " .
+                    $adId .
+                    " with user session " . (isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : '')
+            );
+            } else {
+                // Go ahead and delete the record
+                DB::delete('pictures','id=%d',$pictureId);
+            }
+        }
+    }
+
+    // Render the remaining pictures
+    $existingImages = DB::query("SELECT * FROM pictures WHERE adId=%d", $adId);
+
+    $app->render('ajaxExistingImages.html.twig', array(
+        'v' => array('id' => $adId),
+        'i' => $existingImages
+    ));
+});
 
 
 

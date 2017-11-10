@@ -30,11 +30,27 @@
         </div>
         <div class="form-group{% if errorList['adImages'] %} has-error{% endif %}">
             <label for="fcAdImages" class="control-label">Pictures</label>
-            <p class="help-block">Choose at least 1 picture and up to 3</p>
+            {% if isEditing %}
+                {% include 'existingAdImagesPanel.html.twig' %}
+            {% endif %}
+
+            <p class="help-block">Add images</p>
             <input type="file" class="form-control" name="adImages[]" multiple='multiple'><br>
             {% if errorList['adImages'] %}<p class="help-block">{{ errorList['adImages'] }}</p>{% endif %}
         </div>    
         <button type="submit">{% if isEditing %}Update{% else %}Create{% endif %} Ad</button>
     </form>
-
 {% endblock %} 
+
+{% block bodyendextra %}
+    <script>
+        var currentPage = {{currentPage}};
+        function loadPage(page) {
+            $('#btPage' + currentPage).removeClass("currentPageButton");
+            currentPage = page;
+            $('#btPage' + currentPage).addClass("currentPageButton");
+            $('#existingImages').load("/ajax/pictures/delete/");
+            window.history.pushState("", "Product list", "/newproducts/" + page);
+        }
+    </script>
+{% endblock %}
