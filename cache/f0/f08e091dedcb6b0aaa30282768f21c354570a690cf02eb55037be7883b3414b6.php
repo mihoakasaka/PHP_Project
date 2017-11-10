@@ -12,6 +12,7 @@ class __TwigTemplate_cf319c7917621ab2d505d697c19976e4b6e9625d7d94f4ecbd77844369b
         $this->blocks = array(
             'title' => array($this, 'block_title'),
             'content' => array($this, 'block_content'),
+            'bodyendextra' => array($this, 'block_bodyendextra'),
         );
     }
 
@@ -147,19 +148,30 @@ class __TwigTemplate_cf319c7917621ab2d505d697c19976e4b6e9625d7d94f4ecbd77844369b
         }
         echo "\">
             <label for=\"fcAdImages\" class=\"control-label\">Pictures</label>
-            <p class=\"help-block\">Choose at least 1 picture and up to 3</p>
+            ";
+        // line 33
+        if ((isset($context["isEditing"]) ? $context["isEditing"] : null)) {
+            // line 34
+            echo "                ";
+            $this->loadTemplate("existingAdImagesPanel.html.twig", "addEditAd.html.twig", 34)->display($context);
+            // line 35
+            echo "            ";
+        }
+        // line 36
+        echo "
+            <p class=\"help-block\">Add images</p>
             <input type=\"file\" class=\"form-control\" name=\"adImages[]\" multiple='multiple'><br>
             ";
-        // line 35
+        // line 39
         if ($this->getAttribute((isset($context["errorList"]) ? $context["errorList"] : null), "adImages", array(), "array")) {
             echo "<p class=\"help-block\">";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["errorList"]) ? $context["errorList"] : null), "adImages", array(), "array"), "html", null, true);
             echo "</p>";
         }
-        // line 36
+        // line 40
         echo "        </div>    
         <button type=\"submit\">";
-        // line 37
+        // line 41
         if ((isset($context["isEditing"]) ? $context["isEditing"] : null)) {
             echo "Update";
         } else {
@@ -167,7 +179,26 @@ class __TwigTemplate_cf319c7917621ab2d505d697c19976e4b6e9625d7d94f4ecbd77844369b
         }
         echo " Ad</button>
     </form>
+";
+    }
 
+    // line 45
+    public function block_bodyendextra($context, array $blocks = array())
+    {
+        // line 46
+        echo "    <script>
+        var currentPage = ";
+        // line 47
+        echo twig_escape_filter($this->env, (isset($context["currentPage"]) ? $context["currentPage"] : null), "html", null, true);
+        echo ";
+        function loadPage(page) {
+            \$('#btPage' + currentPage).removeClass(\"currentPageButton\");
+            currentPage = page;
+            \$('#btPage' + currentPage).addClass(\"currentPageButton\");
+            \$('#existingImages').load(\"/ajax/pictures/delete/\");
+            window.history.pushState(\"\", \"Product list\", \"/newproducts/\" + page);
+        }
+    </script>
 ";
     }
 
@@ -183,7 +214,7 @@ class __TwigTemplate_cf319c7917621ab2d505d697c19976e4b6e9625d7d94f4ecbd77844369b
 
     public function getDebugInfo()
     {
-        return array (  163 => 37,  160 => 36,  154 => 35,  145 => 31,  142 => 30,  136 => 29,  132 => 28,  125 => 26,  122 => 25,  116 => 24,  112 => 23,  105 => 21,  102 => 20,  96 => 19,  92 => 18,  85 => 16,  81 => 14,  62 => 12,  58 => 11,  47 => 7,  43 => 5,  40 => 4,  29 => 2,  11 => 1,);
+        return array (  192 => 47,  189 => 46,  186 => 45,  175 => 41,  172 => 40,  166 => 39,  161 => 36,  158 => 35,  155 => 34,  153 => 33,  146 => 31,  143 => 30,  137 => 29,  133 => 28,  126 => 26,  123 => 25,  117 => 24,  113 => 23,  106 => 21,  103 => 20,  97 => 19,  93 => 18,  86 => 16,  82 => 14,  63 => 12,  59 => 11,  48 => 7,  44 => 5,  41 => 4,  30 => 2,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -228,14 +259,29 @@ class __TwigTemplate_cf319c7917621ab2d505d697c19976e4b6e9625d7d94f4ecbd77844369b
         </div>
         <div class=\"form-group{% if errorList['adImages'] %} has-error{% endif %}\">
             <label for=\"fcAdImages\" class=\"control-label\">Pictures</label>
-            <p class=\"help-block\">Choose at least 1 picture and up to 3</p>
+            {% if isEditing %}
+                {% include 'existingAdImagesPanel.html.twig' %}
+            {% endif %}
+
+            <p class=\"help-block\">Add images</p>
             <input type=\"file\" class=\"form-control\" name=\"adImages[]\" multiple='multiple'><br>
             {% if errorList['adImages'] %}<p class=\"help-block\">{{ errorList['adImages'] }}</p>{% endif %}
         </div>    
         <button type=\"submit\">{% if isEditing %}Update{% else %}Create{% endif %} Ad</button>
     </form>
-
 {% endblock %} 
-", "addEditAd.html.twig", "C:\\xampp\\htdocs\\phpproject\\templates\\addEditAd.html.twig");
+
+{% block bodyendextra %}
+    <script>
+        var currentPage = {{currentPage}};
+        function loadPage(page) {
+            \$('#btPage' + currentPage).removeClass(\"currentPageButton\");
+            currentPage = page;
+            \$('#btPage' + currentPage).addClass(\"currentPageButton\");
+            \$('#existingImages').load(\"/ajax/pictures/delete/\");
+            window.history.pushState(\"\", \"Product list\", \"/newproducts/\" + page);
+        }
+    </script>
+{% endblock %}", "addEditAd.html.twig", "C:\\xampp\\htdocs\\phproject\\templates\\addEditAd.html.twig");
     }
 }

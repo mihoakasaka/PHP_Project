@@ -90,7 +90,6 @@ $app->get('/login', function() use ($app) {
     $app->render('account/login.html.twig', array('userSession' => $_SESSION['user']));
 });
 
-
 function buildCategoriesStruct() {
     // Build a structure suitable to generate a select element in template for hierachal categories
     // FIXME: actually get a list from db
@@ -118,17 +117,21 @@ $app->get('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
     }
 
     if ($id != -1) { // We're editing
-        $values = ''; // FIXME: actually fetch ad from database
+        // Fetch ad from database
+        $values = DB::queryFirstRow('SELECT * FROM `ads` WHERE id=%d AND sellerId=%d', $id, $_SESSION['user']['id']);
         if (!$values) {
             $app->render('not_found.html.twig');
             return;
         }
+        $existingImages = DB::query("SELECT * FROM pictures WHERE adId=%d", $id);
     } else { // nothing to load from database - adding
         $values = array();
+        $existingImages = array();
     }
-   $app->render('addEditAd.html.twig', array(
+    $app->render('addEditAd.html.twig', array(
         'v' => $values,
         'c' => buildCategoriesStruct(),
+        'i' => $existingImages,
         'isEditing' => ($id != -1)
     ));
 })->conditions(array(
@@ -144,6 +147,14 @@ $app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
     if (($op == 'add' && $id != -1) || ($op == 'edit' && $id == -1)) {
         $app->render('not_found.html.twig');
         return;
+    }
+
+    // Get the current number of pictures
+    if ($op == 'edit') {
+        $existingImages = DB::query("SELECT * FROM pictures WHERE adId=%d", $id);
+        $existingImagesCount = count($existingImages);
+    } else {
+        $existingImagesCount = 0; // If we're adding, we're starting at 0.
     }
 
     $categoryId = $app->request()->post('categoryId');
@@ -183,13 +194,14 @@ $app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
     // i.e. adImages['error'] becomes adImages['error'][0]
     // If no image is uploaded, only the first element exists
     $adImages = array();
+    $imageCount = 0;
+
     // is file being uploaded
     if ($_FILES['adImages']['error'][0] != UPLOAD_ERR_NO_FILE) {
 
         $adImages = $_FILES['adImages'];
 
         // Loop over all elements to check for upload errors
-        $imageCount = 0;
         while ($imageCount < count($adImages['error'])) {
 
             if ($adImages['error'][$imageCount] != 0) {
@@ -214,8 +226,8 @@ $app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
             }
             $imageCount++;
         }
-        if ($imageCount > 3) {
-            $errorList['adImages'] = (isset($errorList['adImages']) ? $errorList['adImages'] . ' ' : '') . "Can't upload more than 3 files at a time.";
+        if (($imageCount + $existingImagesCount) > 3) {
+            $errorList['adImages'] = (isset($errorList['adImages']) ? $errorList['adImages'] . ' ' : '') . "Can't upload more than 3 files at a time. Can't have more than 3 pictures per ad.";
         }
     } else { // no file uploaded
         if ($op == 'add') {
@@ -229,6 +241,7 @@ $app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
             'errorList' => $errorList,
             'isEditing' => ($id != -1),
             'v' => $values,
+            'i' => $existingImages,
             'c' => buildCategoriesStruct()
         ));
     } else { // All fields validated
@@ -247,19 +260,24 @@ $app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
         }
 
         if ($id != -1) {
-            DB::update('todos', $values, "id=%i AND ownerId=%i", $id, $_SESSION['user']['id']);
+            // Update ad
+            DB::update('ads', $values, "id=%i AND sellerId=%i", $id, $_SESSION['user']['id']);
         } else {
             $values['sellerId'] = $_SESSION['user']['id'];
             // Insert ad record
             DB::insert('ads', $values);
-            $newAdId = DB::insertId(); // Get ID of inserted ad for pictures
-            // Insert Pictures
+            $id = DB::insertId(); // Get ID of inserted ad for pictures
+        }
+
+        // Insert Pictures for add and edit
+        if ($imageCount > 0) {
             for ($i = 0; $i < count($sanitizedImages); $i++) {
                 // Add FK to link picture to ad
-                $sanitizedImages[$i]['adId'] = $newAdId;
+                $sanitizedImages[$i]['adId'] = $id;
             }
             db::insert('pictures', $sanitizedImages);
         }
+
         $app->render('addEditAd_success.html.twig', array('isEditing' => ($id != -1)));
     }
 })->conditions(array(
@@ -293,6 +311,7 @@ $app->get('/category/:name', function($name) use ($app, $log) {
     // Search for category by name
 });
 
+<<<<<<< HEAD
 // Products pagination usinx AJAX - main page
 $app->get('/ads(/:page)', function($page = 1) use ($app) {
     $perPage = 4;
@@ -329,6 +348,55 @@ $app->get('/ajax/ads(/:page)', function($page = 1) use ($app) {
         "adList" => $adList,
         ));
 });
+=======
+/* Manage ad pictures AJAX */
+$app->get('/ajax/ad/:adId/pictures/delete/(:pictureId)', function($adId = -1, $pictureId = -1) use ($app, $log) {
+    /* We delete the picture id and we render the existing images section */
+
+    // Check that user is authorized and that deleted picture belongs to expected add
+    if (!$_SESSION['user'] || $adId == -1 || $pictureId == -1) {
+        // Getting unexepected values for picture deletion. Log it.
+        $log->err("Error attempting to delete picture id " .
+                $pictureId .
+                " from ad id " .
+                $adId .
+                " with user session " . (isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : '')
+        );
+    } else {
+        // Check that the picture actually belongs to the correct ad and user
+        if (!DB::queryFirstField("SELECT p.id FROM pictures as p INNER JOIN ads as a on p.adId = a.id WHERE a.sellerId=%d AND a.id=%d AND p.id=%d", $_SESSION['user']['id'], $adId, $pictureId)) {
+            $log->err("No results returned from query when attempting to delete picture id " .
+                    $pictureId .
+                    " from ad id " .
+                    $adId .
+                    " with user session " . (isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : '')
+            );
+        } else {
+            // Check that we're not deleting the last picture
+            if (DB::queryFirstField('SELECT COUNT(id) from pictures WHERE adId=%d', $adId) < 2) {
+                            $log->err("Attempt to delete last picture from ad for picture id " .
+                    $pictureId .
+                    " from ad id " .
+                    $adId .
+                    " with user session " . (isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : '')
+            );
+            } else {
+                // Go ahead and delete the record
+                DB::delete('pictures','id=%d',$pictureId);
+            }
+        }
+    }
+
+    // Render the remaining pictures
+    $existingImages = DB::query("SELECT * FROM pictures WHERE adId=%d", $adId);
+
+    $app->render('ajaxExistingImages.html.twig', array(
+        'v' => array('id' => $adId),
+        'i' => $existingImages
+    ));
+});
+
+>>>>>>> f84061ddf7eaa097eb2484393798546ae8e1fac7
 
 
 require_once 'account.php';

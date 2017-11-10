@@ -144,3 +144,29 @@ NOT DONE -add ad life cycle diagram
 None at the moment
 
 =====================================================================
+
+2017/11/10
+Miho
+1. 
+NOT COMPLETE - FB Login
+NOT COMPLETE - Index page
+2.
+FB Login CONTINUES
+Test Add Ad
+Review Boo
+Review Boostrap template
+3.
+Q's concerning Facebook for teacher
+Categories w/ Miguel
+
+Miguel
+1.
+DONE - Integrate Bootstrap and LESS
+NOT DONE -add ad life cycle diagram
+2.
+- Add ad life cycle diagram
+- Add paging to search results
+- Complete edit part of Add?edit Ads forms
+- Test password recovery
+3.
+Not at the moment

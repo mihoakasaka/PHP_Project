@@ -35,7 +35,13 @@ class __TwigTemplate_a4d291dfccbdff3a92946773f4a0a17f6b94a256c7b3c80b9f76ee79194
     public function block_content($context, array $blocks = array())
     {
         // line 4
-        echo "<p>You've succesfully created your ad. Congratulations !</p>
+        echo "<p>You've succesfully ";
+        if ((isset($context["isEditing"]) ? $context["isEditing"] : null)) {
+            echo "updated";
+        } else {
+            echo "created";
+        }
+        echo " your ad. Congratulations !</p>
 ";
     }
 
@@ -67,7 +73,7 @@ class __TwigTemplate_a4d291dfccbdff3a92946773f4a0a17f6b94a256c7b3c80b9f76ee79194
         return new Twig_Source("{% extends \"master.html.twig\" %}
 {% block title %}Create Ad success{% endblock %}
 {% block content %}
-<p>You've succesfully created your ad. Congratulations !</p>
+<p>You've succesfully {% if isEditing %}updated{% else %}created{% endif %} your ad. Congratulations !</p>
 {% endblock %}
 ", "addEditAd_success.html.twig", "C:\\xampp\\htdocs\\phproject\\templates\\addEditAd_success.html.twig");
     }
