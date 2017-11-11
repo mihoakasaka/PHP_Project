@@ -80,15 +80,7 @@ if ($_SERVER['SERVER_NAME'] != 'localhost') {
 }
 $twig->addGlobal('userSession', $_SESSION['user']);
 
-$app->get('/logout', function() use ($app) {
-    $_SESSION['user'] = array();
-    $app->render('account/logout.html.twig', array('userSession' => $_SESSION['user']));
-});
 
-$app->get('/login', function() use ($app) {
-
-    $app->render('account/login.html.twig', array('userSession' => $_SESSION['user']));
-});
 
 function buildCategoriesStruct() {
     // Build a structure suitable to generate a select element in template for hierachal categories
@@ -401,6 +393,8 @@ $app->get('/ajax/ad/:adId/pictures/delete/(:pictureId)', function($adId = -1, $p
 
 require_once 'account.php';
 require_once 'admin.php';
+require_once 'adslist.php';
+require_once 'dashboard.php';
 
 $app->run();
 
