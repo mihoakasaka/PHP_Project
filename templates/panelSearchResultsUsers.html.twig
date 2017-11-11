@@ -1,0 +1,6 @@
+{# This template is meant to be included with an include into the search results main template and the search results ajax templates #}
+{% for u in v.userResults %}
+    <p>{{ u.name }}</p>
+{% else %}
+    <p class='text-muted'>No users found matching this search</p>
+{% endfor %}

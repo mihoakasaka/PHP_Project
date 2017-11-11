@@ -1,0 +1,5 @@
+{% for c in v.categoryResults %}
+    <p><a href='/category/{{c.urlSanitizedFullName}}'>{{ c.fullName }}</a></p>
+    {% else %}
+    <p class='text-muted'>No categories found matching this search</p>
+{% endfor %}
