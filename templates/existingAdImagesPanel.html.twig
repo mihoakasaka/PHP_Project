@@ -6,7 +6,7 @@
             <img  src="{{ image.imagePath }}" />
             {% if i|length > 1%}
                 <button class="btn-danger" onclick="deleteAndReload('/ajax/ad/{{v.id}}/pictures/delete/{{image.id}}');return false;">Delete Me</button> 
-                <button class="btn-warning" href="/ajax/ad/{{v.id}}/pictures/promote/{{image.id}}">Make me the main picture</button>
+                <button class="btn-warning" href="/ajax/ad/{{v.id}}/pictures/promote/{{image.id}}"><span class="fa fa-asterisk" aria-hidden="true" />Make me the main picture</button>
             {% endif %}
         </div>
     {% endfor %}

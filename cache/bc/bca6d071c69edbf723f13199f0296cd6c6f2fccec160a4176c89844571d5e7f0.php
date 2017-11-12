@@ -42,7 +42,7 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
             echo "class=\"has-error\"";
         }
         echo ">
-        <h2>Please Login</h2>
+        <h2>Please Login <span class=\"fa fa-sign-in\" aria-hidden=\"true\" /></h2>
         <div class=\"imgcontainer\">
             <img src=\"images/login.png\" class=\"avatar\">
         </div>
@@ -70,7 +70,7 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
         echo "\"><img src=\"images/fblogin.png\" width=\"200\"></a>
         
         <p class=\"help-block\">No account?<a href=\"/register\">Register!!</a></p>
-        <p class=\"help-block\">Forget password?<a href=\"/register\">Reset password</a></p>
+        <p class=\"help-block\">Forget password?<a href=\"/passreset/request\">Reset password</a></p>
     </form>
 
 ";
@@ -107,7 +107,7 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
 {% block content %}
 
     <form method=\"post\" id=\"loginForm\" {% if error %}class=\"has-error\"{% endif %}>
-        <h2>Please Login</h2>
+        <h2>Please Login <span class=\"fa fa-sign-in\" aria-hidden=\"true\" /></h2>
         <div class=\"imgcontainer\">
             <img src=\"images/login.png\" class=\"avatar\">
         </div>
@@ -127,10 +127,10 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
         <a href=\"{{loginUrl}}\"><img src=\"images/fblogin.png\" width=\"200\"></a>
         
         <p class=\"help-block\">No account?<a href=\"/register\">Register!!</a></p>
-        <p class=\"help-block\">Forget password?<a href=\"/register\">Reset password</a></p>
+        <p class=\"help-block\">Forget password?<a href=\"/passreset/request\">Reset password</a></p>
     </form>
 
 {% endblock %} 
-", "account/login.html.twig", "C:\\xampp\\htdocs\\phproject\\templates\\account\\login.html.twig");
+", "account/login.html.twig", "C:\\xampp\\htdocs\\phpproject\\templates\\account\\login.html.twig");
     }
 }

@@ -39,10 +39,10 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        {% if userSession %}<li><a href="/logout">Log out</a></li> 
+                        {% if userSession %}<li><a href="/logout">Log out&nbsp;<span class="fa fa-sign-out" aria-hidden="true" /></a></li> 
                             {% else %}
-                            <li><a href="/login">Log in</a></li>
-                            <li><a href="/register">Register</a></li>
+                            <li><a href="/login">Log in&nbsp;<span class="fa fa-sign-in" aria-hidden="true" /></a></li>
+                            <li><a href="/register">Register&nbsp;<span class="fa fa-user-plus" aria-hidden="true" /></a></li>
                             {% endif %}
                     </ul>
                     <form class="navbar-form navbar-right" method="post" action="/search">

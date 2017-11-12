@@ -70,6 +70,6 @@ class __TwigTemplate_8757500fd6375ca09a6e114f1152edff39aea6295680702ef1634235c36
 
 {% block content %}  
 <p>Content not found, <a href=\"/\">Click to continue</a>.</p>
-{% endblock %}", "not_found.html.twig", "C:\\xampp\\htdocs\\phproject\\templates\\not_found.html.twig");
+{% endblock %}", "not_found.html.twig", "C:\\xampp\\htdocs\\phpproject\\templates\\not_found.html.twig");
     }
 }

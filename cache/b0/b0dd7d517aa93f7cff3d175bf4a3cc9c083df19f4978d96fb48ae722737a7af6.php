@@ -38,7 +38,7 @@ class __TwigTemplate_b6c07b804fe28db17ed6880f3b5118ce329cbcb765c4b2c27b8094a52df
                 echo twig_escape_filter($this->env, $this->getAttribute((isset($context["v"]) ? $context["v"] : null), "id", array()), "html", null, true);
                 echo "/pictures/delete/";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["image"], "id", array()), "html", null, true);
-                echo "');return false;\">Delete Me</button> 
+                echo "');return false;\"><span class=\"fa fa-asterisk\" aria-hidden=\"true\"></i>Delete Me</button> 
                 <button class=\"btn-warning\" href=\"/ajax/ad/";
                 // line 9
                 echo twig_escape_filter($this->env, $this->getAttribute((isset($context["v"]) ? $context["v"] : null), "id", array()), "html", null, true);
@@ -91,12 +91,12 @@ class __TwigTemplate_b6c07b804fe28db17ed6880f3b5118ce329cbcb765c4b2c27b8094a52df
         <div class=\"pict-thumb\">
             <img  src=\"{{ image.imagePath }}\" />
             {% if i|length > 1%}
-                <button class=\"btn-danger\" onclick=\"deleteAndReload('/ajax/ad/{{v.id}}/pictures/delete/{{image.id}}');return false;\">Delete Me</button> 
+                <button class=\"btn-danger\" onclick=\"deleteAndReload('/ajax/ad/{{v.id}}/pictures/delete/{{image.id}}');return false;\"><span class=\"fa fa-asterisk\" aria-hidden=\"true\"></i>Delete Me</button> 
                 <button class=\"btn-warning\" href=\"/ajax/ad/{{v.id}}/pictures/promote/{{image.id}}\">Make me the main picture</button>
             {% endif %}
         </div>
     {% endfor %}
 </p>
-</div>", "existingAdImagesPanel.html.twig", "C:\\xampp\\htdocs\\phproject\\templates\\existingAdImagesPanel.html.twig");
+</div>", "existingAdImagesPanel.html.twig", "C:\\xampp\\htdocs\\phpproject\\templates\\existingAdImagesPanel.html.twig");
     }
 }

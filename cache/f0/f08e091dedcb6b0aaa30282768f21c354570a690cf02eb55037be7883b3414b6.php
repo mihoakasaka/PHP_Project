@@ -267,6 +267,6 @@ class __TwigTemplate_cf319c7917621ab2d505d697c19976e4b6e9625d7d94f4ecbd77844369b
             \$('#existingImages').load(deleteUrl);
         }
     </script>
-{% endblock %}", "addEditAd.html.twig", "C:\\xampp\\htdocs\\phproject\\templates\\addEditAd.html.twig");
+{% endblock %}", "addEditAd.html.twig", "C:\\xampp\\htdocs\\phpproject\\templates\\addEditAd.html.twig");
     }
 }
