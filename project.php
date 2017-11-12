@@ -345,7 +345,7 @@ $app->post('/ajax/categorysearchresults(/:page)', function($page = 1) use ($app)
         return;
     }
     $skip = ($page - 1) * $perPage;
-    $values['categoryResults'] = DB::query('SELECT * from categories WHERE description LIKE %ss ORDER BY id LIMIT %d,%d', $searchTerm, 0, $perPage);
+    $values['categoryResults'] = DB::query('SELECT * from categories WHERE description LIKE %ss ORDER BY id LIMIT %d,%d', $searchTerm, $skip, $perPage);
     $app->render('ajaxcategorysearchresults.html.twig', array(
         "v" => $values
         ));
@@ -366,7 +366,7 @@ $app->post('/ajax/usersearchresults(/:page)', function($page = 1) use ($app) {
         return;
     }
     $skip = ($page - 1) * $perPage;
-    $values['userResults'] = DB::query('SELECT * from users WHERE username LIKE %ss OR name LIKE %ss ORDER BY id LIMIT %d,%d', $searchTerm, $searchTerm, 0, $perPage);
+    $values['userResults'] = DB::query('SELECT * from users WHERE username LIKE %ss OR name LIKE %ss ORDER BY id LIMIT %d,%d', $searchTerm, $searchTerm, $skip, $perPage);
     $app->render('ajaxusersearchresults.html.twig', array(
         "v" => $values
         ));

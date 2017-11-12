@@ -211,14 +211,13 @@ class __TwigTemplate_3744c8db58ae6dbeea08c01705e38fec252e6c219615d5385128361541d
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["v"]) ? $context["v"] : null), "currentUserPage", array()), "html", null, true);
         echo ";
         function loadUserPanel(page) {
-            \$('#liPageUser' + currentCategoryPage).removeClass(\"active\");
-            currentCategoryPage = page;
-            \$('#liPageUser' + currentCategoryPage).addClass(\"active\");
+            \$('#liPageUser' + currentUserPage).removeClass(\"active\");
+            currentUserPage = page;
+            \$('#liPageUser' + currentUserPage).addClass(\"active\");
             \$('#searchResultsUsers').load(\"/ajax/usersearchresults/\" + page, {'searchTerm': \"";
         // line 77
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["v"]) ? $context["v"] : null), "searchTerm", array()), "html", null, true);
         echo "\"});
-            //window.history.pushState(\"\", \"Product list\", \"/newproducts/\" + page);
         }
 
 
@@ -325,11 +324,10 @@ class __TwigTemplate_3744c8db58ae6dbeea08c01705e38fec252e6c219615d5385128361541d
 
         var currentUserPage = {{ v.currentUserPage }};
         function loadUserPanel(page) {
-            \$('#liPageUser' + currentCategoryPage).removeClass(\"active\");
-            currentCategoryPage = page;
-            \$('#liPageUser' + currentCategoryPage).addClass(\"active\");
+            \$('#liPageUser' + currentUserPage).removeClass(\"active\");
+            currentUserPage = page;
+            \$('#liPageUser' + currentUserPage).addClass(\"active\");
             \$('#searchResultsUsers').load(\"/ajax/usersearchresults/\" + page, {'searchTerm': \"{{v.searchTerm}}\"});
-            //window.history.pushState(\"\", \"Product list\", \"/newproducts/\" + page);
         }
 
 

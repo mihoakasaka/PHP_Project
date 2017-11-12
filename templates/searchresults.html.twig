@@ -71,11 +71,10 @@
 
         var currentUserPage = {{ v.currentUserPage }};
         function loadUserPanel(page) {
-            $('#liPageUser' + currentCategoryPage).removeClass("active");
-            currentCategoryPage = page;
-            $('#liPageUser' + currentCategoryPage).addClass("active");
+            $('#liPageUser' + currentUserPage).removeClass("active");
+            currentUserPage = page;
+            $('#liPageUser' + currentUserPage).addClass("active");
             $('#searchResultsUsers').load("/ajax/usersearchresults/" + page, {'searchTerm': "{{v.searchTerm}}"});
-            //window.history.pushState("", "Product list", "/newproducts/" + page);
         }
 
 
