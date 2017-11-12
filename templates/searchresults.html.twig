@@ -7,20 +7,20 @@
         <input type='text' name='searchTerm' value='{{v.searchTerm}}'/>
         <input type='submit' value='Search' />
     </form>
-    {% if v %}
-    <h3>Categories</h3>
-    <div id="searchResultsCategories">
-        {% include 'panelSearchResultsCategories.html.twig' %}
-    </div>
-    <ul id="searchResultsPaginationCategories">
-        {% for page in range(1,v.maxCategoryPages) %}
-            <li id="liPageCategory{{page}}" {% if page == v.currentCategoryPage %}class="active"{% endif %}>
-                <a id="btPageCategory{{page}}" onclick="loadCategoryPanel({{page}});">{{page}}</a>
-            </li>
-        {% endfor %}
-    </ul>
+    <h2>Search results for <span class="quoted">{{v.searchTerm}}</span></h2>
+        {% if v %}
+        <h3>Categories</h3>
+        <div id="searchResultsCategories">
+            {% include 'panelSearchResultsCategories.html.twig' %}
+        </div>
+        <ul id="searchResultsPaginationCategories">
+            {% for page in range(1,v.maxCategoryPages) %}
+                <li id="liPageCategory{{page}}" {% if page == v.currentCategoryPage %}class="active"{% endif %}>
+                    <a id="btPageCategory{{page}}" onclick="loadCategoryPanel({{page}});">{{page}}</a>
+                </li>
+            {% endfor %}
+        </ul>
 
-        <h2>Search results for <span class="quoted">{{v.searchTerm}}</span></h2>
         <h3>Ads</h3>
         <div id="searchResultsAds"
              {% include 'panelSearchResultsAds.html.twig' %}
@@ -38,7 +38,7 @@
     <div id="searchResultsUsers">
         {% include 'panelSearchResultsUsers.html.twig' %}
     </div>
-        <ul id="searchResultsPaginationUsers">
+    <ul id="searchResultsPaginationUsers">
         {% for page in range(1,v.maxUserPages) %}
             <li id="liPageUser{{page}}" {% if page == v.currentUserPage %}class="active"{% endif %}>
                 <a id="btPageUser{{page}}" onclick="loadUserPanel({{page}});">{{page}}</a>
