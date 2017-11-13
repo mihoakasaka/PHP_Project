@@ -4,6 +4,36 @@ if (false) {
 $app = new \Slim\Slim();
 $log = new Logger('main');
 }
+/* * ***************************  log in with FB account ***************************** */
+$app->get('/fblogin', function() use ($app) {
+     $app->render('account/fblogin.html.twig', array('user' => $_SESSION['facebook_access_token']));
+});
+$app->post('/fblogin', function() use ($app) {
+    //check if user has an account
+    $email = $app->request()->post('email');
+        $row = DB::queryFirstField('SELECT id from users WHERE email = %s', $email);
+    if (!$row) {
+       
+        $result = DB::insert('users', array(
+                    'name' => $_SESSION['facebook_access_token']['fName'].' '.$_SESSION['facebook_access_token']['lName'],
+                    'email' => $_SESSION['facebook_access_token']['email'],
+                    'fbId' => $_SESSION['facebook_access_token']['ID'],
+        ));
+        if ($result) {
+            $userID = DB::insertId();
+            $log->debug(sprintf("Regisetred fbUser %s with id %s", $_SESSION['facebook_access_token']['fName'], $userID));
+            $_SESSION['facebook_access_token']['userID'] = $userID;
+        }
+      
+    }else{
+        $row = DB::queryFirstRow('SELECT fbId from users WHERE email = %s', $email);
+        if(!$row){
+            $result=DB::update('users', array('fbId' =>  $_SESSION['facebook_access_token']['ID']));
+        }
+        
+    }
+       $app->render('account/fblogin_success.html.twig');
+});
 /* * *************       password reset         ************************ */
 
 function generateRandomString($length = 10) {
@@ -143,14 +173,16 @@ $_SESSION['user'] = $row;
 $app->render('account/login_success.html.twig', array('userSession' => $_SESSION['user']));
 }
 });
-/* * ****************** check email if registered *********************** */
+
+
+//check email if registered *
 $app->get('/isemailregistered/:email', function($email)use($app) {
 $row = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);
 echo!$row ? "" : '<span style="color:red; font-weight:bold;">Email already registered.</span>';
 });
 
 
-/* * ****************** check username if taken *********************** */
+// check username if taken
 $app->get('/isusernametaken/:username', function($name)use($app) {
 $row = DB::queryFirstRow("SELECT * FROM users WHERE name=%s", $name);
 echo!$row ? "" : '<span style="color:red; font-weight:bold;">Username already taken.</span>';
