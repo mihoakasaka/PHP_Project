@@ -198,3 +198,24 @@ Test password recovery
 Check Paypal documentation
 3.
 Nothing at the moment
+
+2017/11/13
+Miho
+1. 
+DONE - FB Login
+2.
+No items for this
+3.
+Categories w/ Miguel
+
+Miguel
+1.
+DONE - Add paging to search results
+DONE - Complete edit part of Add?edit Ads forms
+DONE - Test password recovery
+NOT COMPLETE - Check Paypal documentation
+2.
+Paypal doc
+Finish categories handling
+3.
+Nothing at the moment
