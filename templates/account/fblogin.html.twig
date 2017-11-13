@@ -1,14 +1,19 @@
 {# empty Twig template #}
-{% extends "bootstraptransition/master.html.twig" %}
+{% extends "master.html.twig" %}
 {% block title %}Login with FB account{% endblock %}
 
 {% block content %}
     <form method="POST">
           <label for="tbEmail" class="control-label">Name</label>
-    <input type="text" class="form-control"  name="name" readonly="readonly" value="{{user.fName}}{{user.lName}}">
+    <input type="text" class="form-control"  name="name" readonly="readonly" value="{{fbUser.name}}">
      <label for="tbEmail" class="control-label">Email</label>
+<<<<<<< HEAD
     <input type="text" class="form-control"  name="email" readonly="readonly" value="{{user.email}}" >
 
+=======
+    <input type="text" class="form-control"  name="email" readonly="readonly" value="{{fbUser.email}}" >
+    <button >
+>>>>>>> 1f5917eb62e0b0e9f0c6d1f22c4cf2322dc4b9c2
     <input type="submit" value="Confirm" />
 </form>
   

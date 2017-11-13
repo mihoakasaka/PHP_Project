@@ -1,0 +1,6 @@
+{# This template is meant to be included with an include into the search results main template and the search results ajax templates #}
+{% for a in v.adResults %}
+    <p><a href='/add/details/{{a.id}}'>{{ a.title }}</a></p>
+    {% else %}
+    <p class='text-muted'>No ads found matching this search</p>
+{% endfor %}

@@ -70,12 +70,12 @@ class __TwigTemplate_b0a0e21b0477985c6f2212430113f15e1b056c2267ae0aee5e63eb673c8
                         ";
         // line 42
         if ((isset($context["userSession"]) ? $context["userSession"] : null)) {
-            echo "<li><a href=\"/logout\">Log out</a></li> 
+            echo "<li><a href=\"/logout\">Log out&nbsp;<span class=\"fa fa-sign-out\" aria-hidden=\"true\" /></a></li> 
                             ";
         } else {
             // line 44
-            echo "                            <li><a href=\"/login\">Log in</a></li>
-                            <li><a href=\"/register\">Register</a></li>
+            echo "                            <li><a href=\"/login\">Log in&nbsp;<span class=\"fa fa-sign-in\" aria-hidden=\"true\" /></a></li>
+                            <li><a href=\"/register\">Register&nbsp;<span class=\"fa fa-user-plus\" aria-hidden=\"true\" /></a></li>
                             ";
         }
         // line 47
@@ -212,10 +212,10 @@ class __TwigTemplate_b0a0e21b0477985c6f2212430113f15e1b056c2267ae0aee5e63eb673c8
                 </div>
                 <div id=\"navbar\" class=\"navbar-collapse collapse\">
                     <ul class=\"nav navbar-nav navbar-right\">
-                        {% if userSession %}<li><a href=\"/logout\">Log out</a></li> 
+                        {% if userSession %}<li><a href=\"/logout\">Log out&nbsp;<span class=\"fa fa-sign-out\" aria-hidden=\"true\" /></a></li> 
                             {% else %}
-                            <li><a href=\"/login\">Log in</a></li>
-                            <li><a href=\"/register\">Register</a></li>
+                            <li><a href=\"/login\">Log in&nbsp;<span class=\"fa fa-sign-in\" aria-hidden=\"true\" /></a></li>
+                            <li><a href=\"/register\">Register&nbsp;<span class=\"fa fa-user-plus\" aria-hidden=\"true\" /></a></li>
                             {% endif %}
                     </ul>
                     <form class=\"navbar-form navbar-right\" method=\"post\" action=\"/search\">

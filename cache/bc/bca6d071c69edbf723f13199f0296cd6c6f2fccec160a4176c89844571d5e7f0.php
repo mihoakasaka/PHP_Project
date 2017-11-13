@@ -8,7 +8,7 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("bootstraptransition/master.html.twig", "account/login.html.twig", 1);
+        $this->parent = $this->loadTemplate("master.html.twig", "account/login.html.twig", 1);
         $this->blocks = array(
             'title' => array($this, 'block_title'),
             'content' => array($this, 'block_content'),
@@ -17,7 +17,7 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
 
     protected function doGetParent(array $context)
     {
-        return "bootstraptransition/master.html.twig";
+        return "master.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = array())
@@ -42,7 +42,7 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
             echo "class=\"has-error\"";
         }
         echo ">
-        <h2>Please Login</h2>
+        <h2>Please Login <span class=\"fa fa-sign-in\" aria-hidden=\"true\" /></h2>
         <div class=\"imgcontainer\">
             <img src=\"images/login.png\" class=\"avatar\">
         </div>
@@ -64,12 +64,13 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
                 <input type=\"password\" class=\"form-control\" placeholder=\"Enter Password\" name=\"pass\" id=\"tbPassword\" required>
         </div>
         <input type=\"submit\" value=\"Log in\">
-        <p><a href=\"";
+        <a href=\"";
         // line 24
         echo twig_escape_filter($this->env, (isset($context["loginUrl"]) ? $context["loginUrl"] : null), "html", null, true);
-        echo "\">Log in with Facebook!</a></p>
-        <input type=\"reset\" value=\"Cancel\">
+        echo "\"><img src=\"images/fblogin.png\" width=\"200\"></a>
+        
         <p class=\"help-block\">No account?<a href=\"/register\">Register!!</a></p>
+        <p class=\"help-block\">Forget password?<a href=\"/passreset/request\">Reset password</a></p>
     </form>
 
 ";
@@ -100,13 +101,13 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
 
     public function getSourceContext()
     {
-        return new Twig_Source("{% extends \"bootstraptransition/master.html.twig\" %}
+        return new Twig_Source("{% extends \"master.html.twig\" %}
 {% block title %}Login{% endblock %}
 
 {% block content %}
 
     <form method=\"post\" id=\"loginForm\" {% if error %}class=\"has-error\"{% endif %}>
-        <h2>Please Login</h2>
+        <h2>Please Login <span class=\"fa fa-sign-in\" aria-hidden=\"true\" /></h2>
         <div class=\"imgcontainer\">
             <img src=\"images/login.png\" class=\"avatar\">
         </div>
@@ -123,9 +124,10 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
                 <input type=\"password\" class=\"form-control\" placeholder=\"Enter Password\" name=\"pass\" id=\"tbPassword\" required>
         </div>
         <input type=\"submit\" value=\"Log in\">
-        <p><a href=\"{{loginUrl}}\">Log in with Facebook!</a></p>
-        <input type=\"reset\" value=\"Cancel\">
+        <a href=\"{{loginUrl}}\"><img src=\"images/fblogin.png\" width=\"200\"></a>
+        
         <p class=\"help-block\">No account?<a href=\"/register\">Register!!</a></p>
+        <p class=\"help-block\">Forget password?<a href=\"/passreset/request\">Reset password</a></p>
     </form>
 
 {% endblock %} 

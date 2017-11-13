@@ -80,15 +80,7 @@ if ($_SERVER['SERVER_NAME'] != 'localhost') {
 }
 $twig->addGlobal('userSession', $_SESSION['user']);
 
-$app->get('/logout', function() use ($app) {
-    $_SESSION['user'] = array();
-    $app->render('account/logout.html.twig', array('userSession' => $_SESSION['user']));
-});
 
-$app->get('/login', function() use ($app) {
-
-    $app->render('account/login.html.twig', array('userSession' => $_SESSION['user']));
-});
 
 function buildCategoriesStruct() {
     // Build a structure suitable to generate a select element in template for hierachal categories
@@ -294,12 +286,90 @@ $app->post('/search', function() use ($app, $log) {
     $searchTerm = $app->request()->post('searchTerm');
 
     $values = array('searchTerm' => $searchTerm);
+    
+    $perPage = 2;
+    
+    $totalCount = DB::queryFirstField ('SELECT COUNT(*) AS count from categories WHERE description LIKE %ss', $searchTerm);
+    $maxPages = max(ceil($totalCount / $perPage ), 1);
+    $values['categoryResults'] = DB::query('SELECT * from categories WHERE description LIKE %ss ORDER BY id LIMIT %d,%d', $searchTerm, 0, $perPage);
+    $values['maxCategoryPages'] = $maxPages;
+    $values['currentCategoryPage'] = 1;
 
-    $values['adResults'] = DB::query('SELECT * from ads WHERE title LIKE %ss', $searchTerm);
-    $values['categoryResults'] = DB::query('SELECT * from categories WHERE description LIKE %ss', $searchTerm);
-    $values['userResults'] = DB::query('SELECT * from users WHERE username LIKE %ss OR name LIKE %ss', $searchTerm, $searchTerm);
-
+    $totalCount = DB::queryFirstField ('SELECT COUNT(*) AS count from ads WHERE title LIKE %ss', $searchTerm);
+    $maxPages = max(ceil($totalCount / $perPage ), 1);
+    $values['adResults'] = DB::query('SELECT * from ads WHERE title LIKE %ss ORDER BY id LIMIT %d,%d', $searchTerm, 0, $perPage);
+    $values['maxAdPages'] = $maxPages;
+    $values['currentAdPage'] = 1;
+    
+    $totalCount = DB::queryFirstField ('SELECT COUNT(*) AS count from users WHERE username LIKE %ss OR name LIKE %ss', $searchTerm, $searchTerm);
+    $maxPages = max(ceil($totalCount / $perPage ), 1);
+    $values['userResults'] = DB::query('SELECT * from users WHERE username LIKE %ss OR name LIKE %ss ORDER BY id LIMIT %d,%d', $searchTerm, $searchTerm, 0, $perPage);
+    $values['maxUserPages'] = $maxPages;
+    $values['currentUserPage'] = 1;
     $app->render('searchresults.html.twig', array('v' => $values));
+});
+
+/* Ad results AJAX pagination */
+$app->post('/ajax/adsearchresults(/:page)', function($page = 1) use ($app) {
+    
+    $searchTerm = $app->request()->params('searchTerm');
+    $perPage = 2;
+            
+    $totalCount = DB::queryFirstField ('SELECT COUNT(*) AS count from ads WHERE title LIKE %ss', $searchTerm);
+    $maxPages = max(ceil($totalCount / $perPage ), 1);
+            
+    if ($page > $maxPages) {
+        http_response_code(404);
+        $app->render('not_found.html.twig');
+        return;
+    }
+    $skip = ($page - 1) * $perPage;
+    $values['adResults'] = DB::query('SELECT * from ads WHERE title LIKE %ss ORDER BY id LIMIT %d,%d', $searchTerm, $skip, $perPage);
+    $app->render('ajaxadsearchresults.html.twig', array(
+        "v" => $values
+        ));
+});
+
+/* Categories results AJAX pagination */
+$app->post('/ajax/categorysearchresults(/:page)', function($page = 1) use ($app) {
+    
+    $searchTerm = $app->request()->params('searchTerm');
+    $perPage = 2;
+            
+    $totalCount = DB::queryFirstField ('SELECT COUNT(*) AS count from categories WHERE description LIKE %ss', $searchTerm);
+    $maxPages = max(ceil($totalCount / $perPage ), 1);
+            
+    if ($page > $maxPages) {
+        http_response_code(404);
+        $app->render('not_found.html.twig');
+        return;
+    }
+    $skip = ($page - 1) * $perPage;
+    $values['categoryResults'] = DB::query('SELECT * from categories WHERE description LIKE %ss ORDER BY id LIMIT %d,%d', $searchTerm, $skip, $perPage);
+    $app->render('ajaxcategorysearchresults.html.twig', array(
+        "v" => $values
+        ));
+});
+
+/* Users results AJAX pagination */
+$app->post('/ajax/usersearchresults(/:page)', function($page = 1) use ($app) {
+    
+    $searchTerm = $app->request()->params('searchTerm');
+    $perPage = 2;
+            
+    $totalCount = DB::queryFirstField ('SELECT COUNT(*) AS count from users WHERE username LIKE %ss OR name LIKE %ss', $searchTerm, $searchTerm);
+    $maxPages = max(ceil($totalCount / $perPage ), 1);
+            
+    if ($page > $maxPages) {
+        http_response_code(404);
+        $app->render('not_found.html.twig');
+        return;
+    }
+    $skip = ($page - 1) * $perPage;
+    $values['userResults'] = DB::query('SELECT * from users WHERE username LIKE %ss OR name LIKE %ss ORDER BY id LIMIT %d,%d', $searchTerm, $searchTerm, $skip, $perPage);
+    $app->render('ajaxusersearchresults.html.twig', array(
+        "v" => $values
+        ));
 });
 
 /* Categories */
@@ -401,6 +471,8 @@ $app->get('/ajax/ad/:adId/pictures/delete/(:pictureId)', function($adId = -1, $p
 
 require_once 'account.php';
 require_once 'admin.php';
+require_once 'adslist.php';
+require_once 'dashboard.php';
 
 $app->run();
 

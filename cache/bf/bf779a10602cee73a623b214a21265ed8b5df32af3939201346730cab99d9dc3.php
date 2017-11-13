@@ -12,92 +12,137 @@ class __TwigTemplate_87a86df006dd2202e643b264156f3e573238b8b43873d89825885252259
         $this->blocks = array(
             'title' => array($this, 'block_title'),
             'headextra' => array($this, 'block_headextra'),
-            'loginstatus' => array($this, 'block_loginstatus'),
             'content' => array($this, 'block_content'),
+            'bodyendextra' => array($this, 'block_bodyendextra'),
         );
     }
 
     protected function doDisplay(array $context, array $blocks = array())
     {
         // line 1
-        echo "<html>
+        echo "<!DOCTYPE html>
+<html lang=\"en\">
     <head>
-        <link href=\"/styles.css\" rel=\"stylesheet\">
-        <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>
-        <meta charset=\"UTF-8\">
+        <meta charset=\"utf-8\">
+        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
+        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name=\"description\" content=\"\">
+        <meta name=\"author\" content=\"\">
+        <link rel=\"icon\" href=\"../../favicon.ico\">
         <title>";
-        // line 6
+        // line 11
         $this->displayBlock('title', $context, $blocks);
         echo " | Garage Sale</title>
-    ";
-        // line 7
-        $this->displayBlock('headextra', $context, $blocks);
-        // line 8
-        echo "
+        <!-- Bootstrap core CSS -->
+        <link href=\"/css/garagesale.css\" rel=\"stylesheet\">
 
-</head>
-<body>
-    <div id=\"header\">
-        ";
-        // line 13
-        $this->displayBlock('loginstatus', $context, $blocks);
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <link href=\"/css/ie10-viewport-bug-workaround.css\" rel=\"stylesheet\">
+
+        <script src=\"/js/ie-emulation-modes-warning.js\"></script>
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src=\"https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js\"></script>
+          <script src=\"https://oss.maxcdn.com/respond/1.4.2/respond.min.js\"></script>
+        <![endif]-->
+    ";
         // line 25
-        echo "    </div>
+        $this->displayBlock('headextra', $context, $blocks);
+        // line 26
+        echo "</head>
+<body>
+    <header>
+        <nav class=\"navbar navbar-inverse navbar-fixed-top\">
+            <div class=\"container-fluid\">
+                <div class=\"navbar-header\">
+                    <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" aria-controls=\"navbar\">
+                        <span class=\"sr-only\">Toggle navigation</span>
+                        <span class=\"icon-bar\"></span>
+                        <span class=\"icon-bar\"></span>
+                        <span class=\"icon-bar\"></span>
+                    </button>
+                    <a class=\"navbar-brand\" href=\"/\">Garage Sale</a>
+                </div>
+                <div id=\"navbar\" class=\"navbar-collapse collapse\">
+                    <ul class=\"nav navbar-nav navbar-right\">
+                        ";
+        // line 42
+        if ((isset($context["userSession"]) ? $context["userSession"] : null)) {
+            echo "<li><a href=\"/logout\">Log out&nbsp;<span class=\"fa fa-sign-out\" aria-hidden=\"true\" /></a></li> 
+                            ";
+        } else {
+            // line 44
+            echo "                            <li><a href=\"/login\">Log in&nbsp;<span class=\"fa fa-sign-in\" aria-hidden=\"true\" /></a></li>
+                            <li><a href=\"/register\">Register&nbsp;<span class=\"fa fa-user-plus\" aria-hidden=\"true\" /></a></li>
+                            ";
+        }
+        // line 47
+        echo "                    </ul>
+                    <form class=\"navbar-form navbar-right\" method=\"post\" action=\"/search\">
+                        <input type=\"text\" class=\"form-control\" placeholder=\"Search...\" name=\"searchTerm\">
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
 
+    <main>
 
-    <div id=\"centeredContent\">
-    ";
-        // line 29
+        <div class=\"container-fluid\">
+            <div class=\"row\">
+
+                <div class=\"col-xs-12 main\">";
+        // line 61
         $this->displayBlock('content', $context, $blocks);
-        // line 30
         echo "</div>
-<div id=\"footer\">
-    footer
-</div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class=\"container-fluid\">
+            <div class=\"row\">
+                <p class=\"col-xs-12\">Garage Sale is a project of <a href=\"http://ipd10.com\">IPD-10's</a> Miho Akasaka and Miguel Legault</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js\"></script>
+    <script>window.jQuery || document.write('<script src=\"js/vendor/jquery.min.js\"><\\/script>')</script>
+    <script src=\"/js/bootstrap.min.js\"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src=\"/js/ie10-viewport-bug-workaround.js\"></script>
+";
+        // line 82
+        $this->displayBlock('bodyendextra', $context, $blocks);
+        // line 83
+        echo "
 </body>
 </html>";
     }
 
-    // line 6
+    // line 11
     public function block_title($context, array $blocks = array())
     {
     }
 
-    // line 7
+    // line 25
     public function block_headextra($context, array $blocks = array())
     {
     }
 
-    // line 13
-    public function block_loginstatus($context, array $blocks = array())
+    // line 61
+    public function block_content($context, array $blocks = array())
     {
-        // line 14
-        echo "            ";
-        if ((isset($context["userSession"]) ? $context["userSession"] : null)) {
-            // line 15
-            echo "                <p class='login-status'>Hello, ";
-            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["userSession"]) ? $context["userSession"] : null), "name", array()), "html", null, true);
-            echo "!! /<a href=\"/logout\">Log out</a></p> 
-            ";
-        } else {
-            // line 17
-            echo "                <p class='login-status'> Hello, guest. please <a href=\"/login\">log in</a> or <a href=\"/register\">register</a><p>
-                ";
-        }
-        // line 19
-        echo "        <form method=\"post\" action='/search'>
-        <input type='text' name='searchTerm' value='";
-        // line 20
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["v"]) ? $context["v"] : null), "searchTerm", array()), "html", null, true);
-        echo "'/>
-        <input type='submit' value='Search' />
-    </form>
-
-        ";
     }
 
-    // line 29
-    public function block_content($context, array $blocks = array())
+    // line 82
+    public function block_bodyendextra($context, array $blocks = array())
     {
     }
 
@@ -106,9 +151,14 @@ class __TwigTemplate_87a86df006dd2202e643b264156f3e573238b8b43873d89825885252259
         return "master.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  100 => 29,  91 => 20,  88 => 19,  84 => 17,  78 => 15,  75 => 14,  72 => 13,  67 => 7,  62 => 6,  53 => 30,  51 => 29,  45 => 25,  43 => 13,  36 => 8,  34 => 7,  30 => 6,  23 => 1,);
+        return array (  145 => 82,  140 => 61,  135 => 25,  130 => 11,  124 => 83,  122 => 82,  98 => 61,  82 => 47,  77 => 44,  72 => 42,  54 => 26,  52 => 25,  35 => 11,  23 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -121,40 +171,90 @@ class __TwigTemplate_87a86df006dd2202e643b264156f3e573238b8b43873d89825885252259
 
     public function getSourceContext()
     {
-        return new Twig_Source("<html>
+        return new Twig_Source("<!DOCTYPE html>
+<html lang=\"en\">
     <head>
-        <link href=\"/styles.css\" rel=\"stylesheet\">
-        <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>
-        <meta charset=\"UTF-8\">
+        <meta charset=\"utf-8\">
+        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
+        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name=\"description\" content=\"\">
+        <meta name=\"author\" content=\"\">
+        <link rel=\"icon\" href=\"../../favicon.ico\">
         <title>{% block title %}{% endblock %} | Garage Sale</title>
+        <!-- Bootstrap core CSS -->
+        <link href=\"/css/garagesale.css\" rel=\"stylesheet\">
+
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <link href=\"/css/ie10-viewport-bug-workaround.css\" rel=\"stylesheet\">
+
+        <script src=\"/js/ie-emulation-modes-warning.js\"></script>
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src=\"https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js\"></script>
+          <script src=\"https://oss.maxcdn.com/respond/1.4.2/respond.min.js\"></script>
+        <![endif]-->
     {% block headextra %}{% endblock %}
-
-
 </head>
 <body>
-    <div id=\"header\">
-        {% block loginstatus %}
-            {% if userSession %}
-                <p class='login-status'>Hello, {{userSession.name}}!! /<a href=\"/logout\">Log out</a></p> 
-            {% else %}
-                <p class='login-status'> Hello, guest. please <a href=\"/login\">log in</a> or <a href=\"/register\">register</a><p>
-                {% endif %}
-        <form method=\"post\" action='/search'>
-        <input type='text' name='searchTerm' value='{{v.searchTerm}}'/>
-        <input type='submit' value='Search' />
-    </form>
+    <header>
+        <nav class=\"navbar navbar-inverse navbar-fixed-top\">
+            <div class=\"container-fluid\">
+                <div class=\"navbar-header\">
+                    <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" aria-controls=\"navbar\">
+                        <span class=\"sr-only\">Toggle navigation</span>
+                        <span class=\"icon-bar\"></span>
+                        <span class=\"icon-bar\"></span>
+                        <span class=\"icon-bar\"></span>
+                    </button>
+                    <a class=\"navbar-brand\" href=\"/\">Garage Sale</a>
+                </div>
+                <div id=\"navbar\" class=\"navbar-collapse collapse\">
+                    <ul class=\"nav navbar-nav navbar-right\">
+                        {% if userSession %}<li><a href=\"/logout\">Log out&nbsp;<span class=\"fa fa-sign-out\" aria-hidden=\"true\" /></a></li> 
+                            {% else %}
+                            <li><a href=\"/login\">Log in&nbsp;<span class=\"fa fa-sign-in\" aria-hidden=\"true\" /></a></li>
+                            <li><a href=\"/register\">Register&nbsp;<span class=\"fa fa-user-plus\" aria-hidden=\"true\" /></a></li>
+                            {% endif %}
+                    </ul>
+                    <form class=\"navbar-form navbar-right\" method=\"post\" action=\"/search\">
+                        <input type=\"text\" class=\"form-control\" placeholder=\"Search...\" name=\"searchTerm\">
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-        {% endblock %}
-    </div>
+    <main>
 
+        <div class=\"container-fluid\">
+            <div class=\"row\">
 
-    <div id=\"centeredContent\">
-    {% block content %}{% endblock %}
-</div>
-<div id=\"footer\">
-    footer
-</div>
+                <div class=\"col-xs-12 main\">{% block content %}{% endblock %}</div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class=\"container-fluid\">
+            <div class=\"row\">
+                <p class=\"col-xs-12\">Garage Sale is a project of <a href=\"http://ipd10.com\">IPD-10's</a> Miho Akasaka and Miguel Legault</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js\"></script>
+    <script>window.jQuery || document.write('<script src=\"js/vendor/jquery.min.js\"><\\/script>')</script>
+    <script src=\"/js/bootstrap.min.js\"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src=\"/js/ie10-viewport-bug-workaround.js\"></script>
+{% block bodyendextra %}{% endblock %}
+
 </body>
-</html>", "master.html.twig", "C:\\xampp\\htdocs\\phproject\\templates\\master.html.twig");
+</html>", "master.html.twig", "C:\\xampp\\htdocs\\phpproject\\templates\\master.html.twig");
     }
 }

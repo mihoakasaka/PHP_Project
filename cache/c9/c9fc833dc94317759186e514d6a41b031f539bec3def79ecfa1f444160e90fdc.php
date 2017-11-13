@@ -8,7 +8,7 @@ class __TwigTemplate_ff293466af8894c9d01678a9a8effdd1e95560874730b14996b7add9b00
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("bootstraptransition/master.html.twig", "account/register.html.twig", 1);
+        $this->parent = $this->loadTemplate("master.html.twig", "account/register.html.twig", 1);
         $this->blocks = array(
             'title' => array($this, 'block_title'),
             'content' => array($this, 'block_content'),
@@ -18,7 +18,7 @@ class __TwigTemplate_ff293466af8894c9d01678a9a8effdd1e95560874730b14996b7add9b00
 
     protected function doGetParent(array $context)
     {
-        return "bootstraptransition/master.html.twig";
+        return "master.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = array())
@@ -147,7 +147,7 @@ class __TwigTemplate_ff293466af8894c9d01678a9a8effdd1e95560874730b14996b7add9b00
 
     public function getSourceContext()
     {
-        return new Twig_Source("{% extends \"bootstraptransition/master.html.twig\" %}
+        return new Twig_Source("{% extends \"master.html.twig\" %}
 {% block title %}Register{% endblock %}
 
 {% block content %}

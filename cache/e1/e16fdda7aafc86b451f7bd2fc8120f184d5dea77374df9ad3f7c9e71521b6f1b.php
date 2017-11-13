@@ -7,16 +7,36 @@ class __TwigTemplate_8757500fd6375ca09a6e114f1152edff39aea6295680702ef1634235c36
     {
         parent::__construct($env);
 
-        $this->parent = false;
-
+        // line 1
+        $this->parent = $this->loadTemplate("master.html.twig", "not_found.html.twig", 1);
         $this->blocks = array(
+            'title' => array($this, 'block_title'),
+            'content' => array($this, 'block_content'),
         );
+    }
+
+    protected function doGetParent(array $context)
+    {
+        return "master.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        // line 1
-        echo "<p>Not found</p>";
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+    }
+
+    // line 3
+    public function block_title($context, array $blocks = array())
+    {
+        echo "Not found";
+    }
+
+    // line 5
+    public function block_content($context, array $blocks = array())
+    {
+        echo "  
+<p>Content not found, <a href=\"/\">Click to continue</a>.</p>
+";
     }
 
     public function getTemplateName()
@@ -24,9 +44,14 @@ class __TwigTemplate_8757500fd6375ca09a6e114f1152edff39aea6295680702ef1634235c36
         return "not_found.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  19 => 1,);
+        return array (  35 => 5,  29 => 3,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -39,6 +64,12 @@ class __TwigTemplate_8757500fd6375ca09a6e114f1152edff39aea6295680702ef1634235c36
 
     public function getSourceContext()
     {
-        return new Twig_Source("<p>Not found</p>", "not_found.html.twig", "C:\\xampp\\htdocs\\phproject\\templates\\not_found.html.twig");
+        return new Twig_Source("{% extends \"master.html.twig\" %}
+
+{% block title %}Not found{% endblock %}
+
+{% block content %}  
+<p>Content not found, <a href=\"/\">Click to continue</a>.</p>
+{% endblock %}", "not_found.html.twig", "C:\\xampp\\htdocs\\phpproject\\templates\\not_found.html.twig");
     }
 }

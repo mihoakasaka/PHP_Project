@@ -60,8 +60,8 @@ try {
 
 //echo 'Logged in as ' . $userNode->getName();
 $fbUser = array(
-    'fName' => $userNode->getFirstName(),
-    'lName' => $userNode->getLastName(),
+    'name' => $userNode->getName(),
+    
     'email' => $userNode->getEmail(),
     'ID' => $userNode->getId(),
 );

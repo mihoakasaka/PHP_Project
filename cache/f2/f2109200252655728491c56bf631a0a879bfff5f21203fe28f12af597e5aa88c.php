@@ -1,7 +1,7 @@
 <?php
 
-/* access_denied.html.twig */
-class __TwigTemplate_40d0599bff5490ec2f8896092ddd549389853dd383a27c8b61092670fe0fe096 extends Twig_Template
+/* ajaxusersearchresults.html.twig */
+class __TwigTemplate_6f47ec2f5cf3f957e5b4fee993dcc0bc84487fc5857a9170ef801222ae154017 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -16,13 +16,12 @@ class __TwigTemplate_40d0599bff5490ec2f8896092ddd549389853dd383a27c8b61092670fe0
     protected function doDisplay(array $context, array $blocks = array())
     {
         // line 1
-        echo "<p>Access Denied</p>
-";
+        $this->loadTemplate("panelSearchResultsUsers.html.twig", "ajaxusersearchresults.html.twig", 1)->display($context);
     }
 
     public function getTemplateName()
     {
-        return "access_denied.html.twig";
+        return "ajaxusersearchresults.html.twig";
     }
 
     public function getDebugInfo()
@@ -40,7 +39,7 @@ class __TwigTemplate_40d0599bff5490ec2f8896092ddd549389853dd383a27c8b61092670fe0
 
     public function getSourceContext()
     {
-        return new Twig_Source("<p>Access Denied</p>
-", "access_denied.html.twig", "C:\\xampp\\htdocs\\phpproject\\templates\\access_denied.html.twig");
+        return new Twig_Source("{% include 'panelSearchResultsUsers.html.twig' %}
+", "ajaxusersearchresults.html.twig", "C:\\xampp\\htdocs\\phpproject\\templates\\ajaxusersearchresults.html.twig");
     }
 }

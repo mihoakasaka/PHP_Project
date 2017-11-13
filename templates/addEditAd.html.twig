@@ -1,4 +1,4 @@
-{% extends "bootstraptransition/master.html.twig" %}
+{% extends "master.html.twig" %}
 {% block title %}{% if isEditing %}Edit{% else %}Create New{% endif %} Ad{% endblock %}
 
 {% block content %}
@@ -33,24 +33,18 @@
             {% if isEditing %}
                 {% include 'existingAdImagesPanel.html.twig' %}
             {% endif %}
-
             <p class="help-block">Add images</p>
             <input type="file" class="form-control" name="adImages[]" multiple='multiple'><br>
             {% if errorList['adImages'] %}<p class="help-block">{{ errorList['adImages'] }}</p>{% endif %}
         </div>    
         <button type="submit">{% if isEditing %}Update{% else %}Create{% endif %} Ad</button>
-    </form>
+    </form>        
 {% endblock %} 
 
 {% block bodyendextra %}
     <script>
-        var currentPage = {{currentPage}};
-        function loadPage(page) {
-            $('#btPage' + currentPage).removeClass("currentPageButton");
-            currentPage = page;
-            $('#btPage' + currentPage).addClass("currentPageButton");
-            $('#existingImages').load("/ajax/pictures/delete/");
-            window.history.pushState("", "Product list", "/newproducts/" + page);
+        function deleteAndReload(deleteUrl) {
+            $('#existingImages').load(deleteUrl);
         }
     </script>
 {% endblock %}

@@ -1,4 +1,4 @@
-{% extends "bootstraptransition/master.html.twig" %}
+{% extends "master.html.twig" %}
 {% block title %}Search{% endblock %}
 
 {% block content %}
@@ -7,28 +7,77 @@
         <input type='text' name='searchTerm' value='{{v.searchTerm}}'/>
         <input type='submit' value='Search' />
     </form>
-{% if v %}
     <h2>Search results for <span class="quoted">{{v.searchTerm}}</span></h2>
-        <h3>Ads</h3>
-        {% for a in v.adResults %}
-            <p><a href='/add/details/{{a.id}}'>{{ a.title }}</a></p>
-        {% else %}
-            <p class='text-muted'>No ads found matching this search</p>
-        {% endfor %}
-        
+        {% if v %}
         <h3>Categories</h3>
-                {% for c in v.categoryResults %}
-                    <p><a href='/category/{{c.urlSanitizedFullName}}'>{{ c.fullName }}</a></p>
-        {% else %}
-            <p class='text-muted'>No categories found matching this search</p>
-        {% endfor %}
+        <div id="searchResultsCategories">
+            {% include 'panelSearchResultsCategories.html.twig' %}
+        </div>
+        <ul id="searchResultsPaginationCategories">
+            {% for page in range(1,v.maxCategoryPages) %}
+                <li id="liPageCategory{{page}}" {% if page == v.currentCategoryPage %}class="active"{% endif %}>
+                    <a id="btPageCategory{{page}}" onclick="loadCategoryPanel({{page}});">{{page}}</a>
+                </li>
+            {% endfor %}
+        </ul>
 
-        <h3>Users</h3>
-                {% for u in v.userResults %}
-            <p>{{ u.name }}</p>
-        {% else %}
-            <p class='text-muted'>No users found matching this search</p>
+        <h3>Ads</h3>
+        <div id="searchResultsAds"
+             {% include 'panelSearchResultsAds.html.twig' %}
+    </div>
+    <ul id="searchResultsPaginationAds">
+        {% for page in range(1,v.maxAdPages) %}
+            <li id="liPageAd{{page}}" {% if page == v.currentAdPage %}class="active"{% endif %}>
+                <a id="btPageAd{{page}}" onclick="loadAdPanel({{page}});">{{page}}</a>
+            </li>
         {% endfor %}
+    </ul>
 
-        {% endif %}
+
+    <h3>Users</h3>
+    <div id="searchResultsUsers">
+        {% include 'panelSearchResultsUsers.html.twig' %}
+    </div>
+    <ul id="searchResultsPaginationUsers">
+        {% for page in range(1,v.maxUserPages) %}
+            <li id="liPageUser{{page}}" {% if page == v.currentUserPage %}class="active"{% endif %}>
+                <a id="btPageUser{{page}}" onclick="loadUserPanel({{page}});">{{page}}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+
+{% endif %}
 {% endblock %} 
+
+{% block bodyendextra %}
+    <script>
+
+        var currentAdPage = {{ v.currentAdPage }};
+        function loadAdPanel(page) {
+            $('#liPageAd' + currentAdPage).removeClass("active");
+            currentAdPage = page;
+            $('#liPageAd' + currentAdPage).addClass("active");
+            $('#searchResultsAds').load("/ajax/adsearchresults/" + page, {'searchTerm': "{{v.searchTerm}}"});
+        }
+
+        var currentCategoryPage = {{ v.currentCategoryPage }};
+        function loadCategoryPanel(page) {
+            $('#liPageCategory' + currentCategoryPage).removeClass("active");
+            currentCategoryPage = page;
+            $('#liPageCategory' + currentCategoryPage).addClass("active");
+            $('#searchResultsCategories').load("/ajax/categorysearchresults/" + page, {'searchTerm': "{{v.searchTerm}}"});
+        }
+
+        var currentUserPage = {{ v.currentUserPage }};
+        function loadUserPanel(page) {
+            $('#liPageUser' + currentUserPage).removeClass("active");
+            currentUserPage = page;
+            $('#liPageUser' + currentUserPage).addClass("active");
+            $('#searchResultsUsers').load("/ajax/usersearchresults/" + page, {'searchTerm': "{{v.searchTerm}}"});
+        }
+
+
+
+    </script>
+{% endblock %}

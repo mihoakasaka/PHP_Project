@@ -1,10 +1,10 @@
-{% extends "bootstraptransition/master.html.twig" %}
+{% extends "master.html.twig" %}
 {% block title %}Login{% endblock %}
 
 {% block content %}
 
     <form method="post" id="loginForm" {% if error %}class="has-error"{% endif %}>
-        <h2>Please Login</h2>
+        <h2>Please Login <span class="fa fa-sign-in" aria-hidden="true" /></h2>
         <div class="imgcontainer">
             <img src="images/login.png" class="avatar">
         </div>
@@ -24,7 +24,7 @@
         <a href="{{loginUrl}}"><img src="images/fblogin.png" width="200"></a>
         
         <p class="help-block">No account?<a href="/register">Register!!</a></p>
-        <p class="help-block">Forget password?<a href="/register">Reset password</a></p>
+        <p class="help-block">Forget password?<a href="/passreset/request">Reset password</a></p>
     </form>
 
 {% endblock %} 
