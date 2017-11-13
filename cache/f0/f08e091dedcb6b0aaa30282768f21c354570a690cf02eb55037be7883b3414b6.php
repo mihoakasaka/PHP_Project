@@ -8,7 +8,7 @@ class __TwigTemplate_cf319c7917621ab2d505d697c19976e4b6e9625d7d94f4ecbd77844369b
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("bootstraptransition/master.html.twig", "addEditAd.html.twig", 1);
+        $this->parent = $this->loadTemplate("master.html.twig", "addEditAd.html.twig", 1);
         $this->blocks = array(
             'title' => array($this, 'block_title'),
             'content' => array($this, 'block_content'),
@@ -18,7 +18,7 @@ class __TwigTemplate_cf319c7917621ab2d505d697c19976e4b6e9625d7d94f4ecbd77844369b
 
     protected function doGetParent(array $context)
     {
-        return "bootstraptransition/master.html.twig";
+        return "master.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = array())
@@ -218,7 +218,7 @@ class __TwigTemplate_cf319c7917621ab2d505d697c19976e4b6e9625d7d94f4ecbd77844369b
 
     public function getSourceContext()
     {
-        return new Twig_Source("{% extends \"bootstraptransition/master.html.twig\" %}
+        return new Twig_Source("{% extends \"master.html.twig\" %}
 {% block title %}{% if isEditing %}Edit{% else %}Create New{% endif %} Ad{% endblock %}
 
 {% block content %}
@@ -267,6 +267,6 @@ class __TwigTemplate_cf319c7917621ab2d505d697c19976e4b6e9625d7d94f4ecbd77844369b
             \$('#existingImages').load(deleteUrl);
         }
     </script>
-{% endblock %}", "addEditAd.html.twig", "C:\\xampp\\htdocs\\phpproject\\templates\\addEditAd.html.twig");
+{% endblock %}", "addEditAd.html.twig", "C:\\xampp\\htdocs\\phproject\\templates\\addEditAd.html.twig");
     }
 }
