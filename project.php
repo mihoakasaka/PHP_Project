@@ -85,6 +85,7 @@ $twig->addGlobal('userSession', $_SESSION['user']);
 function buildCategoriesStruct() {
     // Build a structure suitable to generate a select element in template for hierachal categories
     // FIXME: actually get a list from db
+    /*
     $categoriesList = array(
         array('categoryId' => 5, 'noPosts' => true, 'categoryDashedName' => 'Cars'),
         array('categoryId' => 6, 'noPosts' => false, 'categoryDashedName' => ' - Used'),
@@ -92,7 +93,8 @@ function buildCategoriesStruct() {
         array('categoryId' => 8, 'noPosts' => true, 'categoryDashedName' => 'Appliances'),
         array('categoryId' => 9, 'noPosts' => false, 'categoryDashedName' => ' - Dishwahers'),
         array('categoryId' => 10, 'noPosts' => false, 'categoryDashedName' => ' - Blenders')
-    );
+    ); */
+    require_once 'temporarysideprojects/categories.php';
     return $categoriesList;
 }
 
