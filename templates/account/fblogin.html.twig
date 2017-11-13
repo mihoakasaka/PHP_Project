@@ -3,12 +3,12 @@
 {% block title %}Login with FB account{% endblock %}
 
 {% block content %}
-    <form action="/">
+    <form method="POST">
           <label for="tbEmail" class="control-label">Name</label>
     <input type="text" class="form-control"  name="name" readonly="readonly" value="{{user.fName}}{{user.lName}}">
      <label for="tbEmail" class="control-label">Email</label>
     <input type="text" class="form-control"  name="email" readonly="readonly" value="{{user.email}}" >
-    <button >
+
     <input type="submit" value="Confirm" />
 </form>
   
