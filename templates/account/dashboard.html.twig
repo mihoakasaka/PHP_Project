@@ -7,25 +7,27 @@
 {% block content %}
 
 
-    <a href="/ad/add">Create an ad</a>
-    <div id="categoryList">
-<h1>Ads posted</hi>
-    </div>
-    <div id="adsList">
-        {% for a in adsList %}
-            <div class="adContainer">
-                <div class="imageContainer">
-                    <img src="{{a.imagePath}}" width="100">
-                </div>
-                <div class="title">
-                    <p>{{a.title}}</p>
-                </div>
-                <div class="price">
-                    <p>{{a.price}}</p>      
-                </div>
+    <p><a href="/ad/add">Create an ad</a></p>
+    <h1>Your Ads</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Ad Title</th>
+                    <th>Ad Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in adsList %}
+                    <tr>
+                        <td>{{a.title}}</td>
+                        <td>{{a.status}}</td>
+                        <td>Renew Delete</td>
+                    </tr>
+                {% else %}
+                    <tr colspan="3"><td>You don't have any ads yet. <a href='/ad/add'>Create one now</a></td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-            </div>                   
-        {% endfor %}
-
-    </div>
 {% endblock %}{# empty Twig template #}
