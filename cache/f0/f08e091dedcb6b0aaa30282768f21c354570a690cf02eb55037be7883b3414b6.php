@@ -61,7 +61,7 @@ class __TwigTemplate_cf319c7917621ab2d505d697c19976e4b6e9625d7d94f4ecbd77844369b
         foreach ($context['_seq'] as $context["_key"] => $context["o"]) {
             // line 12
             echo "                    <option value='";
-            echo twig_escape_filter($this->env, $this->getAttribute($context["o"], "categoryId", array()), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($context["o"], "id", array()), "html", null, true);
             echo "' ";
             if ($this->getAttribute($context["o"], "noPosts", array())) {
                 echo "disabled='disabled'";
@@ -229,7 +229,7 @@ class __TwigTemplate_cf319c7917621ab2d505d697c19976e4b6e9625d7d94f4ecbd77844369b
             <label for=\"lstCategory\" class=\"control-label\">Category</label>
             <select class=\"form-control\" name='categoryId' id=\"lstCategory\">
                 {% for o in c %}
-                    <option value='{{o.categoryId}}' {% if o.noPosts%}disabled='disabled'{% endif %} {% if v.categoryId == o.categoryId %}selected='selected'{% endif %}>{{ o.categoryDashedName }}</option>
+                    <option value='{{o.id}}' {% if o.noPosts%}disabled='disabled'{% endif %} {% if v.categoryId == o.categoryId %}selected='selected'{% endif %}>{{ o.categoryDashedName }}</option>
                 {% endfor %}
             </select>
         </div>
