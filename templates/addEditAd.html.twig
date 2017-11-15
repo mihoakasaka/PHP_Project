@@ -9,7 +9,7 @@
             <label for="lstCategory" class="control-label">Category</label>
             <select class="form-control" name='categoryId' id="lstCategory">
                 {% for o in c %}
-                    <option value='{{o.categoryId}}' {% if o.noPosts%}disabled='disabled'{% endif %} {% if v.categoryId == o.categoryId %}selected='selected'{% endif %}>{{ o.categoryDashedName }}</option>
+                    <option value='{{o.id}}' {% if o.noPosts%}disabled='disabled'{% endif %} {% if v.categoryId == o.categoryId %}selected='selected'{% endif %}>{{ o.categoryDashedName }}</option>
                 {% endfor %}
             </select>
         </div>

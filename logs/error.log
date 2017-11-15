@@ -104,3 +104,5 @@
 [2017-11-12 00:51:19] main.ERROR: Query: INSERT INTO `ads` (`categoryId`,`title`,`body`,`price`,`sellerId`) VALUES ('', 'China gold', 'Treats you rChina like gold', '400', '5') [] []
 [2017-11-12 00:55:57] main.ERROR: Error: Cannot add or update a child row: a foreign key constraint fails (`garagesale`.`ads`, CONSTRAINT `ads_ibfk_1` FOREIGN KEY (`categoryId`) REFERENCES `categories` (`id`)) [] []
 [2017-11-12 00:55:57] main.ERROR: Query: UPDATE `ads` SET `categoryId`='', `title`='A great deal !!!', `body`='Lorem ipsum and then some', `price`='4.99' WHERE id=1 AND sellerId=2 [] []
+[2017-11-15 19:21:00] main.ERROR: Error: Cannot add or update a child row: a foreign key constraint fails (`cp4809_garagesale`.`ads`, CONSTRAINT `ads_ibfk_1` FOREIGN KEY (`categoryId`) REFERENCES `categories` (`id`)) [] []
+[2017-11-15 19:21:00] main.ERROR: Query: INSERT INTO `ads` (`categoryId`,`title`,`body`,`price`,`sellerId`) VALUES ('', 'it\"s old', 'dfgsdhbsfghbsfghbsdfghsfghsfghdfghsdfh', '3', '3') [] []
