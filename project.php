@@ -80,27 +80,27 @@ if ($_SERVER['SERVER_NAME'] != 'localhost') {
 }
 $twig->addGlobal('userSession', $_SESSION['user']);
 
+require_once './categories.php';
+/*
+  function buildCategoriesStruct() {
+  // Build a structure suitable to generate a select element in template for hierachal categories
+  // FIXME: actually get a list from db
 
-
-function buildCategoriesStruct() {
-    // Build a structure suitable to generate a select element in template for hierachal categories
-    // FIXME: actually get a list from db
-    /*
-    $categoriesList = array(
-        array('categoryId' => 5, 'noPosts' => true, 'categoryDashedName' => 'Cars'),
-        array('categoryId' => 6, 'noPosts' => false, 'categoryDashedName' => ' - Used'),
-        array('categoryId' => 7, 'noPosts' => false, 'categoryDashedName' => ' - Vintage'),
-        array('categoryId' => 8, 'noPosts' => true, 'categoryDashedName' => 'Appliances'),
-        array('categoryId' => 9, 'noPosts' => false, 'categoryDashedName' => ' - Dishwahers'),
-        array('categoryId' => 10, 'noPosts' => false, 'categoryDashedName' => ' - Blenders')
-    ); */
-    require_once 'temporarysideprojects/categories.php';
-    return $categoriesList;
-}
+  $categoriesList = array(
+  array('categoryId' => 5, 'noPosts' => true, 'categoryDashedName' => 'Cars'),
+  array('categoryId' => 6, 'noPosts' => false, 'categoryDashedName' => ' - Used'),
+  array('categoryId' => 7, 'noPosts' => false, 'categoryDashedName' => ' - Vintage'),
+  array('categoryId' => 8, 'noPosts' => true, 'categoryDashedName' => 'Appliances'),
+  array('categoryId' => 9, 'noPosts' => false, 'categoryDashedName' => ' - Dishwahers'),
+  array('categoryId' => 10, 'noPosts' => false, 'categoryDashedName' => ' - Blenders')
+  );
+  require_once 'temporarysideprojects/categories.php';
+  return $categoriesList;
+  } */
 
 /* Ad/Add and Ad/Edit */
 
-$app->get('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
+$app->get('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log, $categoriesList) {
     if (!$_SESSION['user']) {
         $app->render('access_denied.html.twig');
         return;
@@ -124,7 +124,7 @@ $app->get('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
     }
     $app->render('addEditAd.html.twig', array(
         'v' => $values,
-        'c' => buildCategoriesStruct(),
+        'c' => $categoriesList,
         'i' => $existingImages,
         'isEditing' => ($id != -1)
     ));
@@ -133,7 +133,7 @@ $app->get('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
     'id' => '\d+'
 ));
 
-$app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
+$app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log, $categoriesList) {
     if (!$_SESSION['user']) {
         $app->render('access_denied.html.twig');
         return;
@@ -236,7 +236,7 @@ $app->post('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
             'isEditing' => ($id != -1),
             'v' => $values,
             'i' => $existingImages,
-            'c' => buildCategoriesStruct()
+            'c' => $categoriesList
         ));
     } else { // All fields validated
         // Process images
@@ -288,23 +288,23 @@ $app->post('/search', function() use ($app, $log) {
     $searchTerm = $app->request()->post('searchTerm');
 
     $values = array('searchTerm' => $searchTerm);
-    
+
     $perPage = 2;
-    
-    $totalCount = DB::queryFirstField ('SELECT COUNT(*) AS count from categories WHERE description LIKE %ss', $searchTerm);
-    $maxPages = max(ceil($totalCount / $perPage ), 1);
+
+    $totalCount = DB::queryFirstField('SELECT COUNT(*) AS count from categories WHERE description LIKE %ss', $searchTerm);
+    $maxPages = max(ceil($totalCount / $perPage), 1);
     $values['categoryResults'] = DB::query('SELECT * from categories WHERE description LIKE %ss ORDER BY id LIMIT %d,%d', $searchTerm, 0, $perPage);
     $values['maxCategoryPages'] = $maxPages;
     $values['currentCategoryPage'] = 1;
 
-    $totalCount = DB::queryFirstField ('SELECT COUNT(*) AS count from ads WHERE title LIKE %ss', $searchTerm);
-    $maxPages = max(ceil($totalCount / $perPage ), 1);
+    $totalCount = DB::queryFirstField('SELECT COUNT(*) AS count from ads WHERE title LIKE %ss', $searchTerm);
+    $maxPages = max(ceil($totalCount / $perPage), 1);
     $values['adResults'] = DB::query('SELECT * from ads WHERE title LIKE %ss ORDER BY id LIMIT %d,%d', $searchTerm, 0, $perPage);
     $values['maxAdPages'] = $maxPages;
     $values['currentAdPage'] = 1;
-    
-    $totalCount = DB::queryFirstField ('SELECT COUNT(*) AS count from users WHERE username LIKE %ss OR name LIKE %ss', $searchTerm, $searchTerm);
-    $maxPages = max(ceil($totalCount / $perPage ), 1);
+
+    $totalCount = DB::queryFirstField('SELECT COUNT(*) AS count from users WHERE username LIKE %ss OR name LIKE %ss', $searchTerm, $searchTerm);
+    $maxPages = max(ceil($totalCount / $perPage), 1);
     $values['userResults'] = DB::query('SELECT * from users WHERE username LIKE %ss OR name LIKE %ss ORDER BY id LIMIT %d,%d', $searchTerm, $searchTerm, 0, $perPage);
     $values['maxUserPages'] = $maxPages;
     $values['currentUserPage'] = 1;
@@ -313,13 +313,13 @@ $app->post('/search', function() use ($app, $log) {
 
 /* Ad results AJAX pagination */
 $app->post('/ajax/adsearchresults(/:page)', function($page = 1) use ($app) {
-    
+
     $searchTerm = $app->request()->params('searchTerm');
     $perPage = 2;
-            
-    $totalCount = DB::queryFirstField ('SELECT COUNT(*) AS count from ads WHERE title LIKE %ss', $searchTerm);
-    $maxPages = max(ceil($totalCount / $perPage ), 1);
-            
+
+    $totalCount = DB::queryFirstField('SELECT COUNT(*) AS count from ads WHERE title LIKE %ss', $searchTerm);
+    $maxPages = max(ceil($totalCount / $perPage), 1);
+
     if ($page > $maxPages) {
         http_response_code(404);
         $app->render('not_found.html.twig');
@@ -329,18 +329,18 @@ $app->post('/ajax/adsearchresults(/:page)', function($page = 1) use ($app) {
     $values['adResults'] = DB::query('SELECT * from ads WHERE title LIKE %ss ORDER BY id LIMIT %d,%d', $searchTerm, $skip, $perPage);
     $app->render('ajaxadsearchresults.html.twig', array(
         "v" => $values
-        ));
+    ));
 });
 
 /* Categories results AJAX pagination */
 $app->post('/ajax/categorysearchresults(/:page)', function($page = 1) use ($app) {
-    
+
     $searchTerm = $app->request()->params('searchTerm');
     $perPage = 2;
-            
-    $totalCount = DB::queryFirstField ('SELECT COUNT(*) AS count from categories WHERE description LIKE %ss', $searchTerm);
-    $maxPages = max(ceil($totalCount / $perPage ), 1);
-            
+
+    $totalCount = DB::queryFirstField('SELECT COUNT(*) AS count from categories WHERE description LIKE %ss', $searchTerm);
+    $maxPages = max(ceil($totalCount / $perPage), 1);
+
     if ($page > $maxPages) {
         http_response_code(404);
         $app->render('not_found.html.twig');
@@ -350,18 +350,18 @@ $app->post('/ajax/categorysearchresults(/:page)', function($page = 1) use ($app)
     $values['categoryResults'] = DB::query('SELECT * from categories WHERE description LIKE %ss ORDER BY id LIMIT %d,%d', $searchTerm, $skip, $perPage);
     $app->render('ajaxcategorysearchresults.html.twig', array(
         "v" => $values
-        ));
+    ));
 });
 
 /* Users results AJAX pagination */
 $app->post('/ajax/usersearchresults(/:page)', function($page = 1) use ($app) {
-    
+
     $searchTerm = $app->request()->params('searchTerm');
     $perPage = 2;
-            
-    $totalCount = DB::queryFirstField ('SELECT COUNT(*) AS count from users WHERE username LIKE %ss OR name LIKE %ss', $searchTerm, $searchTerm);
-    $maxPages = max(ceil($totalCount / $perPage ), 1);
-            
+
+    $totalCount = DB::queryFirstField('SELECT COUNT(*) AS count from users WHERE username LIKE %ss OR name LIKE %ss', $searchTerm, $searchTerm);
+    $maxPages = max(ceil($totalCount / $perPage), 1);
+
     if ($page > $maxPages) {
         http_response_code(404);
         $app->render('not_found.html.twig');
@@ -371,23 +371,65 @@ $app->post('/ajax/usersearchresults(/:page)', function($page = 1) use ($app) {
     $values['userResults'] = DB::query('SELECT * from users WHERE username LIKE %ss OR name LIKE %ss ORDER BY id LIMIT %d,%d', $searchTerm, $searchTerm, $skip, $perPage);
     $app->render('ajaxusersearchresults.html.twig', array(
         "v" => $values
-        ));
+    ));
 });
 
 /* Categories */
 
-// Browse a category by name
-$app->get('/category/:name', function($name) use ($app, $log) {
-    echo 'browsing category ' . $name;
+// Generate categories file. No UI. No links to it. Call it on the rare occasions categories are modified
+$app->get('/admin/generatecategories', function() use ($app, $log) {
 
-    // Search for category by name
+    $header = <<< ROSESAREBEST
+<?php
+
+/* This file is generated automatically. Any edits here will be overwritten. */
+        
+
+        
+ROSESAREBEST;
+    
+    $results = DB::query('SELECT * FROM categories');
+
+    $categoriesFile = fopen("./categories.php", "w") or die("Unable to open file!");
+    fwrite($categoriesFile, $header);
+
+    fwrite($categoriesFile, '$categoriesList = ' . var_export($results, TRUE));
+    fwrite($categoriesFile, ';');
+    fclose($categoriesFile);
+    echo 'export done';
+});
+
+// Browse a category by name
+$app->get('/category/:name', function($name) use ($app, $log, $categoriesList) {
+
+    // Check if name is in our categories list
+    $categoryFound = NULL;
+
+    foreach ($categoriesList as $c) {
+        // Search for category by url name
+        if ($c['urlSanitizedFullName'] == $name) {
+            $categoryFound = $c;
+            break;
+        }
+    }
+
+    if (!$categoryFound) {
+        http_response_code(404);
+        $app->render('not_found.html.twig');
+        return;
+    }
+
+    // Display all ads in this category, or if it is a parent directory, all ads in a child category
+    $adsInCategory = DB::query('SELECT a.*, c.id, c.parentCategoryId, c.fullName from ads as a INNER JOIN categories as c ON a.categoryId=c.id WHERE c.id=%i || c.parentCategoryId=%i', $categoryFound['id'], $categoryFound['id']);
+
+    echo "browsing category " . $categoryFound['id'] . ". There are " . count($adsInCategory) . " ads in this category";
 });
 
 
 // Products pagination usinx AJAX - main page
 $app->get('/ads(/:page)', function($page = 1) use ($app) {
     $perPage = 4;
-    $totalCount = DB::queryFirstField ("SELECT COUNT(*) AS count FROM ads");
+    $totalCount = DB::queryFirstField("SELECT COUNT(*) AS count FROM ads");
     $maxPages = ($totalCount + $perPage - 1) / $perPage;
     if ($page > $maxPages) {
         http_response_code(404);
@@ -395,19 +437,19 @@ $app->get('/ads(/:page)', function($page = 1) use ($app) {
         return;
     }
     $skip = ($page - 1) * $perPage;
-    $adList = DB::query('SELECT ads.id, title, price, imagePath FROM ads,pictures WHERE ads.id=pictures.adId Order by ads.id desc LIMIT %d,%d',$skip, $perPage);
-    
+    $adList = DB::query('SELECT ads.id, title, price, imagePath FROM ads,pictures WHERE ads.id=pictures.adId Order by ads.id desc LIMIT %d,%d', $skip, $perPage);
+
     //$adList = DB::query("SELECT * FROM ads ORDER BY id LIMIT %d,%d", $skip, $perPage);
     $app->render('ads.html.twig', array(
         "adList" => $adList,
         "maxPages" => $maxPages,
         "currentPage" => $page
-        ));
+    ));
 });
 // Products pagination usinx AJAX - just the table of products
 $app->get('/ajax/ads(/:page)', function($page = 1) use ($app) {
     $perPage = 4;
-    $totalCount = DB::queryFirstField ("SELECT COUNT(*) AS count FROM ads");
+    $totalCount = DB::queryFirstField("SELECT COUNT(*) AS count FROM ads");
     $maxPages = ($totalCount + $perPage - 1) / $perPage;
     if ($page > $maxPages) {
         http_response_code(404);
@@ -415,10 +457,10 @@ $app->get('/ajax/ads(/:page)', function($page = 1) use ($app) {
         return;
     }
     $skip = ($page - 1) * $perPage;
-      $adList = DB::query('SELECT ads.id, title, price, imagePath FROM ads,pictures WHERE ads.id=pictures.adId Order by ads.id desc LIMIT %d,%d',$skip, $perPage);
-   $app->render('ajaxads.html.twig', array(
+    $adList = DB::query('SELECT ads.id, title, price, imagePath FROM ads,pictures WHERE ads.id=pictures.adId Order by ads.id desc LIMIT %d,%d', $skip, $perPage);
+    $app->render('ajaxads.html.twig', array(
         "adList" => $adList,
-        ));
+    ));
 });
 
 /* Manage ad pictures AJAX */
@@ -446,15 +488,15 @@ $app->get('/ajax/ad/:adId/pictures/delete/(:pictureId)', function($adId = -1, $p
         } else {
             // Check that we're not deleting the last picture
             if (DB::queryFirstField('SELECT COUNT(id) from pictures WHERE adId=%d', $adId) < 2) {
-                            $log->err("Attempt to delete last picture from ad for picture id " .
-                    $pictureId .
-                    " from ad id " .
-                    $adId .
-                    " with user session " . (isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : '')
-            );
+                $log->err("Attempt to delete last picture from ad for picture id " .
+                        $pictureId .
+                        " from ad id " .
+                        $adId .
+                        " with user session " . (isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : '')
+                );
             } else {
                 // Go ahead and delete the record
-                DB::delete('pictures','id=%d',$pictureId);
+                DB::delete('pictures', 'id=%d', $pictureId);
             }
         }
     }
