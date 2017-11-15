@@ -8,7 +8,7 @@
 
 
     <a href="/ad/add">Create an ad</a>
-    <div id="categoryList">
+    <div id="categories">
  {% for c in categoryList %}
            <p><a href='/category/{{c.urlSanitizedFullName}}'>{{ c.fullName }}</a></p>                 
         {% endfor %}
