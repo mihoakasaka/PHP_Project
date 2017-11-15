@@ -98,12 +98,7 @@ require_once './categories.php';
   return $categoriesList;
   } */
 
-<<<<<<< HEAD
-=======
-/* Ad/Add and Ad/Edit */
 
-
->>>>>>> b96993f1d32ac3a0e73f91e19302321936e27761
 $app->get('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log, $categoriesList) {
     if (!$_SESSION['user']) {
 
