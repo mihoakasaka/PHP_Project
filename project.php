@@ -98,8 +98,6 @@ require_once './categories.php';
   return $categoriesList;
   } */
 
-/* Ad/Add and Ad/Edit */
-
 
 $app->get('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log, $categoriesList) {
     if (!$_SESSION['user']) {
@@ -513,12 +511,9 @@ $app->get('/ajax/ad/:adId/pictures/delete/(:pictureId)', function($adId = -1, $p
 });
 
 
-
-
 require_once 'account.php';
 require_once 'admin.php';
 require_once 'adslist.php';
 require_once 'dashboard.php';
 
 $app->run();
-
