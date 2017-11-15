@@ -6,34 +6,48 @@ $log = new Logger('main');
 }
 /* * ***************************  log in with FB account ***************************** */
 $app->get('/fblogin', function() use ($app) {
-     $app->render('account/fblogin.html.twig', array('user' => $_SESSION['facebook_access_token']));
+$app->render('account/fblogin.html.twig', array('user' => $_SESSION['facebook_access_token']));
 });
-$app->post('/fblogin', function() use ($app) {
-    //check if user has an account
+$app->post('/fblogin', function() use ($app,$log) {
     $email = $app->request()->post('email');
-        $row = DB::queryFirstField('SELECT id from users WHERE email = %s', $email);
-    if (!$row) {
-       
-        $result = DB::insert('users', array(
-                    'name' => $_SESSION['facebook_access_token']['fName'].' '.$_SESSION['facebook_access_token']['lName'],
-                    'email' => $_SESSION['facebook_access_token']['email'],
-                    'fbId' => $_SESSION['facebook_access_token']['ID'],
-        ));
-        if ($result) {
-            $userID = DB::insertId();
-            $log->debug(sprintf("Regisetred fbUser %s with id %s", $_SESSION['facebook_access_token']['fName'], $userID));
-            $_SESSION['facebook_access_token']['userID'] = $userID;
-        }
-      
-    }else{
-        $row = DB::queryFirstRow('SELECT fbId from users WHERE email = %s', $email);
-        if(!$row){
-            $result=DB::update('users', array('fbId' =>  $_SESSION['facebook_access_token']['ID']));
-        }
-        
-    }
-       $app->render('account/fblogin_success.html.twig');
+    
+//check if user has an account
+$row = DB::queryFirstRow('SELECT * from users WHERE email = %s', $email);
+if (!$row) {
+$result = DB::insert('users', array(
+'name' => $_SESSION['facebook_access_token']['name'],
+ 'email' => $_SESSION['facebook_access_token']['email'],
+ 'fbId' => $_SESSION['facebook_access_token']['ID'],
+));
+if ($result) {
+$userID = DB::insertId();
+$log->debug(sprintf("Regisetred fbUser %s with id %s", $_SESSION['facebook_access_token']['fName'], $userID));
+$_SESSION['facebook_access_token']['userID'] = $userID;
+}
+
+} else {
+if ($row['fbId'== NULL]) {
+$result = DB::update('users', array(
+'fbId' => $_SESSION['facebook_access_token']['ID'],
+));
+if (DB::affectedRows() == 0) {
+echo 'error: record not found'; // TODO: use template
+return;
+} 
+}
+}
+$account = DB::queryFirstField('SELECT id from users WHERE email=%s AND fbId =%s',$_SESSION['facebook_access_token']['email'], $_SESSION['facebook_access_token']['ID']);
+echo $account;  
+if($account){
+    $_SESSION['user']['ID'] = $account;
+     $_SESSION['user']['name'] = $_SESSION['facebook_access_token']['name'];
+      $_SESSION['user']['email'] = $_SESSION['facebook_access_token']['email'];
+  $app->render('account/fblogin_success.html.twig');
+}
 });
+
+
+
 /* * *************       password reset         ************************ */
 
 function generateRandomString($length = 10) {
@@ -239,46 +253,3 @@ DB::insert('users', array('name' => $name, 'email' => $email, 'password' => $pas
 $app->render('account/register_success.html.twig');
 }
 });
-/* * ***************************  log in with FB account ***************************** */
-$app->get('/fblogin', function() use ($app) {
-$app->render('account/fblogin.html.twig', array('user' => $_SESSION['facebook_access_token']));
-});
-$app->post('/fblogin', function() use ($app,$log) {
-    $email = $app->request()->post('email');
-    
-//check if user has an account
-$row = DB::queryFirstRow('SELECT * from users WHERE email = %s', $email);
-if (!$row) {
-$result = DB::insert('users', array(
-'name' => $_SESSION['facebook_access_token']['name'],
- 'email' => $_SESSION['facebook_access_token']['email'],
- 'fbId' => $_SESSION['facebook_access_token']['ID'],
-));
-if ($result) {
-$userID = DB::insertId();
-$log->debug(sprintf("Regisetred fbUser %s with id %s", $_SESSION['facebook_access_token']['fName'], $userID));
-$_SESSION['facebook_access_token']['userID'] = $userID;
-}
-
-} else {
-if ($row['fbId'== NULL]) {
-$result = DB::update('users', array(
-'fbId' => $_SESSION['facebook_access_token']['ID'],
-));
-if (DB::affectedRows() == 0) {
-echo 'error: record not found'; // TODO: use template
-return;
-} 
-}
-}
-$account = DB::queryFirstField('SELECT id from users WHERE email=%s AND fbId =%s',$_SESSION['facebook_access_token']['email'], $_SESSION['facebook_access_token']['ID']);
-echo $account;  
-if($account){
-    $_SESSION['user']['ID'] = $account;
-     $_SESSION['user']['name'] = $_SESSION['facebook_access_token']['name'];
-      $_SESSION['user']['email'] = $_SESSION['facebook_access_token']['email'];
-  $app->render('account/fblogin_success.html.twig');
-}
-});
-//check if user has FBid in record
-

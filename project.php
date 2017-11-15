@@ -101,7 +101,7 @@ function buildCategoriesStruct() {
 /* Ad/Add and Ad/Edit */
 
 $app->get('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
-    if (!$_SESSION['user']) {
+    if (!$_SESSION['user'] ) {
         $app->render('access_denied.html.twig');
         return;
     }
