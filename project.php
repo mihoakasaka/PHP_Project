@@ -98,15 +98,9 @@ require_once './categories.php';
   return $categoriesList;
   } */
 
-/* Ad/Add and Ad/Edit */
-
-<<<<<<< HEAD
-$app->get('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log) {
-    if (!$_SESSION['user'] ) {
-=======
 $app->get('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log, $categoriesList) {
     if (!$_SESSION['user']) {
->>>>>>> d99a4a488a6fca8cabcfcba075e492d885778211
+
         $app->render('access_denied.html.twig');
         return;
     }
@@ -516,12 +510,9 @@ $app->get('/ajax/ad/:adId/pictures/delete/(:pictureId)', function($adId = -1, $p
 });
 
 
-
-
 require_once 'account.php';
 require_once 'admin.php';
 require_once 'adslist.php';
 require_once 'dashboard.php';
 
 $app->run();
-
