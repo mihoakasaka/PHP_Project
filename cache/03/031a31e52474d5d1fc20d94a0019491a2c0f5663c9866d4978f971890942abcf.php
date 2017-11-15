@@ -46,6 +46,7 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
         // line 8
         echo "
 
+
     <p><a href=\"/ad/add\">Create an ad</a></p>
     <h1>Your Ads</h1>
         <table>
@@ -58,37 +59,69 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
             </thead>
             <tbody>
                 ";
-        // line 21
+        // line 22
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["adsList"]) ? $context["adsList"] : null));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["a"]) {
-            // line 22
+            // line 23
             echo "                    <tr>
                         <td>";
-            // line 23
+            // line 24
             echo twig_escape_filter($this->env, $this->getAttribute($context["a"], "title", array()), "html", null, true);
             echo "</td>
                         <td>";
-            // line 24
+            // line 25
             echo twig_escape_filter($this->env, $this->getAttribute($context["a"], "status", array()), "html", null, true);
             echo "</td>
-                        <td>Renew Delete</td>
+                        <td>
+                            ";
+            // line 27
+            if (($this->getAttribute($context["a"], "status", array()) == "created")) {
+                echo "<button class='btn btn-primary btn-sm'>Pay &amp; Activate</button>";
+            }
+            // line 28
+            echo "                            ";
+            if (($this->getAttribute($context["a"], "status", array()) == "active")) {
+                echo "<button class='btn btn-primary btn-sm'>Pay &amp; Extend</button>";
+            }
+            // line 29
+            echo "                            ";
+            if (($this->getAttribute($context["a"], "status", array()) == "expired")) {
+                echo "<button class='btn btn-primary btn-sm'>Pay &amp; Renew</button>";
+            }
+            // line 30
+            echo "                            ";
+            if (($this->getAttribute($context["a"], "status", array()) == "active")) {
+                // line 31
+                echo "                                ";
+                if (($this->getAttribute($context["a"], "isToBeDisplayed", array()) == 0)) {
+                    echo "<button class='btn btn-primary btn-sm'>Display</button>";
+                } else {
+                    echo "<button class='btn btn-sm'>Hide</button>";
+                }
+                // line 32
+                echo "                            ";
+            }
+            // line 33
+            echo "                            <button class='btn btn-sm btn-danger'><span class=\"fa fa-trash\" aria-hidden=\"true\" /> Delete</button>
+                        </td>
                     </tr>
                 ";
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 28
+            // line 37
             echo "                    <tr colspan=\"3\"><td>You don't have any ads yet. <a href='/ad/add'>Create one now</a></td></tr>
                 ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['a'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 30
+        // line 39
         echo "            </tbody>
         </table>
+
 
 ";
     }
@@ -105,7 +138,7 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
 
     public function getDebugInfo()
     {
-        return array (  90 => 30,  83 => 28,  74 => 24,  70 => 23,  67 => 22,  62 => 21,  47 => 8,  44 => 7,  39 => 5,  36 => 4,  30 => 3,  11 => 1,);
+        return array (  122 => 39,  115 => 37,  107 => 33,  104 => 32,  97 => 31,  94 => 30,  89 => 29,  84 => 28,  80 => 27,  75 => 25,  71 => 24,  68 => 23,  63 => 22,  47 => 8,  44 => 7,  39 => 5,  36 => 4,  30 => 3,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -127,6 +160,7 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
 {% block content %}
 
 
+
     <p><a href=\"/ad/add\">Create an ad</a></p>
     <h1>Your Ads</h1>
         <table>
@@ -142,13 +176,22 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
                     <tr>
                         <td>{{a.title}}</td>
                         <td>{{a.status}}</td>
-                        <td>Renew Delete</td>
+                        <td>
+                            {% if a.status == 'created' %}<button class='btn btn-primary btn-sm'>Pay &amp; Activate</button>{% endif %}
+                            {% if a.status == 'active' %}<button class='btn btn-primary btn-sm'>Pay &amp; Extend</button>{% endif %}
+                            {% if a.status == 'expired' %}<button class='btn btn-primary btn-sm'>Pay &amp; Renew</button>{% endif %}
+                            {% if a.status == 'active' %}
+                                {% if a.isToBeDisplayed == 0 %}<button class='btn btn-primary btn-sm'>Display</button>{% else %}<button class='btn btn-sm'>Hide</button>{% endif %}
+                            {% endif %}
+                            <button class='btn btn-sm btn-danger'><span class=\"fa fa-trash\" aria-hidden=\"true\" /> Delete</button>
+                        </td>
                     </tr>
                 {% else %}
                     <tr colspan=\"3\"><td>You don't have any ads yet. <a href='/ad/add'>Create one now</a></td></tr>
                 {% endfor %}
             </tbody>
         </table>
+
 
 {% endblock %}{# empty Twig template #}
 ", "account/dashboard.html.twig", "C:\\xampp\\htdocs\\phproject\\templates\\account\\dashboard.html.twig");
