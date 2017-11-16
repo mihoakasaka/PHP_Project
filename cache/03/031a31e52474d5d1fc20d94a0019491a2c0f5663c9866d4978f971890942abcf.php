@@ -91,7 +91,7 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
                         ";
             // line 39
             if (($this->getAttribute($context["a"], "status", array()) == "created")) {
-                echo "<button class='btn btn-primary btn-sm modalaction' data-message=\"Extend\" data-action-url=\"/dashboard/test\" data-heading=\"Activate Ad\" data-action-label=\"Pay to extend\">Activate</button>";
+                echo "<button class='btn btn-primary btn-sm modalaction' data-message=\"Extend\" data-action-url=\"/action/testpaypal\" data-heading=\"Activate Ad\" data-action-label=\"Pay to extend\">Activate</button>";
             }
             // line 40
             echo "                        ";
@@ -235,7 +235,7 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
                     <td>{{a.title}}</td>
                     <td>{{a.status}}</td>
                     <td>
-                        {% if a.status == 'created' %}<button class='btn btn-primary btn-sm modalaction' data-message=\"Extend\" data-action-url=\"/dashboard/test\" data-heading=\"Activate Ad\" data-action-label=\"Pay to extend\">Activate</button>{% endif %}
+                        {% if a.status == 'created' %}<button class='btn btn-primary btn-sm modalaction' data-message=\"Extend\" data-action-url=\"/action/testpaypal\" data-heading=\"Activate Ad\" data-action-label=\"Pay to extend\">Activate</button>{% endif %}
                         {% if a.status == 'active' %}<button class='btn btn-primary btn-sm modalaction'>Extend</button>{% endif %}
                         {% if a.status == 'expired' %}<button class='btn btn-primary btn-sm modalaction'>Re-Activate</button>{% endif %}
                         {% if a.status == 'active' %}
