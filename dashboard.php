@@ -1,5 +1,18 @@
 <?php
 
+// Paypal
+use PayPal\Api\Amount;
+use PayPal\Api\Details;
+use PayPal\Api\Item;
+use PayPal\Api\ItemList;
+use PayPal\Api\Payer;
+use PayPal\Api\Payment;
+use PayPal\Api\PaymentExecution;
+use PayPal\Api\RedirectUrls;
+use PayPal\Api\Transaction;
+use PayPal\Rest\ApiContext;
+use PayPal\Auth\OAuthTokenCredential;
+
 $app->get('/dashboard', function() use ($app) {
     if (!$_SESSION['user']) {
         $app->render('access_denied.html.twig');
@@ -36,28 +49,38 @@ $app->get('/action/paypalreturn/:result', function($result = 'false') use ($app)
         echo "Payment failed";
         return;
     }
-        $apiContext = new \PayPal\Rest\ApiContext(
-            new \PayPal\Auth\OAuthTokenCredential(
+    $apiContext = new ApiContext(
+            new OAuthTokenCredential(
             'AST8ISz1fcTihSG977bcrCixv0AKFq2CF5Fqkd5NY9EU2Csa6Z2bpIfxBUU4MO5dA4fFLG0x3EPJ7Y2Z', // ClientID
             'ELQlnyE9DiYiOnj8XjCDXcQ9uRlM11ZyODaOBM5v4DMArmezbVUXu2QuWh1xYZi26koEDjtVWcEghSd1'      // ClientSecret
             )
     );
 
+    // Paypal logging
+    $apiContext->setConfig(
+            array(
+                'log.LogEnabled' => true,
+                'log.FileName' => 'logs/paypaldebug.log',
+                'log.LogLevel' => 'DEBUG',
+            )
+    );
+
+
 
     // FIXME change access method and perform basic sanity check on value
     $paymentId = $_GET['paymentId'];
-    $payment = \PayPal\Api\Payment::get($paymentId, $apiContext);
+    $payment = Payment::get($paymentId, $apiContext);
 
-$execution = new \PayPal\Api\PaymentExecution();
+    $execution = new PaymentExecution();
     $execution->setPayerId($_GET['PayerID']);
-    
+
     try {
 
         $result = $payment->execute($execution, $apiContext);
         echo("Executed Payment" . "Payment" . $payment->getId() . $execution . $result);
 
         try {
-            $payment = \PayPal\Api\Payment::get($paymentId, $apiContext);
+            $payment = Payment::get($paymentId, $apiContext);
         } catch (Exception $ex) {
             echo("Get Payment" . "Payment" . $ex);
             return;
@@ -67,12 +90,11 @@ $execution = new \PayPal\Api\PaymentExecution();
         return;
     }
     echo("Get Payment" . "Payment" . $payment->getId() . $payment);
-
-    
-    });
+});
 
 
 $app->get('/action/testpaypal', function() use ($app) {
+
 
 
     $apiContext = new \PayPal\Rest\ApiContext(
@@ -82,49 +104,59 @@ $app->get('/action/testpaypal', function() use ($app) {
             )
     );
 
+    // Paypal logging
+    $apiContext->setConfig(
+            array(
+                'log.LogEnabled' => true,
+                'log.FileName' => 'logs/paypaldebug.log',
+                'log.LogLevel' => 'DEBUG',
+            )
+    );
 
-    $payer = new \PayPal\Api\Payer();
+    $payer = new Payer();
     $payer->setPaymentMethod('paypal');
 
-    $item1 = new \PayPal\Api\Item();
+    $item1 = new Item();
     $item1->setName('Ground Coffee 40 oz')
             ->setCurrency('USD')
             ->setQuantity(1)
             ->setSku("123123") // Similar to `item_number` in Classic API
             ->setPrice(7.5);
-    $item2 = new \PayPal\Api\Item();
+    $item2 = new Item();
     $item2->setName('Granola bars')
             ->setCurrency('USD')
             ->setQuantity(5)
             ->setSku("321321") // Similar to `item_number` in Classic API
             ->setPrice(2);
 
-    $itemList = new \PayPal\Api\ItemList();
+    $itemList = new ItemList();
     $itemList->setItems(array($item1, $item2));
 
-    $details = new \PayPal\Api\Details();
+    $details = new Details();
     $details->setShipping(1.2)
             ->setTax(1.3)
             ->setSubtotal(17.50);
 
-    $amount = new \PayPal\Api\Amount();
+    $amount = new Amount();
     $amount->setCurrency("USD")
             ->setTotal(20)
             ->setDetails($details);
 
-    $transaction = new \PayPal\Api\Transaction();
+    $transaction = new Transaction();
     $transaction->setAmount($amount)
             ->setItemList($itemList)
             ->setDescription("Payment description")
             ->setInvoiceNumber(uniqid());
 
-//$baseUrl = getBaseUrl();
-    $redirectUrls = new \PayPal\Api\RedirectUrls();
-    $redirectUrls->setReturnUrl("http://localhost:8006/action/paypalreturn/true")
-            ->setCancelUrl("http://localhost:8006/action/paypalreturn/false");
+    $baseUrl = $app->request()->getUrl();
 
 
-    $payment = new \PayPal\Api\Payment();
+    $redirectUrls = new RedirectUrls();
+    $redirectUrls->setReturnUrl("$baseUrl/action/paypalreturn/true")
+            ->setCancelUrl("$baseUrl/action/paypalreturn/false");
+
+
+    $payment = new Payment();
     $payment->setIntent("sale")
             ->setPayer($payer)
             ->setRedirectUrls($redirectUrls)
