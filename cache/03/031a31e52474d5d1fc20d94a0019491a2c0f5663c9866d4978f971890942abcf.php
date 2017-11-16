@@ -13,6 +13,7 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
             'title' => array($this, 'block_title'),
             'headextra' => array($this, 'block_headextra'),
             'content' => array($this, 'block_content'),
+            'bodyendextra' => array($this, 'block_bodyendextra'),
         );
     }
 
@@ -44,84 +45,118 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
     public function block_content($context, array $blocks = array())
     {
         // line 8
-        echo "
+        echo "    <div id=\"adManagementModal\"> 
+        <form method=\"post\" id=\"adManagementModalForm\" class=\"form-access\">
+            <h2>Extend Your Ad</h2>
+            <div class=\"form-group\">
+                <p class=\"help-block\" id=\"loginError\">Pay 5\$ and extend your ad by 5 days -- to November 21, 2017<p>
+            </div>
+            <div class=\"\">
+                <input id=\"adManagementModalPay\" type=\"submit\" value=\"Pay\">
+                <input id=\"adManagementModalCancel\" type='reset' value='Cancel'>
+            </div>
+        </form>                
+    </div>
+
 
 
     <p><a href=\"/ad/add\">Create an ad</a></p>
     <h1>Your Ads</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Ad Title</th>
-                    <th>Ad Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                ";
-        // line 22
+    <table>
+        <thead>
+            <tr>
+                <th>Ad Title</th>
+                <th>Ad Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            ";
+        // line 34
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["adsList"]) ? $context["adsList"] : null));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["a"]) {
-            // line 23
-            echo "                    <tr>
-                        <td>";
-            // line 24
+            // line 35
+            echo "                <tr>
+                    <td>";
+            // line 36
             echo twig_escape_filter($this->env, $this->getAttribute($context["a"], "title", array()), "html", null, true);
             echo "</td>
-                        <td>";
-            // line 25
+                    <td>";
+            // line 37
             echo twig_escape_filter($this->env, $this->getAttribute($context["a"], "status", array()), "html", null, true);
             echo "</td>
-                        <td>
-                            ";
-            // line 27
+                    <td>
+                        ";
+            // line 39
             if (($this->getAttribute($context["a"], "status", array()) == "created")) {
-                echo "<button class='btn btn-primary btn-sm'>Pay &amp; Activate</button>";
+                echo "<button class='btn btn-primary btn-sm modalaction'>Pay &amp; Activate</button>";
             }
-            // line 28
-            echo "                            ";
+            // line 40
+            echo "                        ";
             if (($this->getAttribute($context["a"], "status", array()) == "active")) {
-                echo "<button class='btn btn-primary btn-sm'>Pay &amp; Extend</button>";
+                echo "<button class='btn btn-primary btn-sm modalaction'>Pay &amp; Extend</button>";
             }
-            // line 29
-            echo "                            ";
+            // line 41
+            echo "                        ";
             if (($this->getAttribute($context["a"], "status", array()) == "expired")) {
-                echo "<button class='btn btn-primary btn-sm'>Pay &amp; Renew</button>";
+                echo "<button class='btn btn-primary btn-sm modalaction'>Pay &amp; Renew</button>";
             }
-            // line 30
-            echo "                            ";
+            // line 42
+            echo "                        ";
             if (($this->getAttribute($context["a"], "status", array()) == "active")) {
-                // line 31
-                echo "                                ";
+                // line 43
+                echo "                            ";
                 if (($this->getAttribute($context["a"], "isToBeDisplayed", array()) == 0)) {
                     echo "<button class='btn btn-primary btn-sm'>Display</button>";
                 } else {
                     echo "<button class='btn btn-sm'>Hide</button>";
                 }
-                // line 32
-                echo "                            ";
+                // line 44
+                echo "                        ";
             }
-            // line 33
-            echo "                            <button class='btn btn-sm btn-danger'><span class=\"fa fa-trash\" aria-hidden=\"true\" /> Delete</button>
-                        </td>
-                    </tr>
-                ";
+            // line 45
+            echo "                        <button class='btn btn-sm btn-danger'><span class=\"fa fa-trash\" aria-hidden=\"true\" /> Delete</button>
+                    </td>
+                </tr>
+            ";
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 37
-            echo "                    <tr colspan=\"3\"><td>You don't have any ads yet. <a href='/ad/add'>Create one now</a></td></tr>
-                ";
+            // line 49
+            echo "                <tr colspan=\"3\"><td>You don't have any ads yet. <a href='/ad/add'>Create one now</a></td></tr>
+            ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['a'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 39
-        echo "            </tbody>
-        </table>
+        // line 51
+        echo "        </tbody>
+    </table>
 
+
+";
+    }
+
+    // line 57
+    public function block_bodyendextra($context, array $blocks = array())
+    {
+        // line 58
+        echo "        <script>
+            \$(document).ready(function () {
+
+                // bind event handlers
+                \$(\"#adManagementModalCancel\").click(function () {
+                    \$(\"#adManagementModal\").removeClass(\"modal-show\");
+                });
+
+                \$(\".modalaction\").click(function () {
+                    \$(\"#adManagementModal\").addClass(\"modal-show\");
+                });
+            });
+
+        </script>
 
 ";
     }
@@ -138,7 +173,7 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
 
     public function getDebugInfo()
     {
-        return array (  122 => 39,  115 => 37,  107 => 33,  104 => 32,  97 => 31,  94 => 30,  89 => 29,  84 => 28,  80 => 27,  75 => 25,  71 => 24,  68 => 23,  63 => 22,  47 => 8,  44 => 7,  39 => 5,  36 => 4,  30 => 3,  11 => 1,);
+        return array (  146 => 58,  143 => 57,  135 => 51,  128 => 49,  120 => 45,  117 => 44,  110 => 43,  107 => 42,  102 => 41,  97 => 40,  93 => 39,  88 => 37,  84 => 36,  81 => 35,  76 => 34,  48 => 8,  45 => 7,  40 => 5,  37 => 4,  31 => 3,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -158,42 +193,72 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
 
 {% endblock %}
 {% block content %}
+    <div id=\"adManagementModal\"> 
+        <form method=\"post\" id=\"adManagementModalForm\" class=\"form-access\">
+            <h2>Extend Your Ad</h2>
+            <div class=\"form-group\">
+                <p class=\"help-block\" id=\"loginError\">Pay 5\$ and extend your ad by 5 days -- to November 21, 2017<p>
+            </div>
+            <div class=\"\">
+                <input id=\"adManagementModalPay\" type=\"submit\" value=\"Pay\">
+                <input id=\"adManagementModalCancel\" type='reset' value='Cancel'>
+            </div>
+        </form>                
+    </div>
 
 
 
     <p><a href=\"/ad/add\">Create an ad</a></p>
     <h1>Your Ads</h1>
-        <table>
-            <thead>
+    <table>
+        <thead>
+            <tr>
+                <th>Ad Title</th>
+                <th>Ad Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in adsList %}
                 <tr>
-                    <th>Ad Title</th>
-                    <th>Ad Status</th>
-                    <th>Actions</th>
+                    <td>{{a.title}}</td>
+                    <td>{{a.status}}</td>
+                    <td>
+                        {% if a.status == 'created' %}<button class='btn btn-primary btn-sm modalaction'>Pay &amp; Activate</button>{% endif %}
+                        {% if a.status == 'active' %}<button class='btn btn-primary btn-sm modalaction'>Pay &amp; Extend</button>{% endif %}
+                        {% if a.status == 'expired' %}<button class='btn btn-primary btn-sm modalaction'>Pay &amp; Renew</button>{% endif %}
+                        {% if a.status == 'active' %}
+                            {% if a.isToBeDisplayed == 0 %}<button class='btn btn-primary btn-sm'>Display</button>{% else %}<button class='btn btn-sm'>Hide</button>{% endif %}
+                        {% endif %}
+                        <button class='btn btn-sm btn-danger'><span class=\"fa fa-trash\" aria-hidden=\"true\" /> Delete</button>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                {% for a in adsList %}
-                    <tr>
-                        <td>{{a.title}}</td>
-                        <td>{{a.status}}</td>
-                        <td>
-                            {% if a.status == 'created' %}<button class='btn btn-primary btn-sm'>Pay &amp; Activate</button>{% endif %}
-                            {% if a.status == 'active' %}<button class='btn btn-primary btn-sm'>Pay &amp; Extend</button>{% endif %}
-                            {% if a.status == 'expired' %}<button class='btn btn-primary btn-sm'>Pay &amp; Renew</button>{% endif %}
-                            {% if a.status == 'active' %}
-                                {% if a.isToBeDisplayed == 0 %}<button class='btn btn-primary btn-sm'>Display</button>{% else %}<button class='btn btn-sm'>Hide</button>{% endif %}
-                            {% endif %}
-                            <button class='btn btn-sm btn-danger'><span class=\"fa fa-trash\" aria-hidden=\"true\" /> Delete</button>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr colspan=\"3\"><td>You don't have any ads yet. <a href='/ad/add'>Create one now</a></td></tr>
-                {% endfor %}
-            </tbody>
-        </table>
+            {% else %}
+                <tr colspan=\"3\"><td>You don't have any ads yet. <a href='/ad/add'>Create one now</a></td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
 
-{% endblock %}{# empty Twig template #}
+{% endblock %}
+
+{% block bodyendextra %}
+        <script>
+            \$(document).ready(function () {
+
+                // bind event handlers
+                \$(\"#adManagementModalCancel\").click(function () {
+                    \$(\"#adManagementModal\").removeClass(\"modal-show\");
+                });
+
+                \$(\".modalaction\").click(function () {
+                    \$(\"#adManagementModal\").addClass(\"modal-show\");
+                });
+            });
+
+        </script>
+
+{% endblock %}
 ", "account/dashboard.html.twig", "C:\\xampp\\htdocs\\phproject\\templates\\account\\dashboard.html.twig");
     }
 }
