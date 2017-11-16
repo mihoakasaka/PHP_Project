@@ -29,7 +29,7 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
     // line 3
     public function block_title($context, array $blocks = array())
     {
-        echo "Index";
+        echo "Seller Dashboard";
     }
 
     // line 4
@@ -153,7 +153,7 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
     {
         return new Twig_Source("{% extends \"master.html.twig\" %}
 
-{% block title %}Index{% endblock %}
+{% block title %}Seller Dashboard{% endblock %}
 {% block headextra %}
 
 {% endblock %}

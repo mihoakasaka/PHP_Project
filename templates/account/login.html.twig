@@ -15,16 +15,19 @@
                 {% endif %}
                 <label for="tbEmail" class="control-label">Email</label><span class="help-block" id="isTaken"></span>
                 <input type="text" class="form-control" placeholder="Enter email" name="email" id="tbEmail" required>
-        <div class="form-group">
+            <div class="form-group">
+            </div>
+            <label for="tbPassword" class="control-label">Password</label><span class="help-block" id="isTaken"></span>
+            <input type="password" class="form-control" placeholder="Enter Password" name="pass" id="tbPassword" required>
         </div>
-                <label for="tbPassword" class="control-label">Password</label><span class="help-block" id="isTaken"></span>
-                <input type="password" class="form-control" placeholder="Enter Password" name="pass" id="tbPassword" required>
+        <div class="">
+            <input type="submit" value="Log in">
+            <button class="btn"><a href="{{loginUrl}}">Continue with Facebook</a></button>
+
+            <p class="help-block">No account?<a href="/register"> Register!!</a></p>
+            <p class="help-block">Forget password?<a href="/passreset/request"> Reset password</a></p>
+
         </div>
-        <input type="submit" value="Log in">
-        <a href="{{loginUrl}}"><img src="images/fblogin.png" width="200"></a>
-        
-        <p class="help-block">No account?<a href="/register">Register!!</a></p>
-        <p class="help-block">Forget password?<a href="/passreset/request">Reset password</a></p>
     </form>
 
 {% endblock %} 
