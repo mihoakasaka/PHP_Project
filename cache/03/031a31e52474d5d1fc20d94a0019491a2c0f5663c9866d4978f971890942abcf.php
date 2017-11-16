@@ -47,12 +47,12 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
         // line 8
         echo "    <div id=\"adManagementModal\"> 
         <form method=\"post\" id=\"adManagementModalForm\" class=\"form-access\">
-            <h2>Extend Your Ad</h2>
+            <h2 id=\"modalHeading\">Extend Your Ad</h2>
             <div class=\"form-group\">
-                <p class=\"help-block\" id=\"loginError\">Pay 5\$ and extend your ad by 5 days -- to November 21, 2017<p>
+                <p class=\"help-block\" id=\"modalMessage\">Pay 5\$ and extend your ad by 5 days -- to November 21, 2017<p>
             </div>
             <div class=\"\">
-                <input id=\"adManagementModalPay\" type=\"submit\" value=\"Pay\">
+                <input id=\"adManagementModalSubmit\" type=\"submit\" value=\"Pay\">
                 <input id=\"adManagementModalCancel\" type='reset' value='Cancel'>
             </div>
         </form>                
@@ -91,17 +91,17 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
                         ";
             // line 39
             if (($this->getAttribute($context["a"], "status", array()) == "created")) {
-                echo "<button class='btn btn-primary btn-sm modalaction'>Pay &amp; Activate</button>";
+                echo "<button class='btn btn-primary btn-sm modalaction' data-message=\"Extend\" data-action-url=\"/dashboard/test\" data-heading=\"Activate Ad\" data-action-label=\"Pay to extend\">Activate</button>";
             }
             // line 40
             echo "                        ";
             if (($this->getAttribute($context["a"], "status", array()) == "active")) {
-                echo "<button class='btn btn-primary btn-sm modalaction'>Pay &amp; Extend</button>";
+                echo "<button class='btn btn-primary btn-sm modalaction'>Extend</button>";
             }
             // line 41
             echo "                        ";
             if (($this->getAttribute($context["a"], "status", array()) == "expired")) {
-                echo "<button class='btn btn-primary btn-sm modalaction'>Pay &amp; Renew</button>";
+                echo "<button class='btn btn-primary btn-sm modalaction'>Re-Activate</button>";
             }
             // line 42
             echo "                        ";
@@ -150,8 +150,19 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
                 \$(\"#adManagementModalCancel\").click(function () {
                     \$(\"#adManagementModal\").removeClass(\"modal-show\");
                 });
-
-                \$(\".modalaction\").click(function () {
+                
+                // Modal action: a button is generating an action
+                \$(\".modalaction\").click(function (ev) {
+                    // Get data from target button using data attributes
+                    var \$actionButton = ev.target;
+                    var message = \$actionButton.getAttribute('data-message');
+                    var heading = \$actionButton.getAttribute('data-heading');
+                    var actionUrl = \$actionButton.getAttribute('data-action-url');
+                    var actionLabel = \$actionButton.getAttribute('data-action-label');
+                    \$(\"#modalHeading\").text(heading);
+                    \$(\"#modalMessage\").text(message);
+                    \$(\"#adManagementModalForm\").attr('action', actionUrl);
+                    \$(\"#adManagementModalSubmit\").val(actionLabel);
                     \$(\"#adManagementModal\").addClass(\"modal-show\");
                 });
             });
@@ -195,12 +206,12 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
 {% block content %}
     <div id=\"adManagementModal\"> 
         <form method=\"post\" id=\"adManagementModalForm\" class=\"form-access\">
-            <h2>Extend Your Ad</h2>
+            <h2 id=\"modalHeading\">Extend Your Ad</h2>
             <div class=\"form-group\">
-                <p class=\"help-block\" id=\"loginError\">Pay 5\$ and extend your ad by 5 days -- to November 21, 2017<p>
+                <p class=\"help-block\" id=\"modalMessage\">Pay 5\$ and extend your ad by 5 days -- to November 21, 2017<p>
             </div>
             <div class=\"\">
-                <input id=\"adManagementModalPay\" type=\"submit\" value=\"Pay\">
+                <input id=\"adManagementModalSubmit\" type=\"submit\" value=\"Pay\">
                 <input id=\"adManagementModalCancel\" type='reset' value='Cancel'>
             </div>
         </form>                
@@ -224,9 +235,9 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
                     <td>{{a.title}}</td>
                     <td>{{a.status}}</td>
                     <td>
-                        {% if a.status == 'created' %}<button class='btn btn-primary btn-sm modalaction'>Pay &amp; Activate</button>{% endif %}
-                        {% if a.status == 'active' %}<button class='btn btn-primary btn-sm modalaction'>Pay &amp; Extend</button>{% endif %}
-                        {% if a.status == 'expired' %}<button class='btn btn-primary btn-sm modalaction'>Pay &amp; Renew</button>{% endif %}
+                        {% if a.status == 'created' %}<button class='btn btn-primary btn-sm modalaction' data-message=\"Extend\" data-action-url=\"/dashboard/test\" data-heading=\"Activate Ad\" data-action-label=\"Pay to extend\">Activate</button>{% endif %}
+                        {% if a.status == 'active' %}<button class='btn btn-primary btn-sm modalaction'>Extend</button>{% endif %}
+                        {% if a.status == 'expired' %}<button class='btn btn-primary btn-sm modalaction'>Re-Activate</button>{% endif %}
                         {% if a.status == 'active' %}
                             {% if a.isToBeDisplayed == 0 %}<button class='btn btn-primary btn-sm'>Display</button>{% else %}<button class='btn btn-sm'>Hide</button>{% endif %}
                         {% endif %}
@@ -250,8 +261,19 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
                 \$(\"#adManagementModalCancel\").click(function () {
                     \$(\"#adManagementModal\").removeClass(\"modal-show\");
                 });
-
-                \$(\".modalaction\").click(function () {
+                
+                // Modal action: a button is generating an action
+                \$(\".modalaction\").click(function (ev) {
+                    // Get data from target button using data attributes
+                    var \$actionButton = ev.target;
+                    var message = \$actionButton.getAttribute('data-message');
+                    var heading = \$actionButton.getAttribute('data-heading');
+                    var actionUrl = \$actionButton.getAttribute('data-action-url');
+                    var actionLabel = \$actionButton.getAttribute('data-action-label');
+                    \$(\"#modalHeading\").text(heading);
+                    \$(\"#modalMessage\").text(message);
+                    \$(\"#adManagementModalForm\").attr('action', actionUrl);
+                    \$(\"#adManagementModalSubmit\").val(actionLabel);
                     \$(\"#adManagementModal\").addClass(\"modal-show\");
                 });
             });
