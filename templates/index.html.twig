@@ -2,7 +2,16 @@
 
 {% block title %}Index{% endblock %}
 {% block headextra %}
-
+    <script>
+        var currentPage = {{currentPage}};
+                function loadPage(page) {
+                    $('#btPage' + currentPage).removeClass("currentPageButton");
+                    currentPage = page;
+                    $('#btPage' + currentPage).addClass("currentPageButton");
+                    $('#adsList').load("/ajax/ads/" + page);
+                    window.history.pushState("", "Ads list", "/ads/" + page);
+                }
+    </script>
 {% endblock %}
 {% block content %}
 
@@ -26,8 +35,15 @@
                     <p>{{a.price}}</p>      
                 </div>
 
-            </div>                   
+            </div>   
+             
         {% endfor %}
 
     </div>
+         <div class="paginationContainer">
+            {% for page in range(1,maxPages) %}
+                <button class="{% if page == currentPage %}currentPageButton{% endif %}"
+                        id="btPage{{page}}" onclick="loadPage({{page}});">{{page}}</button>
+            {% endfor %}
+        </div>   
 {% endblock %}

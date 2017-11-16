@@ -7,10 +7,5 @@ if (false) {
 }
 
 // URL/event handlers go here
-$app->get('/', function() use ($app,$categoriesList) {
 
-    $adsList = DB::query('SELECT ads.id, title, price, imagePath FROM ads,pictures WHERE ads.id=pictures.adId Order by ads.id desc');
-
-    $app->render('index.html.twig', array('adsList' => $adsList,'categoryList'=>$categoriesList));
-});
 

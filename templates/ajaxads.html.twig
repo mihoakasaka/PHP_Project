@@ -1,10 +1,19 @@
 {# empty Twig template #}
-<table border="1">
-    <tr><th>image</th><th>title</th><th>price</th></tr>
-            {% for a in adList %}
-        <tr><td> <img src="{{a.imagePath}}" width="100"></td>
-            <td>{{a.title}}</td>
-            <td>{{a.price}}</td>
-            </tr>
+<div >
+ 
+        {% for a in adList %}
+            <div class="adContainer">
+                <div class="imageContainer">
+                    <img src="{{a.imagePath}}" width="100">
+                </div>
+                <div class="title">
+                    <p>{{a.title}}</p>
+                </div>
+                <div class="price">
+                    <p>{{a.price}}</p>      
+                </div>
+
+            </div>                   
         {% endfor %}
-</table>
+
+    </div>
