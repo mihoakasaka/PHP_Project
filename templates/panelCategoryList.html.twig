@@ -1,0 +1,8 @@
+{# empty Twig template #}
+    <div id="categories">
+ {% for c in categoryList %}
+         
+              <p><a href='/category/{{c.urlSanitizedFullName}}'>{{ c.fullName }}</a></p>                 
+     
+        {% endfor %}
+    </div>

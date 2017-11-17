@@ -16,12 +16,8 @@
 {% block content %}
 
 
-    <a href="/ad/add">Create an ad</a>
-    <div id="categories">
- {% for c in categoryList %}
-           <p><a href='/category/{{c.urlSanitizedFullName}}'>{{ c.fullName }}</a></p>                 
-        {% endfor %}
-    </div>
+    <a href="/ad/add"><button>Create an ad</button></a>
+
     <div id="adsList">
         {% for a in adsList %}
             <div class="adContainer">
