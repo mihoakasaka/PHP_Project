@@ -1,10 +1,17 @@
 {# empty Twig template #}
-<div >
- 
-        {% for a in adsList %}
+{% extends "master.html.twig" %}
+
+{% block title %}Ads list{% endblock %}
+
+
+{% block content %}  
+{% include 'panelCategoryList.html.twig' %}
+
+    <div id="adsList">
+        {% for a in adList %}
             <div class="adContainer">
                 <div class="imageContainer">
-                 <a href="/ad/{{a.id}}">   <img src="{{a.imagePath}}" width="100"></a>
+                  <a href="/ad/{{a.id}}">  <img src="{{a.imagePath}}" width="100"></a>
                 </div>
                 <div class="title">
                     <p>{{a.title}}</p>
@@ -13,7 +20,9 @@
                     <p>{{a.price}}</p>      
                 </div>
 
-            </div>                   
+            </div>   
+             
         {% endfor %}
 
-    </div>
+
+        {% endblock %}

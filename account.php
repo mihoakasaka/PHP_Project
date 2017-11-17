@@ -192,15 +192,6 @@ $app->get('/isemailregistered/:email', function($email)use($app) {
     echo!$row ? "" : '<span style="color:red; font-weight:bold;">Email already registered.</span>';
 });
 
-
-// check username if taken
-$app->get('/isusernametaken/:username', function($name)use($app) {
-    $row = DB::queryFirstRow("SELECT * FROM users WHERE name=%s", $name);
-    echo!$row ? "" : '<span style="color:red; font-weight:bold;">Username already taken.</span>';
-});
-
-
-
 $app->get('/register', function() use ($app) {
     $app->render('account/register.html.twig');
 });
