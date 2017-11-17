@@ -285,3 +285,23 @@ Paypal doc
 dashboard ad management
 3.
 Nothing at the moment
+
+2017/11/17
+Miho
+1. 
+NOT COMPLETE index page
+2.
+index page
+3.
+
+
+Miguel
+1.
+DONE Paypal documentation
+NOT COMPLETE - dashboard ad management
+2.
+dashboard ad management
+Paypal receives proper order information
+finish presentation
+3.
+Nothing at the moment
