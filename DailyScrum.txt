@@ -264,3 +264,24 @@ Finish categories handling
 test Facebook login
 3.
 Nothing at the moment
+
+2017/11/16
+Miho
+1. 
+NOT COMPLETE index page
+DONE test ad modification
+2.
+index page
+3.
+
+
+Miguel
+1.
+NOT COMPLETE Paypal doc
+DONE Finish categories handling
+DONE test Facebook login
+2.
+Paypal doc
+dashboard ad management
+3.
+Nothing at the moment

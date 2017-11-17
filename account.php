@@ -155,7 +155,7 @@ $app->map('/passreset/token/:secretToken', function($secretToken) use ($app, $lo
 
 $app->get('/logout', function() use ($app) {
     $_SESSION['user'] = array();
-    $app->render('account/logout.html.twig');
+    $app->render('account/logout.html.twig', array('userSession' => $_SESSION['user']));
 });
 
 $app->get('/login', function() use ($app) {

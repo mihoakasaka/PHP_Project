@@ -9108,6 +9108,35 @@ button.close {
 body {
   padding-top: 50px;
 }
+/* Modal */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: #000000;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+.modal-show {
+  display: block !important;
+}
+.vertical-center {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
 /* Pagination Controls */
 /* Forms */
 /* Any form that blocks the whole page (like login or register) should use this class */
@@ -9120,26 +9149,33 @@ body {
 #registerForm h1,
 #adAddEditForm h1,
 #loginForm h1,
+#adManagementModalForm h1,
 #registerForm h2,
 #adAddEditForm h2,
 #loginForm h2,
+#adManagementModalForm h2,
 #registerForm h3,
 #adAddEditForm h3,
 #loginForm h3,
+#adManagementModalForm h3,
 #registerForm h4,
 #adAddEditForm h4,
-#loginForm h4 {
+#loginForm h4,
+#adManagementModalForm h4 {
   margin-bottom: 10px;
 }
 #registerForm input[type='submit'],
 #adAddEditForm input[type='submit'],
 #loginForm input[type='submit'],
+#adManagementModalForm input[type='submit'],
 #registerForm button,
 #adAddEditForm button,
 #loginForm button,
+#adManagementModalForm button,
 #registerForm input[type='reset'],
 #adAddEditForm input[type='reset'],
-#loginForm input[type='reset'] {
+#loginForm input[type='reset'],
+#adManagementModalForm input[type='reset'] {
   display: inline-block;
   margin-bottom: 0;
   font-weight: normal;
@@ -9168,108 +9204,141 @@ body {
 #registerForm input[type='submit']:focus,
 #adAddEditForm input[type='submit']:focus,
 #loginForm input[type='submit']:focus,
+#adManagementModalForm input[type='submit']:focus,
 #registerForm button:focus,
 #adAddEditForm button:focus,
 #loginForm button:focus,
+#adManagementModalForm button:focus,
 #registerForm input[type='reset']:focus,
 #adAddEditForm input[type='reset']:focus,
 #loginForm input[type='reset']:focus,
+#adManagementModalForm input[type='reset']:focus,
 #registerForm input[type='submit']:active:focus,
 #adAddEditForm input[type='submit']:active:focus,
 #loginForm input[type='submit']:active:focus,
+#adManagementModalForm input[type='submit']:active:focus,
 #registerForm button:active:focus,
 #adAddEditForm button:active:focus,
 #loginForm button:active:focus,
+#adManagementModalForm button:active:focus,
 #registerForm input[type='reset']:active:focus,
 #adAddEditForm input[type='reset']:active:focus,
 #loginForm input[type='reset']:active:focus,
+#adManagementModalForm input[type='reset']:active:focus,
 #registerForm input[type='submit'].active:focus,
 #adAddEditForm input[type='submit'].active:focus,
 #loginForm input[type='submit'].active:focus,
+#adManagementModalForm input[type='submit'].active:focus,
 #registerForm button.active:focus,
 #adAddEditForm button.active:focus,
 #loginForm button.active:focus,
+#adManagementModalForm button.active:focus,
 #registerForm input[type='reset'].active:focus,
 #adAddEditForm input[type='reset'].active:focus,
 #loginForm input[type='reset'].active:focus,
+#adManagementModalForm input[type='reset'].active:focus,
 #registerForm input[type='submit'].focus,
 #adAddEditForm input[type='submit'].focus,
 #loginForm input[type='submit'].focus,
+#adManagementModalForm input[type='submit'].focus,
 #registerForm button.focus,
 #adAddEditForm button.focus,
 #loginForm button.focus,
+#adManagementModalForm button.focus,
 #registerForm input[type='reset'].focus,
 #adAddEditForm input[type='reset'].focus,
 #loginForm input[type='reset'].focus,
+#adManagementModalForm input[type='reset'].focus,
 #registerForm input[type='submit']:active.focus,
 #adAddEditForm input[type='submit']:active.focus,
 #loginForm input[type='submit']:active.focus,
+#adManagementModalForm input[type='submit']:active.focus,
 #registerForm button:active.focus,
 #adAddEditForm button:active.focus,
 #loginForm button:active.focus,
+#adManagementModalForm button:active.focus,
 #registerForm input[type='reset']:active.focus,
 #adAddEditForm input[type='reset']:active.focus,
 #loginForm input[type='reset']:active.focus,
+#adManagementModalForm input[type='reset']:active.focus,
 #registerForm input[type='submit'].active.focus,
 #adAddEditForm input[type='submit'].active.focus,
 #loginForm input[type='submit'].active.focus,
+#adManagementModalForm input[type='submit'].active.focus,
 #registerForm button.active.focus,
 #adAddEditForm button.active.focus,
 #loginForm button.active.focus,
+#adManagementModalForm button.active.focus,
 #registerForm input[type='reset'].active.focus,
 #adAddEditForm input[type='reset'].active.focus,
-#loginForm input[type='reset'].active.focus {
+#loginForm input[type='reset'].active.focus,
+#adManagementModalForm input[type='reset'].active.focus {
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
 #registerForm input[type='submit']:hover,
 #adAddEditForm input[type='submit']:hover,
 #loginForm input[type='submit']:hover,
+#adManagementModalForm input[type='submit']:hover,
 #registerForm button:hover,
 #adAddEditForm button:hover,
 #loginForm button:hover,
+#adManagementModalForm button:hover,
 #registerForm input[type='reset']:hover,
 #adAddEditForm input[type='reset']:hover,
 #loginForm input[type='reset']:hover,
+#adManagementModalForm input[type='reset']:hover,
 #registerForm input[type='submit']:focus,
 #adAddEditForm input[type='submit']:focus,
 #loginForm input[type='submit']:focus,
+#adManagementModalForm input[type='submit']:focus,
 #registerForm button:focus,
 #adAddEditForm button:focus,
 #loginForm button:focus,
+#adManagementModalForm button:focus,
 #registerForm input[type='reset']:focus,
 #adAddEditForm input[type='reset']:focus,
 #loginForm input[type='reset']:focus,
+#adManagementModalForm input[type='reset']:focus,
 #registerForm input[type='submit'].focus,
 #adAddEditForm input[type='submit'].focus,
 #loginForm input[type='submit'].focus,
+#adManagementModalForm input[type='submit'].focus,
 #registerForm button.focus,
 #adAddEditForm button.focus,
 #loginForm button.focus,
+#adManagementModalForm button.focus,
 #registerForm input[type='reset'].focus,
 #adAddEditForm input[type='reset'].focus,
-#loginForm input[type='reset'].focus {
+#loginForm input[type='reset'].focus,
+#adManagementModalForm input[type='reset'].focus {
   color: #333;
   text-decoration: none;
 }
 #registerForm input[type='submit']:active,
 #adAddEditForm input[type='submit']:active,
 #loginForm input[type='submit']:active,
+#adManagementModalForm input[type='submit']:active,
 #registerForm button:active,
 #adAddEditForm button:active,
 #loginForm button:active,
+#adManagementModalForm button:active,
 #registerForm input[type='reset']:active,
 #adAddEditForm input[type='reset']:active,
 #loginForm input[type='reset']:active,
+#adManagementModalForm input[type='reset']:active,
 #registerForm input[type='submit'].active,
 #adAddEditForm input[type='submit'].active,
 #loginForm input[type='submit'].active,
+#adManagementModalForm input[type='submit'].active,
 #registerForm button.active,
 #adAddEditForm button.active,
 #loginForm button.active,
+#adManagementModalForm button.active,
 #registerForm input[type='reset'].active,
 #adAddEditForm input[type='reset'].active,
-#loginForm input[type='reset'].active {
+#loginForm input[type='reset'].active,
+#adManagementModalForm input[type='reset'].active {
   outline: 0;
   background-image: none;
   -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
@@ -9278,30 +9347,39 @@ body {
 #registerForm input[type='submit'].disabled,
 #adAddEditForm input[type='submit'].disabled,
 #loginForm input[type='submit'].disabled,
+#adManagementModalForm input[type='submit'].disabled,
 #registerForm button.disabled,
 #adAddEditForm button.disabled,
 #loginForm button.disabled,
+#adManagementModalForm button.disabled,
 #registerForm input[type='reset'].disabled,
 #adAddEditForm input[type='reset'].disabled,
 #loginForm input[type='reset'].disabled,
+#adManagementModalForm input[type='reset'].disabled,
 #registerForm input[type='submit'][disabled],
 #adAddEditForm input[type='submit'][disabled],
 #loginForm input[type='submit'][disabled],
+#adManagementModalForm input[type='submit'][disabled],
 #registerForm button[disabled],
 #adAddEditForm button[disabled],
 #loginForm button[disabled],
+#adManagementModalForm button[disabled],
 #registerForm input[type='reset'][disabled],
 #adAddEditForm input[type='reset'][disabled],
 #loginForm input[type='reset'][disabled],
+#adManagementModalForm input[type='reset'][disabled],
 fieldset[disabled] #registerForm input[type='submit'],
 fieldset[disabled] #adAddEditForm input[type='submit'],
 fieldset[disabled] #loginForm input[type='submit'],
+fieldset[disabled] #adManagementModalForm input[type='submit'],
 fieldset[disabled] #registerForm button,
 fieldset[disabled] #adAddEditForm button,
 fieldset[disabled] #loginForm button,
+fieldset[disabled] #adManagementModalForm button,
 fieldset[disabled] #registerForm input[type='reset'],
 fieldset[disabled] #adAddEditForm input[type='reset'],
-fieldset[disabled] #loginForm input[type='reset'] {
+fieldset[disabled] #loginForm input[type='reset'],
+fieldset[disabled] #adManagementModalForm input[type='reset'] {
   cursor: not-allowed;
   opacity: 0.65;
   filter: alpha(opacity=65);
@@ -9311,29 +9389,37 @@ fieldset[disabled] #loginForm input[type='reset'] {
 a#registerForm input[type='submit'].disabled,
 a#adAddEditForm input[type='submit'].disabled,
 a#loginForm input[type='submit'].disabled,
+a#adManagementModalForm input[type='submit'].disabled,
 a#registerForm button.disabled,
 a#adAddEditForm button.disabled,
 a#loginForm button.disabled,
+a#adManagementModalForm button.disabled,
 a#registerForm input[type='reset'].disabled,
 a#adAddEditForm input[type='reset'].disabled,
 a#loginForm input[type='reset'].disabled,
+a#adManagementModalForm input[type='reset'].disabled,
 fieldset[disabled] a#registerForm input[type='submit'],
 fieldset[disabled] a#adAddEditForm input[type='submit'],
 fieldset[disabled] a#loginForm input[type='submit'],
+fieldset[disabled] a#adManagementModalForm input[type='submit'],
 fieldset[disabled] a#registerForm button,
 fieldset[disabled] a#adAddEditForm button,
 fieldset[disabled] a#loginForm button,
+fieldset[disabled] a#adManagementModalForm button,
 fieldset[disabled] a#registerForm input[type='reset'],
 fieldset[disabled] a#adAddEditForm input[type='reset'],
-fieldset[disabled] a#loginForm input[type='reset'] {
+fieldset[disabled] a#loginForm input[type='reset'],
+fieldset[disabled] a#adManagementModalForm input[type='reset'] {
   pointer-events: none;
 }
 #registerForm input[type='submit'],
 #adAddEditForm input[type='submit'],
 #loginForm input[type='submit'],
+#adManagementModalForm input[type='submit'],
 #registerForm button[type='submit'],
 #adAddEditForm button[type='submit'],
-#loginForm button[type='submit'] {
+#loginForm button[type='submit'],
+#adManagementModalForm button[type='submit'] {
   color: #fff;
   background-color: #de8500;
   border-color: #c47600;
@@ -9341,15 +9427,19 @@ fieldset[disabled] a#loginForm input[type='reset'] {
 #registerForm input[type='submit']:focus,
 #adAddEditForm input[type='submit']:focus,
 #loginForm input[type='submit']:focus,
+#adManagementModalForm input[type='submit']:focus,
 #registerForm button[type='submit']:focus,
 #adAddEditForm button[type='submit']:focus,
 #loginForm button[type='submit']:focus,
+#adManagementModalForm button[type='submit']:focus,
 #registerForm input[type='submit'].focus,
 #adAddEditForm input[type='submit'].focus,
 #loginForm input[type='submit'].focus,
+#adManagementModalForm input[type='submit'].focus,
 #registerForm button[type='submit'].focus,
 #adAddEditForm button[type='submit'].focus,
-#loginForm button[type='submit'].focus {
+#loginForm button[type='submit'].focus,
+#adManagementModalForm button[type='submit'].focus {
   color: #fff;
   background-color: #ab6700;
   border-color: #452900;
@@ -9357,9 +9447,11 @@ fieldset[disabled] a#loginForm input[type='reset'] {
 #registerForm input[type='submit']:hover,
 #adAddEditForm input[type='submit']:hover,
 #loginForm input[type='submit']:hover,
+#adManagementModalForm input[type='submit']:hover,
 #registerForm button[type='submit']:hover,
 #adAddEditForm button[type='submit']:hover,
-#loginForm button[type='submit']:hover {
+#loginForm button[type='submit']:hover,
+#adManagementModalForm button[type='submit']:hover {
   color: #fff;
   background-color: #ab6700;
   border-color: #875100;
@@ -9367,21 +9459,27 @@ fieldset[disabled] a#loginForm input[type='reset'] {
 #registerForm input[type='submit']:active,
 #adAddEditForm input[type='submit']:active,
 #loginForm input[type='submit']:active,
+#adManagementModalForm input[type='submit']:active,
 #registerForm button[type='submit']:active,
 #adAddEditForm button[type='submit']:active,
 #loginForm button[type='submit']:active,
+#adManagementModalForm button[type='submit']:active,
 #registerForm input[type='submit'].active,
 #adAddEditForm input[type='submit'].active,
 #loginForm input[type='submit'].active,
+#adManagementModalForm input[type='submit'].active,
 #registerForm button[type='submit'].active,
 #adAddEditForm button[type='submit'].active,
 #loginForm button[type='submit'].active,
+#adManagementModalForm button[type='submit'].active,
 .open > .dropdown-toggle#registerForm input[type='submit'],
 .open > .dropdown-toggle#adAddEditForm input[type='submit'],
 .open > .dropdown-toggle#loginForm input[type='submit'],
+.open > .dropdown-toggle#adManagementModalForm input[type='submit'],
 .open > .dropdown-toggle#registerForm button[type='submit'],
 .open > .dropdown-toggle#adAddEditForm button[type='submit'],
-.open > .dropdown-toggle#loginForm button[type='submit'] {
+.open > .dropdown-toggle#loginForm button[type='submit'],
+.open > .dropdown-toggle#adManagementModalForm button[type='submit'] {
   color: #fff;
   background-color: #ab6700;
   border-color: #875100;
@@ -9389,57 +9487,75 @@ fieldset[disabled] a#loginForm input[type='reset'] {
 #registerForm input[type='submit']:active:hover,
 #adAddEditForm input[type='submit']:active:hover,
 #loginForm input[type='submit']:active:hover,
+#adManagementModalForm input[type='submit']:active:hover,
 #registerForm button[type='submit']:active:hover,
 #adAddEditForm button[type='submit']:active:hover,
 #loginForm button[type='submit']:active:hover,
+#adManagementModalForm button[type='submit']:active:hover,
 #registerForm input[type='submit'].active:hover,
 #adAddEditForm input[type='submit'].active:hover,
 #loginForm input[type='submit'].active:hover,
+#adManagementModalForm input[type='submit'].active:hover,
 #registerForm button[type='submit'].active:hover,
 #adAddEditForm button[type='submit'].active:hover,
 #loginForm button[type='submit'].active:hover,
+#adManagementModalForm button[type='submit'].active:hover,
 .open > .dropdown-toggle#registerForm input[type='submit']:hover,
 .open > .dropdown-toggle#adAddEditForm input[type='submit']:hover,
 .open > .dropdown-toggle#loginForm input[type='submit']:hover,
+.open > .dropdown-toggle#adManagementModalForm input[type='submit']:hover,
 .open > .dropdown-toggle#registerForm button[type='submit']:hover,
 .open > .dropdown-toggle#adAddEditForm button[type='submit']:hover,
 .open > .dropdown-toggle#loginForm button[type='submit']:hover,
+.open > .dropdown-toggle#adManagementModalForm button[type='submit']:hover,
 #registerForm input[type='submit']:active:focus,
 #adAddEditForm input[type='submit']:active:focus,
 #loginForm input[type='submit']:active:focus,
+#adManagementModalForm input[type='submit']:active:focus,
 #registerForm button[type='submit']:active:focus,
 #adAddEditForm button[type='submit']:active:focus,
 #loginForm button[type='submit']:active:focus,
+#adManagementModalForm button[type='submit']:active:focus,
 #registerForm input[type='submit'].active:focus,
 #adAddEditForm input[type='submit'].active:focus,
 #loginForm input[type='submit'].active:focus,
+#adManagementModalForm input[type='submit'].active:focus,
 #registerForm button[type='submit'].active:focus,
 #adAddEditForm button[type='submit'].active:focus,
 #loginForm button[type='submit'].active:focus,
+#adManagementModalForm button[type='submit'].active:focus,
 .open > .dropdown-toggle#registerForm input[type='submit']:focus,
 .open > .dropdown-toggle#adAddEditForm input[type='submit']:focus,
 .open > .dropdown-toggle#loginForm input[type='submit']:focus,
+.open > .dropdown-toggle#adManagementModalForm input[type='submit']:focus,
 .open > .dropdown-toggle#registerForm button[type='submit']:focus,
 .open > .dropdown-toggle#adAddEditForm button[type='submit']:focus,
 .open > .dropdown-toggle#loginForm button[type='submit']:focus,
+.open > .dropdown-toggle#adManagementModalForm button[type='submit']:focus,
 #registerForm input[type='submit']:active.focus,
 #adAddEditForm input[type='submit']:active.focus,
 #loginForm input[type='submit']:active.focus,
+#adManagementModalForm input[type='submit']:active.focus,
 #registerForm button[type='submit']:active.focus,
 #adAddEditForm button[type='submit']:active.focus,
 #loginForm button[type='submit']:active.focus,
+#adManagementModalForm button[type='submit']:active.focus,
 #registerForm input[type='submit'].active.focus,
 #adAddEditForm input[type='submit'].active.focus,
 #loginForm input[type='submit'].active.focus,
+#adManagementModalForm input[type='submit'].active.focus,
 #registerForm button[type='submit'].active.focus,
 #adAddEditForm button[type='submit'].active.focus,
 #loginForm button[type='submit'].active.focus,
+#adManagementModalForm button[type='submit'].active.focus,
 .open > .dropdown-toggle#registerForm input[type='submit'].focus,
 .open > .dropdown-toggle#adAddEditForm input[type='submit'].focus,
 .open > .dropdown-toggle#loginForm input[type='submit'].focus,
+.open > .dropdown-toggle#adManagementModalForm input[type='submit'].focus,
 .open > .dropdown-toggle#registerForm button[type='submit'].focus,
 .open > .dropdown-toggle#adAddEditForm button[type='submit'].focus,
-.open > .dropdown-toggle#loginForm button[type='submit'].focus {
+.open > .dropdown-toggle#loginForm button[type='submit'].focus,
+.open > .dropdown-toggle#adManagementModalForm button[type='submit'].focus {
   color: #fff;
   background-color: #875100;
   border-color: #452900;
@@ -9447,86 +9563,112 @@ fieldset[disabled] a#loginForm input[type='reset'] {
 #registerForm input[type='submit']:active,
 #adAddEditForm input[type='submit']:active,
 #loginForm input[type='submit']:active,
+#adManagementModalForm input[type='submit']:active,
 #registerForm button[type='submit']:active,
 #adAddEditForm button[type='submit']:active,
 #loginForm button[type='submit']:active,
+#adManagementModalForm button[type='submit']:active,
 #registerForm input[type='submit'].active,
 #adAddEditForm input[type='submit'].active,
 #loginForm input[type='submit'].active,
+#adManagementModalForm input[type='submit'].active,
 #registerForm button[type='submit'].active,
 #adAddEditForm button[type='submit'].active,
 #loginForm button[type='submit'].active,
+#adManagementModalForm button[type='submit'].active,
 .open > .dropdown-toggle#registerForm input[type='submit'],
 .open > .dropdown-toggle#adAddEditForm input[type='submit'],
 .open > .dropdown-toggle#loginForm input[type='submit'],
+.open > .dropdown-toggle#adManagementModalForm input[type='submit'],
 .open > .dropdown-toggle#registerForm button[type='submit'],
 .open > .dropdown-toggle#adAddEditForm button[type='submit'],
-.open > .dropdown-toggle#loginForm button[type='submit'] {
+.open > .dropdown-toggle#loginForm button[type='submit'],
+.open > .dropdown-toggle#adManagementModalForm button[type='submit'] {
   background-image: none;
 }
 #registerForm input[type='submit'].disabled:hover,
 #adAddEditForm input[type='submit'].disabled:hover,
 #loginForm input[type='submit'].disabled:hover,
+#adManagementModalForm input[type='submit'].disabled:hover,
 #registerForm button[type='submit'].disabled:hover,
 #adAddEditForm button[type='submit'].disabled:hover,
 #loginForm button[type='submit'].disabled:hover,
+#adManagementModalForm button[type='submit'].disabled:hover,
 #registerForm input[type='submit'][disabled]:hover,
 #adAddEditForm input[type='submit'][disabled]:hover,
 #loginForm input[type='submit'][disabled]:hover,
+#adManagementModalForm input[type='submit'][disabled]:hover,
 #registerForm button[type='submit'][disabled]:hover,
 #adAddEditForm button[type='submit'][disabled]:hover,
 #loginForm button[type='submit'][disabled]:hover,
+#adManagementModalForm button[type='submit'][disabled]:hover,
 fieldset[disabled] #registerForm input[type='submit']:hover,
 fieldset[disabled] #adAddEditForm input[type='submit']:hover,
 fieldset[disabled] #loginForm input[type='submit']:hover,
+fieldset[disabled] #adManagementModalForm input[type='submit']:hover,
 fieldset[disabled] #registerForm button[type='submit']:hover,
 fieldset[disabled] #adAddEditForm button[type='submit']:hover,
 fieldset[disabled] #loginForm button[type='submit']:hover,
+fieldset[disabled] #adManagementModalForm button[type='submit']:hover,
 #registerForm input[type='submit'].disabled:focus,
 #adAddEditForm input[type='submit'].disabled:focus,
 #loginForm input[type='submit'].disabled:focus,
+#adManagementModalForm input[type='submit'].disabled:focus,
 #registerForm button[type='submit'].disabled:focus,
 #adAddEditForm button[type='submit'].disabled:focus,
 #loginForm button[type='submit'].disabled:focus,
+#adManagementModalForm button[type='submit'].disabled:focus,
 #registerForm input[type='submit'][disabled]:focus,
 #adAddEditForm input[type='submit'][disabled]:focus,
 #loginForm input[type='submit'][disabled]:focus,
+#adManagementModalForm input[type='submit'][disabled]:focus,
 #registerForm button[type='submit'][disabled]:focus,
 #adAddEditForm button[type='submit'][disabled]:focus,
 #loginForm button[type='submit'][disabled]:focus,
+#adManagementModalForm button[type='submit'][disabled]:focus,
 fieldset[disabled] #registerForm input[type='submit']:focus,
 fieldset[disabled] #adAddEditForm input[type='submit']:focus,
 fieldset[disabled] #loginForm input[type='submit']:focus,
+fieldset[disabled] #adManagementModalForm input[type='submit']:focus,
 fieldset[disabled] #registerForm button[type='submit']:focus,
 fieldset[disabled] #adAddEditForm button[type='submit']:focus,
 fieldset[disabled] #loginForm button[type='submit']:focus,
+fieldset[disabled] #adManagementModalForm button[type='submit']:focus,
 #registerForm input[type='submit'].disabled.focus,
 #adAddEditForm input[type='submit'].disabled.focus,
 #loginForm input[type='submit'].disabled.focus,
+#adManagementModalForm input[type='submit'].disabled.focus,
 #registerForm button[type='submit'].disabled.focus,
 #adAddEditForm button[type='submit'].disabled.focus,
 #loginForm button[type='submit'].disabled.focus,
+#adManagementModalForm button[type='submit'].disabled.focus,
 #registerForm input[type='submit'][disabled].focus,
 #adAddEditForm input[type='submit'][disabled].focus,
 #loginForm input[type='submit'][disabled].focus,
+#adManagementModalForm input[type='submit'][disabled].focus,
 #registerForm button[type='submit'][disabled].focus,
 #adAddEditForm button[type='submit'][disabled].focus,
 #loginForm button[type='submit'][disabled].focus,
+#adManagementModalForm button[type='submit'][disabled].focus,
 fieldset[disabled] #registerForm input[type='submit'].focus,
 fieldset[disabled] #adAddEditForm input[type='submit'].focus,
 fieldset[disabled] #loginForm input[type='submit'].focus,
+fieldset[disabled] #adManagementModalForm input[type='submit'].focus,
 fieldset[disabled] #registerForm button[type='submit'].focus,
 fieldset[disabled] #adAddEditForm button[type='submit'].focus,
-fieldset[disabled] #loginForm button[type='submit'].focus {
+fieldset[disabled] #loginForm button[type='submit'].focus,
+fieldset[disabled] #adManagementModalForm button[type='submit'].focus {
   background-color: #de8500;
   border-color: #c47600;
 }
 #registerForm input[type='submit'] .badge,
 #adAddEditForm input[type='submit'] .badge,
 #loginForm input[type='submit'] .badge,
+#adManagementModalForm input[type='submit'] .badge,
 #registerForm button[type='submit'] .badge,
 #adAddEditForm button[type='submit'] .badge,
-#loginForm button[type='submit'] .badge {
+#loginForm button[type='submit'] .badge,
+#adManagementModalForm button[type='submit'] .badge {
   color: #de8500;
   background-color: #fff;
 }
@@ -9539,6 +9681,59 @@ fieldset[disabled] #loginForm button[type='submit'].focus {
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
+}
+#adManagementModal {
+  overflow: hidden;
+  right: 0;
+  bottom: 0;
+  z-index: 1050;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: #000000;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+#adManagementModal.fade .modal-dialog {
+  -webkit-transform: translate(0, -25%);
+  -ms-transform: translate(0, -25%);
+  -o-transform: translate(0, -25%);
+  transform: translate(0, -25%);
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  -moz-transition: -moz-transform 0.3s ease-out;
+  -o-transition: -o-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+}
+#adManagementModal.in .modal-dialog {
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+#adManagementModal form {
+  background: white;
+}
+#adManagementModalForm {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 #adAddEditForm div.pict-thumb {
   display: inline-block;
@@ -9730,29 +9925,3 @@ a#adAddEditForm div.pict-thumb img.active {
 .quoted::after {
   content: close-quote;
 }
-/*
-.form-signin .checkbox {
-  font-weight: normal;
-}
-.form-signin .form-control {
-  position: relative;
-  height: auto;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-  padding: 10px;
-  font-size: 16px;
-}
-.form-signin .form-control:focus {
-  z-index: 2;
-}
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-} */

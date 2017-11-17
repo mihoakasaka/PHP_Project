@@ -58,19 +58,22 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
         // line 16
         echo "                <label for=\"tbEmail\" class=\"control-label\">Email</label><span class=\"help-block\" id=\"isTaken\"></span>
                 <input type=\"text\" class=\"form-control\" placeholder=\"Enter email\" name=\"email\" id=\"tbEmail\" required>
-        <div class=\"form-group\">
+            <div class=\"form-group\">
+            </div>
+            <label for=\"tbPassword\" class=\"control-label\">Password</label><span class=\"help-block\" id=\"isTaken\"></span>
+            <input type=\"password\" class=\"form-control\" placeholder=\"Enter Password\" name=\"pass\" id=\"tbPassword\" required>
         </div>
-                <label for=\"tbPassword\" class=\"control-label\">Password</label><span class=\"help-block\" id=\"isTaken\"></span>
-                <input type=\"password\" class=\"form-control\" placeholder=\"Enter Password\" name=\"pass\" id=\"tbPassword\" required>
-        </div>
-        <input type=\"submit\" value=\"Log in\">
-        <a href=\"";
-        // line 24
+        <div class=\"\">
+            <input type=\"submit\" value=\"Log in\">
+            <button class=\"btn\"><a href=\"";
+        // line 25
         echo twig_escape_filter($this->env, (isset($context["loginUrl"]) ? $context["loginUrl"] : null), "html", null, true);
-        echo "\"><img src=\"images/fblogin.png\" width=\"200\"></a>
-        
-        <p class=\"help-block\">No account?<a href=\"/register\">Register!!</a></p>
-        <p class=\"help-block\">Forget password?<a href=\"/passreset/request\">Reset password</a></p>
+        echo "\">Continue with Facebook</a></button>
+
+            <p class=\"help-block\">No account?<a href=\"/register\"> Register!!</a></p>
+            <p class=\"help-block\">Forget password?<a href=\"/passreset/request\"> Reset password</a></p>
+
+        </div>
     </form>
 
 ";
@@ -88,7 +91,7 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
 
     public function getDebugInfo()
     {
-        return array (  69 => 24,  59 => 16,  55 => 14,  53 => 13,  41 => 6,  38 => 5,  35 => 4,  29 => 2,  11 => 1,);
+        return array (  70 => 25,  59 => 16,  55 => 14,  53 => 13,  41 => 6,  38 => 5,  35 => 4,  29 => 2,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -118,19 +121,22 @@ class __TwigTemplate_4b6c7fc23a60cefe61d2591d35cbd194f2fc800b5fcd16f9d4f4d0495e6
                 {% endif %}
                 <label for=\"tbEmail\" class=\"control-label\">Email</label><span class=\"help-block\" id=\"isTaken\"></span>
                 <input type=\"text\" class=\"form-control\" placeholder=\"Enter email\" name=\"email\" id=\"tbEmail\" required>
-        <div class=\"form-group\">
+            <div class=\"form-group\">
+            </div>
+            <label for=\"tbPassword\" class=\"control-label\">Password</label><span class=\"help-block\" id=\"isTaken\"></span>
+            <input type=\"password\" class=\"form-control\" placeholder=\"Enter Password\" name=\"pass\" id=\"tbPassword\" required>
         </div>
-                <label for=\"tbPassword\" class=\"control-label\">Password</label><span class=\"help-block\" id=\"isTaken\"></span>
-                <input type=\"password\" class=\"form-control\" placeholder=\"Enter Password\" name=\"pass\" id=\"tbPassword\" required>
+        <div class=\"\">
+            <input type=\"submit\" value=\"Log in\">
+            <button class=\"btn\"><a href=\"{{loginUrl}}\">Continue with Facebook</a></button>
+
+            <p class=\"help-block\">No account?<a href=\"/register\"> Register!!</a></p>
+            <p class=\"help-block\">Forget password?<a href=\"/passreset/request\"> Reset password</a></p>
+
         </div>
-        <input type=\"submit\" value=\"Log in\">
-        <a href=\"{{loginUrl}}\"><img src=\"images/fblogin.png\" width=\"200\"></a>
-        
-        <p class=\"help-block\">No account?<a href=\"/register\">Register!!</a></p>
-        <p class=\"help-block\">Forget password?<a href=\"/passreset/request\">Reset password</a></p>
     </form>
 
 {% endblock %} 
-", "account/login.html.twig", "C:\\xampp\\htdocs\\phpproject\\templates\\account\\login.html.twig");
+", "account/login.html.twig", "C:\\xampp\\htdocs\\phproject\\templates\\account\\login.html.twig");
     }
 }

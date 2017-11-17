@@ -59,6 +59,13 @@ class ComposerStaticInitea6c6ac9842be582cf54cc534d477f37
                 0 => __DIR__ . '/..' . '/slim/slim',
             ),
         ),
+        'P' => 
+        array (
+            'PayPal' => 
+            array (
+                0 => __DIR__ . '/..' . '/paypal/rest-api-sdk-php/lib',
+            ),
+        ),
     );
 
     public static $classMap = array (

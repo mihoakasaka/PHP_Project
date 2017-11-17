@@ -334,6 +334,6 @@ class __TwigTemplate_3744c8db58ae6dbeea08c01705e38fec252e6c219615d5385128361541d
 
     </script>
 {% endblock %}
-", "searchresults.html.twig", "C:\\xampp\\htdocs\\phpproject\\templates\\searchresults.html.twig");
+", "searchresults.html.twig", "C:\\xampp\\htdocs\\phproject\\templates\\searchresults.html.twig");
     }
 }
