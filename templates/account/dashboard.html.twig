@@ -36,9 +36,9 @@
                     <td>{{a.title}}</td>
                     <td>{{a.status}}</td>
                     <td>
-                        {% if a.status == 'created' %}<button class='btn btn-primary btn-sm modalaction' data-message="Extend" data-action-url="/action/testpaypal" data-heading="Activate Ad" data-action-label="Pay to extend">Activate</button>{% endif %}
-                        {% if a.status == 'active' %}<button class='btn btn-primary btn-sm modalaction'>Extend</button>{% endif %}
-                        {% if a.status == 'expired' %}<button class='btn btn-primary btn-sm modalaction'>Re-Activate</button>{% endif %}
+                        {% if a.status == 'created' %}<button class='btn btn-primary btn-sm modalaction' data-message="Pay 5 dollars and activate your ad for 5 days" data-action-url="/action/dashboard/activate/{{a.id}}" data-heading="Activate Ad" data-action-label="Pay to activate">Activate</button>{% endif %}
+                        {% if a.status == 'active' %}<button class='btn btn-primary btn-sm modalaction' data-message="Pay 5 dollars and extend your ad for 10 days" data-action-url="/action/dashboard/extend/{{a.id}}" data-heading="Extend Ad" data-action-label="Pay to extend">Extend</button>{% endif %}
+                        {% if a.status == 'expired' %}<button class='btn btn-primary btn-sm modalaction' data-message="Pay 5 dollars and re-activate your ad for 7 days" data-action-url="/action/dashboard/reactivate/{{a.id}}" data-heading="Re-Activate Ad" data-action-label="Pay to re-activate">Re-Activate</button>{% endif %}
                         {% if a.status == 'active' %}
                             {% if a.isToBeDisplayed == 0 %}<button class='btn btn-primary btn-sm'>Display</button>{% else %}<button class='btn btn-sm'>Hide</button>{% endif %}
                         {% endif %}

@@ -21,19 +21,55 @@ $app->get('/dashboard', function() use ($app) {
 
     $adsList = array();
     if ($_SESSION['user']) {
-        $adsList = DB::query("SELECT * FROM ads WHERE sellerId=3 && status NOT LIKE 'deleted'", $_SESSION['user']['id']);
+        $adsList = DB::query("SELECT * FROM ads WHERE sellerId=%i && status != 'deleted'", $_SESSION['user']['id']);
     }
 
     $app->render('account/dashboard.html.twig', array('adsList' => $adsList));
 });
 
-/* AJAX dashboard actions */
 
+/* Dashboard actions */
 
-$app->post('/dashboard/:op(/:id)', function($op, $id = -1) use ($app, $log) {
+$app->post('/action/dashboard/:op(/:id)', function($op, $id = -1) use ($app, $log) {
     echo "Dashboard operation " . $op . " on id " . $id;
+
+    $ad = NULL;
+
+    // Is user logged in
+    if (!$_SESSION['user']) {
+        $app->render('access_denied.html.twig');
+        return;
+    }
+
+    // Does the ad exist 
+    if ($id == -1) {
+        http_response_code(404);
+        $app->render('not_found.html.twig');
+        return;
+    } else {
+        $ad = DB::queryFirstRow("SELECT * FROM ads WHERE sellerId=%i AND id=%i AND status != 'deleted'", $_SESSION['user']['id'], $id);
+    }
+
+    if (!$ad) {
+        http_response_code(404);
+        $app->render('not_found.html.twig');
+        return;
+    }
+
+    // Is the action appropriate for the current state of the ad
+    if (($op == 'activate' && $ad['status'] != 'created') || ($op == 'extend' && $ad['status'] != 'active') || ($op == 'reactivate' && $ad['status'] != 'expired')) {
+        $log->err("Error: Action not appropriate for ad state. Operation " . $op . " for ad state " . $ad['status']);
+        http_response_code(500);
+        $app->render('internal_error.html.twig');
+
+        die;
+    }
+
+    // All good, go to Paypal and collect $$
+    echo "paypal is next";
+    // Record transaction in DB ?
 })->conditions(array(
-    'op' => '(activate|extend|renew|reactivate)',
+    'op' => '(activate|extend|reactivate)',
     'id' => '\d+'
 ));
 

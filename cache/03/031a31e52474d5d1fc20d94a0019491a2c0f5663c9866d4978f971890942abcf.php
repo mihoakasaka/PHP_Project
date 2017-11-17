@@ -91,17 +91,23 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
                         ";
             // line 39
             if (($this->getAttribute($context["a"], "status", array()) == "created")) {
-                echo "<button class='btn btn-primary btn-sm modalaction' data-message=\"Extend\" data-action-url=\"/action/testpaypal\" data-heading=\"Activate Ad\" data-action-label=\"Pay to extend\">Activate</button>";
+                echo "<button class='btn btn-primary btn-sm modalaction' data-message=\"Pay 5 dollars and activate your ad for 5 days\" data-action-url=\"/action/dashboard/activate/";
+                echo twig_escape_filter($this->env, $this->getAttribute($context["a"], "id", array()), "html", null, true);
+                echo "\" data-heading=\"Activate Ad\" data-action-label=\"Pay to activate\">Activate</button>";
             }
             // line 40
             echo "                        ";
             if (($this->getAttribute($context["a"], "status", array()) == "active")) {
-                echo "<button class='btn btn-primary btn-sm modalaction'>Extend</button>";
+                echo "<button class='btn btn-primary btn-sm modalaction' data-message=\"Pay 5 dollars and extend your ad for 10 days\" data-action-url=\"/action/dashboard/extend/";
+                echo twig_escape_filter($this->env, $this->getAttribute($context["a"], "id", array()), "html", null, true);
+                echo "\" data-heading=\"Extend Ad\" data-action-label=\"Pay to extend\">Extend</button>";
             }
             // line 41
             echo "                        ";
             if (($this->getAttribute($context["a"], "status", array()) == "expired")) {
-                echo "<button class='btn btn-primary btn-sm modalaction'>Re-Activate</button>";
+                echo "<button class='btn btn-primary btn-sm modalaction' data-message=\"Pay 5 dollars and re-activate your ad for 7 days\" data-action-url=\"/action/dashboard/reactivate/";
+                echo twig_escape_filter($this->env, $this->getAttribute($context["a"], "id", array()), "html", null, true);
+                echo "\" data-heading=\"Re-Activate Ad\" data-action-label=\"Pay to re-activate\">Re-Activate</button>";
             }
             // line 42
             echo "                        ";
@@ -184,7 +190,7 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
 
     public function getDebugInfo()
     {
-        return array (  146 => 58,  143 => 57,  135 => 51,  128 => 49,  120 => 45,  117 => 44,  110 => 43,  107 => 42,  102 => 41,  97 => 40,  93 => 39,  88 => 37,  84 => 36,  81 => 35,  76 => 34,  48 => 8,  45 => 7,  40 => 5,  37 => 4,  31 => 3,  11 => 1,);
+        return array (  152 => 58,  149 => 57,  141 => 51,  134 => 49,  126 => 45,  123 => 44,  116 => 43,  113 => 42,  106 => 41,  99 => 40,  93 => 39,  88 => 37,  84 => 36,  81 => 35,  76 => 34,  48 => 8,  45 => 7,  40 => 5,  37 => 4,  31 => 3,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -235,9 +241,9 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
                     <td>{{a.title}}</td>
                     <td>{{a.status}}</td>
                     <td>
-                        {% if a.status == 'created' %}<button class='btn btn-primary btn-sm modalaction' data-message=\"Extend\" data-action-url=\"/action/testpaypal\" data-heading=\"Activate Ad\" data-action-label=\"Pay to extend\">Activate</button>{% endif %}
-                        {% if a.status == 'active' %}<button class='btn btn-primary btn-sm modalaction'>Extend</button>{% endif %}
-                        {% if a.status == 'expired' %}<button class='btn btn-primary btn-sm modalaction'>Re-Activate</button>{% endif %}
+                        {% if a.status == 'created' %}<button class='btn btn-primary btn-sm modalaction' data-message=\"Pay 5 dollars and activate your ad for 5 days\" data-action-url=\"/action/dashboard/activate/{{a.id}}\" data-heading=\"Activate Ad\" data-action-label=\"Pay to activate\">Activate</button>{% endif %}
+                        {% if a.status == 'active' %}<button class='btn btn-primary btn-sm modalaction' data-message=\"Pay 5 dollars and extend your ad for 10 days\" data-action-url=\"/action/dashboard/extend/{{a.id}}\" data-heading=\"Extend Ad\" data-action-label=\"Pay to extend\">Extend</button>{% endif %}
+                        {% if a.status == 'expired' %}<button class='btn btn-primary btn-sm modalaction' data-message=\"Pay 5 dollars and re-activate your ad for 7 days\" data-action-url=\"/action/dashboard/reactivate/{{a.id}}\" data-heading=\"Re-Activate Ad\" data-action-label=\"Pay to re-activate\">Re-Activate</button>{% endif %}
                         {% if a.status == 'active' %}
                             {% if a.isToBeDisplayed == 0 %}<button class='btn btn-primary btn-sm'>Display</button>{% else %}<button class='btn btn-sm'>Hide</button>{% endif %}
                         {% endif %}
