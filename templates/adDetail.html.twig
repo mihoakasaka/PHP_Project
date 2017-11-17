@@ -1,0 +1,27 @@
+{# empty Twig template #}
+{% extends "master.html.twig" %}
+
+{% block title %}Detail{% endblock %}
+
+
+{% block content %}  
+
+
+    <div id="adDetail" >
+   
+                <div class="imageContainer">
+                  <img src="{{ad.imagePath}}" width="100"></a>
+                </div>
+                <div class="title">
+                    <p>{{ad.title}}</p>
+                </div>
+                 <div class="body">
+                    <p>{{ad.body}}</p>
+                </div>
+                <div class="price">
+                    <p>{{ad.price}}</p>      
+                </div>
+
+    <a href="">Send Message to the owner</a>
+
+        {% endblock %}

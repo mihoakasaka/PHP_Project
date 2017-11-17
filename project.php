@@ -79,6 +79,7 @@ if ($_SERVER['SERVER_NAME'] != 'localhost') {
     $twig->addGlobal('loginUrl', $loginUrl);
 }
 $twig->addGlobal('userSession', $_SESSION['user']);
+$twig->addGlobal('categories', $categoriesList);
 
 require_once './categories.php';
 
@@ -289,7 +290,7 @@ $app->post('/search', function() use ($app, $log) {
 
     $totalCount = DB::queryFirstField('SELECT COUNT(*) AS count from users WHERE name LIKE %ss', $searchTerm, $searchTerm);
     $maxPages = max(ceil($totalCount / $perPage), 1);
-    $values['userResults'] = DB::query('SELECT * from users WHERE  OR name LIKE %ss ORDER BY id LIMIT %d,%d', $searchTerm, $searchTerm, 0, $perPage);
+    $values['userResults'] = DB::query('SELECT * from users WHERE name LIKE %ss ORDER BY id LIMIT %d,%d', $searchTerm, $searchTerm, 0, $perPage);
     $values['maxUserPages'] = $maxPages;
     $values['currentUserPage'] = 1;
     $app->render('searchresults.html.twig', array('v' => $values));
@@ -343,7 +344,7 @@ $app->post('/ajax/usersearchresults(/:page)', function($page = 1) use ($app) {
     $searchTerm = $app->request()->params('searchTerm');
     $perPage = 2;
 
-    $totalCount = DB::queryFirstField('SELECT COUNT(*) AS count from users WHERE OR name LIKE %ss', $searchTerm, $searchTerm);
+    $totalCount = DB::queryFirstField('SELECT COUNT(*) AS count from users WHERE name LIKE %ss', $searchTerm, $searchTerm);
     $maxPages = max(ceil($totalCount / $perPage), 1);
 
     if ($page > $maxPages) {
@@ -352,7 +353,7 @@ $app->post('/ajax/usersearchresults(/:page)', function($page = 1) use ($app) {
         return;
     }
     $skip = ($page - 1) * $perPage;
-    $values['userResults'] = DB::query('SELECT * from users WHERE OR name LIKE %ss ORDER BY id LIMIT %d,%d', $searchTerm, $searchTerm, $skip, $perPage);
+    $values['userResults'] = DB::query('SELECT * from users WHERE name LIKE %ss ORDER BY id LIMIT %d,%d', $searchTerm, $searchTerm, $skip, $perPage);
     $app->render('ajaxusersearchresults.html.twig', array(
         "v" => $values
     ));

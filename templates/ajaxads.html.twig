@@ -1,10 +1,10 @@
 {# empty Twig template #}
 <div >
  
-        {% for a in adList %}
+        {% for a in adsList %}
             <div class="adContainer">
                 <div class="imageContainer">
-                    <img src="{{a.imagePath}}" width="100">
+                 <a href="/ad/{{a.id}}">   <img src="{{a.imagePath}}" width="100"></a>
                 </div>
                 <div class="title">
                     <p>{{a.title}}</p>

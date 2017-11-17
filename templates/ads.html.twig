@@ -9,16 +9,18 @@
                     $('#btPage' + currentPage).removeClass("currentPageButton");
                     currentPage = page;
                     $('#btPage' + currentPage).addClass("currentPageButton");
-                    $('#itemsView').load("/ajax/ads/" + page);
+                    $('#adsList').load("/ajax/ads/" + page);
                     window.history.pushState("", "Ads list", "/ads/" + page);
                 }
     </script>
 {% endblock %}
-{% block content %}  
-    
-<table id="itemsView" border="1">
+{% block content %}
+
+
+    <a href="/ad/add"><button>Create an ad</button></a>
+{% include 'panelCategoryList.html.twig' %}
     <div id="adsList">
-        {% for a in adList %}
+        {% for a in adsList %}
             <div class="adContainer">
                 <div class="imageContainer">
                     <img src="{{a.imagePath}}" width="100">
@@ -34,5 +36,11 @@
              
         {% endfor %}
 
-
-        {% endblock %}
+    </div>
+         <div class="paginationContainer">
+            {% for page in range(1,maxPages) %}
+                <button class="{% if page == currentPage %}currentPageButton{% endif %}"
+                        id="btPage{{page}}" onclick="loadPage({{page}});">{{page}}</button>
+            {% endfor %}
+        </div>   
+{% endblock %}
