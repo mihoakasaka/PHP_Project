@@ -78,10 +78,12 @@ if ($_SERVER['SERVER_NAME'] != 'localhost') {
     $twig->addGlobal('fbUser', $_SESSION['facebook_access_token']);
     $twig->addGlobal('loginUrl', $loginUrl);
 }
+
+require_once './categories.php';
 $twig->addGlobal('userSession', $_SESSION['user']);
 $twig->addGlobal('categories', $categoriesList);
 
-require_once './categories.php';
+
 
 
 $app->get('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log, $categoriesList) {
