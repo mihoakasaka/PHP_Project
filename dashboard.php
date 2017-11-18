@@ -130,8 +130,6 @@ $app->get('/action/paypalreturn/:result', function($result = 'false') use ($app)
 
 
 $app->get('/action/testpaypal', function() use ($app) {
-echo "starting paypal";
-
 
     $apiContext = new \PayPal\Rest\ApiContext(
             new \PayPal\Auth\OAuthTokenCredential(
@@ -186,7 +184,7 @@ echo "starting paypal";
 
     $baseUrl = $app->request()->getUrl();
     
-    echo "base url : " . $baseUrl;
+    //echo "base url : " . $baseUrl;
 
 
     $redirectUrls = new RedirectUrls();
@@ -199,20 +197,20 @@ echo "starting paypal";
             ->setPayer($payer)
             ->setRedirectUrls($redirectUrls)
             ->setTransactions(array($transaction));
-echo "Going to Paypal now";
+//echo "Going to Paypal now";
     $request = clone $payment;
     try {
         $payment->create($apiContext);
-        echo $payment;
+        //echo $payment;
 
-        echo "\n\nRedirect user to approval_url: " . $payment->getApprovalLink() . "\n";
-        //$app->redirect($payment->getApprovalLink()); 
+        //echo "\n\nRedirect user to approval_url: <a href='" . $payment->getApprovalLink() . "'>Go to Pyapal</a>\n";
+        $app->redirect($payment->getApprovalLink()); 
     } catch (\PayPal\Exception\PayPalConnectionException $ex) {
         // This will print the detailed information on the exception.
         //REALLY HELPFUL FOR DEBUGGING
         echo "exception occured";
         echo $ex->getData();
     }
-    echo "end of paypal";
+    //echo "end of paypal";
 });
 
