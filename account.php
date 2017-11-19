@@ -41,10 +41,10 @@ $app->post('/fblogin', function() use ($app, $log) {
     $account = DB::queryFirstField('SELECT id from users WHERE email=%s AND fbId =%s', $_SESSION['facebook_access_token']['email'], $_SESSION['facebook_access_token']['ID']);
     
     if ($account) {
-        $_SESSION['user']['ID'] = $account;
-        $_SESSION['user']['name'] = $_SESSION['facebook_access_token']['name'];
-        $_SESSION['user']['email'] = $_SESSION['facebook_access_token']['email'];
-        echo $_SESSION['user'];
+        $_SESSION['user']=array('id'=>$account,
+       'name'=>$_SESSION['facebook_access_token']['name'],
+       'email'=> $_SESSION['facebook_access_token']['email']);
+       
         $app->render('account/fblogin_success.html.twig');
     }
 });

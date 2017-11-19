@@ -59,7 +59,7 @@ $fbUser = array(
    'ID' => $userNode->getId(),
 );
 $_SESSION['facebook_access_token'] = $fbUser;
-$_SESSION['user'] = array();
+$_SESSION['user'] = $fbUser;
 header("Location:/fblogin");
 
 /* 
