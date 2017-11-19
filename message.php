@@ -39,3 +39,13 @@
         $app->render('account/login_success.html.twig');
     
 });
+
+//////////////////////////////////////Message box ////////////////////////////////////////
+$app->get('/dashboard/messages', function() use ($app,$log) {
+    
+    $conversationList =DB::query('SELECT * from conversation WHERE messageg.conversationId=conversation.id AND userOne=%i OR userTwo =%i',['id'],$user['id']);
+    $messageList = DB::query('SELECT  ');
+    
+});
+
+  
