@@ -62,9 +62,18 @@ if ($_SERVER['SERVER_NAME'] != 'localhost') {
     $twig->addGlobal('fbUser', $_SESSION['facebook_access_token']);
     $twig->addGlobal('loginUrl', $loginUrl);
 }
+
+require_once './categories.php';
 $twig->addGlobal('userSession', $_SESSION['user']);
 $twig->addGlobal('categories', $categoriesList);
+<<<<<<< HEAD
 require_once './categories.php';
+=======
+
+
+
+
+>>>>>>> fe6c7f15f82b3aa8eb040d33c81f37a57d24169f
 $app->get('/ad/:op(/:id)', function($op, $id = -1) use ($app, $log, $categoriesList) {
     if (!$_SESSION['user']) {
         $app->render('access_denied.html.twig');
