@@ -52,7 +52,7 @@ try {
     echo 'Facebook SDK returned an error: ' . $e->getMessage();
     exit;
 }
-//echo 'Logged in as ' . $userNode->getName();
+
 $fbUser = array(
     
     'name' => $userNode->getName(),

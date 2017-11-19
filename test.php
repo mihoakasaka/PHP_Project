@@ -60,6 +60,7 @@ $fbUser = array(
 );
 $_SESSION['facebook_access_token'] = $fbUser;
 $_SESSION['user'] = $fbUser;
+
 header("Location:/fblogin");
 
 /* 

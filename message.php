@@ -4,13 +4,20 @@
   
 // in Post - receiving submission
     $message = $app->request()->post('message');
-    $reciever = DB::queryFirstRow("SELECT * FROM users,ads WHERE ads.sellerId=users.id AND ads.id=%i", $ID);
+    $reciever = DB::queryFirstRow("SELECT users.id,users.name FROM users,ads WHERE ads.sellerId=users.id AND ads.id=%i", $ID);
     $senderId = $_SESSION['user']['id'];
     if (!$reciever) {echo 'not found';}
-       
+       $result=DB::insert('conversation', array(
+            'userOne' =>$reciever['id'], 
+            'userTwo' =>$senderId
+            
+        ));
+        if ($result) {
+            $conversationId = DB::insertId();
+        }
         DB::insert('messages', array(
             'senderId' => $senderId,
-            'conversationId' =>1,
+            'conversationId' =>$conversationId,
             'message' => $message
         ));
         $url = 'http://' . $_SERVER['SERVER_NAME'] . '/dashboard';
