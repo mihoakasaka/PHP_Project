@@ -2,27 +2,36 @@
 
 {% block title %}Index{% endblock %}
 {% block headextra %}
-    <script>
-        var currentPage = {{currentPage}};
-                function loadPage(page) {
-                    $('#btPage' + currentPage).removeClass("currentPageButton");
-                    currentPage = page;
-                    $('#btPage' + currentPage).addClass("currentPageButton");
-                    $('#adsList').load("/ajax/ads/" + page);
-                    window.history.pushState("", "Ads list", "/ads/" + page);
-                }
-    </script>
+
 {% endblock %}
 {% block content %}
 
 
     <a href="/ad/add"><button>Create an ad</button></a>
 {% include 'panelCategoryList.html.twig' %}
+<div id="adsListContainer">
  {% include 'ajaxads.html.twig' %}
-         <div class="paginationContainer">
-            {% for page in range(1,maxPages) %}
-                <button class="{% if page == currentPage %}currentPageButton{% endif %}"
-                        id="btPage{{page}}" onclick="loadPage({{page}});">{{page}}</button>
-            {% endfor %}
-        </div>   
+ </div>
+   
+              <ul id="paginationAds">
+        {% for page in range(1,maxPages) %}
+            <li id="liPage{{page}}" {% if page == currentPage %}class="active"{% endif %}>
+                <a id="btPage{{page}}" onclick="loadAdPanel({{page}});">{{page}}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+{% block bodyendextra %}
+    <script>
+
+        var currentPage = {{ currentPage }};
+        function loadAdPanel(page) {
+            $('#liPage' + currentPage).removeClass("active");
+            currentPage = page;
+            $('#liPage' + currentPage).addClass("active");
+            $('#adsListContainer').load("/ajax/ads/" + page);
+                    window.history.pushState("", "Ads list", "/ads/" + page);
+        }
+
+    </script>
 {% endblock %}

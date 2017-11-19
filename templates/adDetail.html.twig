@@ -7,21 +7,32 @@
 {% block content %}  
 
 
-    <div id="adDetail" >
+    <div class="adDetail" adId="{{ad.id}}" >
    
                 <div class="imageContainer">
-                  <img src="{{ad.imagePath}}" width="100"></a>
+                  <img src="{{ad.imagePath}}" width="200"></a>
                 </div>
                 <div class="title">
-                    <p>{{ad.title}}</p>
+                    <h1>{{ad.title}}</h1>
                 </div>
                  <div class="body">
                     <p>{{ad.body}}</p>
                 </div>
                 <div class="price">
-                    <p>{{ad.price}}</p>      
+                    <h2 style="color: #ff6666;">$ {{ad.price}}</h2>      
                 </div>
-
-    <a href="">Send Message to the owner</a>
+                {% for i in images %}
+                    <img src="{{i.imagePath}}" width="50">
+                    {% endfor %}
+<br>
+   <form method="POST" style="margin:20px;">
+       <table>
+           <tr><td>Contact to the owner</td></tr>
+            <tr><td><textarea width="200" name="message"></textarea></td></tr>
+             <tr><td><input type="submit" value="Send message"></td></tr>
+             
+       </table>
+       </form>
+    
 
         {% endblock %}

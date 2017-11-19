@@ -5,6 +5,9 @@ if (false) {
     $log = new Logger('main');
 }
 /* * ***************************  log in with FB account ***************************** */
+$app->get('/facebook/login', function() use ($app) {
+    $app->render('account/fblogin.html.twig', array('user' => $_SESSION['facebook_access_token']));
+});
 $app->get('/fblogin', function() use ($app) {
     $app->render('account/fblogin.html.twig', array('user' => $_SESSION['facebook_access_token']));
 });
@@ -21,7 +24,7 @@ $app->post('/fblogin', function() use ($app, $log) {
         ));
         if ($result) {
             $userID = DB::insertId();
-            $log->debug(sprintf("Regisetred fbUser %s with id %s", $_SESSION['facebook_access_token']['fName'], $userID));
+            $log->debug(sprintf("Regisetred fbUser %s with id %s", $_SESSION['facebook_access_token']['name'], $userID));
             $_SESSION['facebook_access_token']['userID'] = $userID;
         }
     } else {
@@ -41,6 +44,7 @@ $app->post('/fblogin', function() use ($app, $log) {
         $_SESSION['user']['ID'] = $account;
         $_SESSION['user']['name'] = $_SESSION['facebook_access_token']['name'];
         $_SESSION['user']['email'] = $_SESSION['facebook_access_token']['email'];
+        echo $_SESSION['user'];
         $app->render('account/fblogin_success.html.twig');
     }
 });

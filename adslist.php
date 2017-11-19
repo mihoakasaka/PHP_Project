@@ -31,7 +31,7 @@ $app->get('/ads(/:page)', function($page = 1) use ($app,$categoriesList) {
     }
     $skip = ($page - 1) * $perPage;
     $adsList = DB::query('SELECT ads.id, title, price, imagePath FROM ads,pictures WHERE ads.id=pictures.adId GROUP by ads.id Order by ads.id desc LIMIT %d,%d', $skip, $perPage);
-    $app->render('ads.html.twig', array(
+    $app->render('index.html.twig', array(
         "adsList" => $adsList,
         "maxPages" => $maxPages,
         "currentPage" => $page,
@@ -58,8 +58,8 @@ $app->get('/ajax/ads(/:page)', function($page = 1) use ($app) {
 $app->get('/ad(/:ID)', function($ID) use ($app) {
    
    
-    $ad = DB::queryFirstRow('SELECT ads.id, title,body, price, imagePath FROM ads,pictures WHERE ads.id=%i', $ID);
-   
+    $ad = DB::queryFirstRow('SELECT ads.id, title,body, price, imagePath FROM ads,pictures WHERE ads.id=pictures.adId AND ads.id=%i', $ID);
+   $images = DB::query('SELECT ads.id, imagePath FROM ads,pictures WHERE  ads.id=pictures.adId AND ads.id=%i', $ID);
      if (!$ad) {
         http_response_code(404);
         $app->render('not_found.html.twig');
@@ -67,6 +67,8 @@ $app->get('/ad(/:ID)', function($ID) use ($app) {
     }
     $app->render('adDetail.html.twig', array(
         "ad" => $ad,
+        'images'=>$images
         
     ));
 });
+   
