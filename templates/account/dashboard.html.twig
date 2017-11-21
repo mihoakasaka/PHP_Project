@@ -42,6 +42,7 @@
                         {% if a.status == 'active' %}
                             {% if a.isToBeDisplayed == 0 %}<button class='btn btn-primary btn-sm'>Display</button>{% else %}<button class='btn btn-sm'>Hide</button>{% endif %}
                         {% endif %}
+                        <button class='btn btn-sm'><a href="/ad/edit/{{a.id}}"><span class="fa fa-pencil-square-o" aria-hidden="true" /> Edit</a></button>
                         <button class='btn btn-sm btn-danger'><span class="fa fa-trash" aria-hidden="true" /> Delete</button>
                     </td>
                 </tr>

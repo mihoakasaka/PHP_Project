@@ -65,8 +65,8 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
     <table>
         <thead>
             <tr>
-                <th>Ad Title</th>
-                <th>Ad Status</th>
+                <th>Title</th>
+                <th>Status</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -123,21 +123,24 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
                 echo "                        ";
             }
             // line 45
-            echo "                        <button class='btn btn-sm btn-danger'><span class=\"fa fa-trash\" aria-hidden=\"true\" /> Delete</button>
+            echo "                        <button class='btn btn-sm'><a href=\"/ad/edit/";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["a"], "id", array()), "html", null, true);
+            echo "\"><span class=\"fa fa-pencil-square-o\" aria-hidden=\"true\" /> Edit</a></button>
+                        <button class='btn btn-sm btn-danger'><span class=\"fa fa-trash\" aria-hidden=\"true\" /> Delete</button>
                     </td>
                 </tr>
             ";
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 49
+            // line 50
             echo "                <tr colspan=\"3\"><td>You don't have any ads yet. <a href='/ad/add'>Create one now</a></td></tr>
             ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['a'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 51
+        // line 52
         echo "        </tbody>
     </table>
 
@@ -145,10 +148,10 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
 ";
     }
 
-    // line 57
+    // line 58
     public function block_bodyendextra($context, array $blocks = array())
     {
-        // line 58
+        // line 59
         echo "        <script>
             \$(document).ready(function () {
 
@@ -190,7 +193,7 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
 
     public function getDebugInfo()
     {
-        return array (  152 => 58,  149 => 57,  141 => 51,  134 => 49,  126 => 45,  123 => 44,  116 => 43,  113 => 42,  106 => 41,  99 => 40,  93 => 39,  88 => 37,  84 => 36,  81 => 35,  76 => 34,  48 => 8,  45 => 7,  40 => 5,  37 => 4,  31 => 3,  11 => 1,);
+        return array (  155 => 59,  152 => 58,  144 => 52,  137 => 50,  126 => 45,  123 => 44,  116 => 43,  113 => 42,  106 => 41,  99 => 40,  93 => 39,  88 => 37,  84 => 36,  81 => 35,  76 => 34,  48 => 8,  45 => 7,  40 => 5,  37 => 4,  31 => 3,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -230,8 +233,8 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
     <table>
         <thead>
             <tr>
-                <th>Ad Title</th>
-                <th>Ad Status</th>
+                <th>Title</th>
+                <th>Status</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -247,6 +250,7 @@ class __TwigTemplate_519aed8f9497ef15a91529755aebac5ae3164b2e0494002a063e2481b75
                         {% if a.status == 'active' %}
                             {% if a.isToBeDisplayed == 0 %}<button class='btn btn-primary btn-sm'>Display</button>{% else %}<button class='btn btn-sm'>Hide</button>{% endif %}
                         {% endif %}
+                        <button class='btn btn-sm'><a href=\"/ad/edit/{{a.id}}\"><span class=\"fa fa-pencil-square-o\" aria-hidden=\"true\" /> Edit</a></button>
                         <button class='btn btn-sm btn-danger'><span class=\"fa fa-trash\" aria-hidden=\"true\" /> Delete</button>
                     </td>
                 </tr>
