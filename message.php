@@ -36,7 +36,7 @@
 
         mail($toEmail, "You have a message from " . $_SERVER['SERVER_NAME'], $emailBody, $headers);
         $log->info('Email sent to user id=' . $reciever['id']);
-        $app->render('account/login_success.html.twig');
+        $app->render('message_success.html.twig');
     
 });
 
