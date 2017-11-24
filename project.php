@@ -4,6 +4,7 @@ use Monolog\Handler\StreamHandler;
 session_start();
 require_once 'Facebook/autoload.php';
 require_once 'vendor/autoload.php';
+require_once 'fbconfig.php';
 DB::$dbName = 'cp4809_garagesale';
 DB::$user = 'cp4809_garagesal';
 DB::$host = 'ipd10.com';
